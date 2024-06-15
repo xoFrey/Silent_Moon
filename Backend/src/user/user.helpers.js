@@ -9,3 +9,7 @@ export const userToView = (user) => {
     meditationFavorites: user.meditationFavorites,
   };
 };
+
+export const generateRandomSixDigitCode = () => {
+  return Math.random().toString().slice(2, 8);
+};
