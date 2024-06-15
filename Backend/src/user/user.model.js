@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema(
     firstname: { type: String, required: true, trim: true },
     lastname: { type: String, required: true, trim: true },
     email: { type: String, required: true, trim: true },
-    fileUrl: { type: String },
+    fileUrl: { type: String, required: false }, // ! Default Image
     password: { type: String, required: true, trim: true },
     isVerified: { type: Boolean, default: false },
     sixDigitCode: { type: String, required: true },

@@ -1,4 +1,4 @@
-import express from "express";
+import express, { json, request } from "express";
 import cors from "cors";
 import multer from "multer";
 import mongoose from "mongoose";
@@ -51,9 +51,44 @@ app.get("/auth/login", (req, res) => {
     scope: scope,
     redirect_url: "http://localhost:3000/auth/callback",
   });
+  res.redirect(
+    `https://accounts.spotify.com/authorize/?` +
+      auth_query_parameters.toString(),
+  );
 });
 
-app.get("/auth/callback", (req, res) => {});
+app.get("/auth/callback", (req, res) => {
+  const code = req.query.code;
+  const authOptions = {
+    url: "https://accounts.spotify.com/api/token",
+    form: {
+      code: code,
+      redirect_uri: "http://localhost:3000/auth/callback",
+      grant_type: "authorization_code",
+    },
+    headers: {
+      Authorization:
+        "Basic " +
+        Buffer.from(spotify_client_id + ":" + spotify_client_secret).toString(
+          "base64",
+        ),
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    json: true,
+  };
+  request.post(authOptions, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      const access_token = body.access_token;
+      res.redirect("/");
+    }
+  });
+});
+
+app.get("/auth/token", (req, res) => {
+  res.json({
+    access_token: access_token,
+  });
+});
 
 await mongoose.connect(process.env.MONGO_URL, { dbName: "SilentMoon" });
 app.listen(PORT, () => console.log("Server ready at", PORT));
