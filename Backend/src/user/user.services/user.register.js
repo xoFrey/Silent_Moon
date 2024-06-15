@@ -1,14 +1,18 @@
-import { User } from "../models/user.js";
 import bcrypt from "bcrypt";
-import { createToken } from "../utils/createToken.js";
-import { generateRandomSixDigitCode, userToView } from "../user.helpers.js";
+
+import { userToView } from "../user.helpers.js";
+import { User } from "../user.model.js";
+import { generateRandomSixDigitCode } from "../../utils/sixDigitCode.js";
+import { createToken } from "../../utils/createToken.js";
 
 export async function registerUser({
-  firstName,
-  lastName,
+  username,
+  firstname,
+  lastname,
   email,
-  password,
   image,
+  password,
+  userLevel,
 }) {
   const foundUserWithEmail = await User.findOne({ email });
   if (foundUserWithEmail)
@@ -17,23 +21,39 @@ export async function registerUser({
   const saltRounds = 10;
   const passwordHash = await bcrypt.hash(password, saltRounds);
 
-  const sixDigitCode = generateRandomSixDigitCode;
+  const sixDigitCode = generateRandomSixDigitCode();
 
   const user = await User.create({
-    firstName,
-    lastName,
+    username,
+    firstname,
+    lastname,
     email,
     fileUrl: image,
     password: passwordHash,
-    isEmailVerified: false,
+    isVerified: false,
     sixDigitCode,
+    userLevel,
   });
   const accessToken = createToken(user, "access"); // header.payload.signature
   const refreshToken = createToken(user, "refresh"); // header.payload.signature
-  // console.log(refreshToken);
 
+  // await sendEmailVerification(user);
   return {
     user: userToView(user),
     tokens: { accessToken, refreshToken },
   };
+}
+
+async function sendEmailVerification(user) {
+  return sendEmail({
+    to: user.email,
+    subject: "Welcomne to Todo.io",
+    text: `Hi ${user.firstname},
+welcome to Todo.io 🎉!!!
+Please enter the below six-digit-code verify your account to be able to login.
+${user.sixDigitCode}
+See you on the other side :)
+- Ahmed from Todo.io
+`,
+  });
 }
