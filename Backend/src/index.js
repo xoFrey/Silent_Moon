@@ -30,10 +30,10 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.static("uploads"));
 
-// const upload = multer({ dest: "./uploads" });
-// app.post("/api/v1/files/upload", upload.single("pictures"), (req, res) => {
-//   res.json({ imgUrl: req.file.filename });
-// });
+const upload = multer({ dest: "./uploads" });
+app.post("/api/v1/files/upload", upload.single("files"), (req, res) => {
+  res.json({ fileUrl: req.file.filename });
+});
 
 await mongoose.connect(process.env.MONGO_URL, { dbName: "SilentMoon" });
 app.listen(PORT, () => console.log("Server ready at", PORT));
