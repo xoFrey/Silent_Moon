@@ -35,5 +35,25 @@ app.post("/api/v1/files/upload", upload.single("files"), (req, res) => {
   res.json({ fileUrl: req.file.filename });
 });
 
+// *spotify stuff
+const spotify_client_id = process.env.SPOTIFY_CLIEND_ID;
+const spotify_client_secret = process.env.SPOTIFY_CLIEND_SECRET;
+
+app.get("/auth/login", (req, res) => {
+  const scope =
+    "streaming\
+                user-read-email\
+                user-read-private";
+
+  const auth_query_parameters = new URLSearchParams({
+    response_type: "code",
+    client_id: spotify_client_id,
+    scope: scope,
+    redirect_url: "http://localhost:3000/auth/callback",
+  });
+});
+
+app.get("/auth/callback", (req, res) => {});
+
 await mongoose.connect(process.env.MONGO_URL, { dbName: "SilentMoon" });
 app.listen(PORT, () => console.log("Server ready at", PORT));
