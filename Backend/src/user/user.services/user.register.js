@@ -47,13 +47,13 @@ export async function registerUser({
 async function sendEmailVerification(user) {
   return sendEmail({
     to: user.email,
-    subject: "Welcomne to Todo.io",
+    subject: "Welcome to Silent Moon",
     text: `Hi ${user.firstname},
-welcome to Todo.io 🎉!!!
+welcome to Silent Moon
 Please enter the below six-digit-code verify your account to be able to login.
 ${user.sixDigitCode}
 See you on the other side :)
-- Ahmed from Todo.io
+- Your Silent Moon Team
 `,
   });
 }
