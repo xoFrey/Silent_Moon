@@ -5,6 +5,7 @@ export const userToView = (user) => {
     lastname: user.lastname,
     fileUrl: user.fileUrl,
     isVerified: user.isVerified,
+    userLevel: user.userLevel,
     yogaFavorites: user.yogaFavorites,
     meditationFavorites: user.meditationFavorites,
   };

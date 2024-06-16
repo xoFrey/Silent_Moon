@@ -1,8 +1,9 @@
-export const meditationRoutes = express
-  .Router()
-  .get("/", MeditationController.getRecommendedCtrl)
-  .get("/", MeditationController.getCategoriesCtrl)
-  .get("/", MeditationController.getMeditationDetailsCtrl)
-  .post("/", MeditationController.createMeditationCtrl)
-  .patch("/", MeditationController.addFavoriteCtrl)
-  .patch("/", MeditationController.removeFavoriteCtrl);
+// export const meditationRoutes = express;
+// import { MeditationController } from "./meditation.controller";
+// .Router()
+// .get("/", MeditationController.getRecommendedCtrl)
+// .get("/", MeditationController.getCategoriesCtrl)
+// .get("/", MeditationController.getMeditationDetailsCtrl)
+// .post("/", MeditationController.createMeditationCtrl)
+// .patch("/", MeditationController.addFavoriteCtrl)
+// .patch("/", MeditationController.removeFavoriteCtrl);
