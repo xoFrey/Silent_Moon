@@ -39,59 +39,51 @@ app.post("/api/v1/files/upload", upload.single("files"), (req, res) => {
 });
 
 // *spotify stuff
-const spotify_client_id = process.env.SPOTIFY_CLIEND_ID;
-const spotify_client_secret = process.env.SPOTIFY_CLIEND_SECRET;
+// const client_id = "b99a64db48bb4c6cb84dc49969b0a254";
+// const redirect_uri = "http://localhost:5173";
 
-app.get("/auth/login", (req, res) => {
-  const scope =
-    "streaming\
-                user-read-email\
-                user-read-private";
+// app.get("/login", function (req, res) {
+//   // const state = generateRandomString(16);
+//   const scope = "user-read-private%20user-read-email";
+//   console.log(
+//     `https://accounts.spotify.com/authorize?&client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&response_type=code`,
+//   );
 
-  const auth_query_parameters = new URLSearchParams({
-    response_type: "code",
-    client_id: spotify_client_id,
-    scope: scope,
-    redirect_url: "http://localhost:3000/auth/callback",
-  });
-  res.redirect(
-    `https://accounts.spotify.com/authorize/?` +
-      auth_query_parameters.toString(),
-  );
-});
+//   res.redirect(
+//     `https://accounts.spotify.com/authorize?&client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&response_type=code`,
+//   );
+// });
 
-app.get("/auth/callback", (req, res) => {
-  const code = req.query.code;
-  const authOptions = {
-    url: "https://accounts.spotify.com/api/token",
-    form: {
-      code: code,
-      redirect_uri: "http://localhost:3000/auth/callback",
-      grant_type: "authorization_code",
-    },
-    headers: {
-      Authorization:
-        "Basic " +
-        Buffer.from(spotify_client_id + ":" + spotify_client_secret).toString(
-          "base64",
-        ),
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    json: true,
-  };
-  request.post(authOptions, function (error, response, body) {
-    if (!error && response.statusCode === 200) {
-      const access_token = body.access_token;
-      res.redirect("/");
-    }
-  });
-});
+// app.get("/callback", function (req, res) {
+//   const code = req.query.code || null;
+//   const state = req.query.state || null;
+//   const client_secret = "1ba811e274e44cd682d4bbbc57946d6b";
 
-app.get("/auth/token", (req, res) => {
-  res.json({
-    access_token: access_token,
-  });
-});
+//   if (state === null) {
+//     res.redirect(
+//       "/#" +
+//         JSON.stringify({
+//           error: "state_mismatch",
+//         }),
+//     );
+//   } else {
+//     const authOptions = {
+//       url: "https://accounts.spotify.com/api/token",
+//       form: {
+//         code: code,
+//         redirect_uri: redirect_uri,
+//         grant_type: "authorization_code",
+//       },
+//       headers: {
+//         "content-type": "application/x-www-form-urlencoded",
+//         Authorization:
+//           "Basic " +
+//           new Buffer.from(client_id + ":" + client_secret).toString("base64"),
+//       },
+//       json: true,
+//     };
+//   }
+// });
 
 app.use("/api/v1/users", userRoutes);
 // app.use("/api/v1/yoga", yogaRoutes);
