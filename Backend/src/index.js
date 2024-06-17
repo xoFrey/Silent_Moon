@@ -39,54 +39,10 @@ app.post("/api/v1/files/upload", upload.single("files"), (req, res) => {
   res.json({ fileUrl: req.file.filename });
 });
 
-// *spotify stuff
-
-const client_id = process.env.SPOTIFY_ID;
-const client_secret = process.env.SPOTIFY_SECRET;
-const redirect_uri = "http://localhost:5173/music";
-const code = "code"; // Diese Variable wird nicht verwendet, aber behalten, falls sie später benötigt wird
-
-let authOptions = {
-  url: "https://accounts.spotify.com/api/token",
-  headers: {
-    Authorization:
-      "Basic " +
-      Buffer.from(client_id + ":" + client_secret).toString("base64"),
-  },
-  body: new URLSearchParams({
-    grant_type: "client_credentials",
-  }),
-};
-
-app.post("/auth", async (req, res) => {
-  try {
-    const response = await fetch(authOptions.url, {
-      method: "POST",
-      headers: {
-        Authorization: authOptions.headers.Authorization,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: authOptions.body,
-    });
-    console.log(response);
-    if (response.ok) {
-      const token = await response.json();
-      const access_token = token.access_token;
-      console.log(access_token);
-      res.send("Token generated");
-    } else {
-      res.status(response.status || 500).send("Error: " + response.statusText);
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error: " + error.message);
-  }
-});
-
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/yoga", yogaRoutes);
 app.use("/api/v1/meditation", meditationRoutes);
-app.use("/api/spotify", spotifyRouter);
+app.use("/api/v1/spotify", spotifyRouter);
 
 await mongoose.connect(process.env.MONGO_URL, { dbName: "SilentMoon" });
 app.listen(PORT, () => console.log("Server ready at", PORT));
