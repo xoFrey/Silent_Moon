@@ -13,10 +13,23 @@ const createMeditationCtrl = async (req, res) => {
   }
 };
 
+const getAllMeditationsCtrl = async (req, res) => {
+  try {
+    const result = await MeditationService.getAllMeditations();
+
+    res.json({ result });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ err, message: err.message || "Could not get all meditations" });
+  }
+};
+
 export const MeditationController = {
   // getRecommendedCtrl,
   // getCategoriesCtrl,
-  // getMeditationDetailsCtrl,
+  getAllMeditationsCtrl,
   createMeditationCtrl,
   // addFavoriteCtrl,
   // removeFavoriteCtrl,
