@@ -33,7 +33,7 @@ export const addFavorite = async (updateInfo) => {
             meditationFavorites: updateInfo.id,
           },
         },
-        { new: true }),
+        { new: true })
   );
 
   return {

@@ -45,6 +45,20 @@ async function verifyUserEmailCtrl(req, res) {
       .json({ err, message: err.message || "Could not verify email" });
   }
 }
+// timeout in dieser Funktion evtl. noch entfernen !!!
+const refreshTokenCtrl = async (req, res) => {
+  try {
+    const result = await UserService.refreshToken(req.authenticatedUserId);
+    setTimeout(() => {
+      res.json({ result });
+    }, 700);
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ err, message: err.message || "Could not refresh token" });
+  }
+};
 
 const editUserCtrl = async (req, res) => {
   try {
@@ -83,7 +97,7 @@ export const UserController = {
   registerUserCtrl,
   verifyUserEmailCtrl,
   loginUserCtrl,
-  //   refreshTokenCtrl,
+  refreshTokenCtrl,
   //   logoutUserCtrl,
   editUserCtrl,
   addFavoriteCtrl,

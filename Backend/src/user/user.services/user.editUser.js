@@ -7,7 +7,7 @@ export const editUser = async (updateInfo) => {
   const updatedUser = User.findByIdAndUpdate(
     updateInfo.userId,
     { $set: updateInfo },
-    { new: true },
+    { new: true }
   );
 
   return updatedUser;
