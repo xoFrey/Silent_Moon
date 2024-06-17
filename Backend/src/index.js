@@ -6,8 +6,8 @@ import morgan from "morgan";
 import cookieSession from "cookie-session";
 import "dotenv/config";
 import { userRoutes } from "./user/user.routes.js";
-// import { yogaRoutes } from "./yoga/yoga.routes.js";
-// import { meditationRoutes } from "./meditation/meditation.routes.js";
+import { yogaRoutes } from "./yoga/yoga.routes.js";
+import { meditationRoutes } from "./meditation/meditation.routes.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -59,8 +59,8 @@ app.get("/auth/login", (req, res) => {
 app.get("/auth/callback", (req, res) => {});
 
 app.use("/api/v1/users", userRoutes);
-// app.use("/api/v1/yoga", yogaRoutes);
-// app.use("/api/v1/meditation", meditationRoutes);
+app.use("/api/v1/yoga", yogaRoutes);
+app.use("/api/v1/meditation", meditationRoutes);
 
 await mongoose.connect(process.env.MONGO_URL, { dbName: "SilentMoon" });
 app.listen(PORT, () => console.log("Server ready at", PORT));
