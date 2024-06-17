@@ -1,4 +1,3 @@
-
 import express from "express";
 import { MeditationController } from "./meditation.controller.js";
 
