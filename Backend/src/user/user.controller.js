@@ -6,13 +6,13 @@ export const UserController = {
   loginUserCtrl,
   //   refreshTokenCtrl,
   //   logoutUserCtrl,
-  //   editUserCtrl,
+  editUserCtrl,
+  addFavoriteCtrl,
 };
 
 async function registerUserCtrl(req, res) {
   try {
     const userInfo = req.body;
-
     const result = await UserService.registerUser(userInfo);
     res.json({ result });
   } catch (err) {
@@ -55,3 +55,36 @@ async function verifyUserEmailCtrl(req, res) {
       .json({ err, message: err.message || "Could not verify email" });
   }
 }
+
+const editUserCtrl = async (req, res) => {
+  try {
+    const userInfo = {
+      userId: req.authenticatedUserId,
+      userInfo: req.body,
+    };
+
+    const result = await UserService.editUser(userInfo);
+    res.json({ result });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ err, message: err.message || "Could not edit user" });
+  }
+};
+
+const addFavoriteCtrl = async (req, res) => {
+  try {
+    const updateInfo = {
+      userId: req.authenticatedUserId,
+      id: req.params.id,
+    };
+    const result = await UserService.addFavorite(updateInfo);
+    res.json({ result });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ err, message: err.message || "Could not add Favorite" });
+  }
+};
