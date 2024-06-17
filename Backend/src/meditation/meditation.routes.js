@@ -5,6 +5,6 @@ export const meditationRoutes = express
   .Router()
   // .get("/", MeditationController.getRecommendedCtrl)
   // .get("/", MeditationController.getCategoriesCtrl)
-  // .get("/", MeditationController.getMeditationDetailsCtrl)
+  .get("/", MeditationController.getAllMeditationsCtrl)
   .post("/", MeditationController.createMeditationCtrl);
 // .patch("/", MeditationController.removeFavoriteCtrl);
