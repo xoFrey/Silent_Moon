@@ -1,4 +1,4 @@
-import { User } from "../user.model";
+import { User } from "../user.model.js";
 
 export const editUser = async (updateInfo) => {
   const user = await User.findById(updateInfo.userId);
@@ -7,7 +7,7 @@ export const editUser = async (updateInfo) => {
   const updatedUser = User.findByIdAndUpdate(
     updateInfo.userId,
     { $set: updateInfo },
-    { new: true },
+    { new: true }
   );
 
   return updatedUser;

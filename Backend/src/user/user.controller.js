@@ -1,15 +1,5 @@
 import { UserService } from "./user.services/user.index.js";
 
-export const UserController = {
-  registerUserCtrl,
-  verifyUserEmailCtrl,
-  loginUserCtrl,
-  //   refreshTokenCtrl,
-  //   logoutUserCtrl,
-  editUserCtrl,
-  addFavoriteCtrl,
-};
-
 async function registerUserCtrl(req, res) {
   try {
     const userInfo = req.body;
@@ -55,6 +45,20 @@ async function verifyUserEmailCtrl(req, res) {
       .json({ err, message: err.message || "Could not verify email" });
   }
 }
+// timeout in dieser Funktion evtl. noch entfernen !!!
+const refreshTokenCtrl = async (req, res) => {
+  try {
+    const result = await UserService.refreshToken(req.authenticatedUserId);
+    setTimeout(() => {
+      res.json({ result });
+    }, 700);
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ err, message: err.message || "Could not refresh token" });
+  }
+};
 
 const editUserCtrl = async (req, res) => {
   try {
@@ -87,4 +91,14 @@ const addFavoriteCtrl = async (req, res) => {
       .status(500)
       .json({ err, message: err.message || "Could not add Favorite" });
   }
+};
+
+export const UserController = {
+  registerUserCtrl,
+  verifyUserEmailCtrl,
+  loginUserCtrl,
+  refreshTokenCtrl,
+  //   logoutUserCtrl,
+  editUserCtrl,
+  addFavoriteCtrl,
 };
