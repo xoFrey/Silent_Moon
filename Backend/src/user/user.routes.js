@@ -1,12 +1,21 @@
 import express from "express";
 import { UserController } from "./user.controller.js";
+import {
+  doJwtAuth,
+  validateRefreshTokenInCookieSession,
+} from "../middlewares/doJwtAuth.js";
 
 export const userRoutes = express
   .Router()
   .post("/register", UserController.registerUserCtrl)
   .post("/verify", UserController.verifyUserEmailCtrl)
   .post("/login", UserController.loginUserCtrl)
-  .patch("/", UserController.editUserCtrl)
-  .patch("/:id/favorites", UserController.addFavoriteCtrl);
-// .post("/refresh-token", UserController.refreshTokenCtrl)
+  .post(
+    "/refresh-token",
+    validateRefreshTokenInCookieSession,
+    UserController.refreshTokenCtrl
+  );
+// .patch("/", UserController.editUserCtrl)
+// .patch("/:id/favorites", UserController.addFavoriteCtrl);
+
 // .post("/logout", UserController.logoutUserCtrl)

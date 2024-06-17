@@ -17,7 +17,7 @@ export function createToken(user, tokenType = "access") {
     {
       access: "90min",
       refresh: "2w",
-    }[tokenType] || "90min"; // access field values dynamically using value of tokenType
+    }[tokenType] || "90min";
 
   const token = jwt.sign(tokenPayload, jwtSecret, { expiresIn });
   return token;
