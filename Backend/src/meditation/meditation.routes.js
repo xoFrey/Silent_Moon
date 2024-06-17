@@ -7,5 +7,4 @@ export const meditationRoutes = express
   // .get("/", MeditationController.getCategoriesCtrl)
   // .get("/", MeditationController.getMeditationDetailsCtrl)
   .post("/", MeditationController.createMeditationCtrl);
-// .patch("/", MeditationController.addFavoriteCtrl)
 // .patch("/", MeditationController.removeFavoriteCtrl);
