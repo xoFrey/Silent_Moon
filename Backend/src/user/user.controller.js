@@ -1,15 +1,5 @@
 import { UserService } from "./user.services/user.index.js";
 
-export const UserController = {
-  registerUserCtrl,
-  verifyUserEmailCtrl,
-  loginUserCtrl,
-  //   refreshTokenCtrl,
-  //   logoutUserCtrl,
-  editUserCtrl,
-  addFavoriteCtrl,
-};
-
 async function registerUserCtrl(req, res) {
   try {
     const userInfo = req.body;
@@ -87,4 +77,14 @@ const addFavoriteCtrl = async (req, res) => {
       .status(500)
       .json({ err, message: err.message || "Could not add Favorite" });
   }
+};
+
+export const UserController = {
+  registerUserCtrl,
+  verifyUserEmailCtrl,
+  loginUserCtrl,
+  //   refreshTokenCtrl,
+  //   logoutUserCtrl,
+  editUserCtrl,
+  addFavoriteCtrl,
 };

@@ -1,7 +1,7 @@
-import { userToView } from "../user.helpers";
-import { User } from "../user.model";
-import { Yoga } from "../../yoga/yoga.model";
-import { Meditation } from "../../meditation/meditation.model";
+import { userToView } from "../user.helpers.js";
+import { User } from "../user.model.js";
+import { Yoga } from "../../yoga/yoga.model.js";
+import { Meditation } from "../../meditation/meditation.model.js";
 
 export const addFavorite = async (updateInfo) => {
   const meditation = Meditation.findById(updateInfo.id);
