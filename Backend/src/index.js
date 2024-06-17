@@ -8,6 +8,7 @@ import "dotenv/config";
 import { userRoutes } from "./user/user.routes.js";
 import { yogaRoutes } from "./yoga/yoga.routes.js";
 import { meditationRoutes } from "./meditation/meditation.routes.js";
+import { spotifyRouter } from "./spotify/spotify.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -67,11 +68,11 @@ app.post("/auth", async (req, res) => {
       },
       body: authOptions.body,
     });
-
+    console.log(response);
     if (response.ok) {
       const token = await response.json();
-      // accessToken = token;
-      console.log(token);
+      const access_token = token.access_token;
+      console.log(access_token);
       res.send("Token generated");
     } else {
       res.status(response.status || 500).send("Error: " + response.statusText);
@@ -81,33 +82,11 @@ app.post("/auth", async (req, res) => {
     res.status(500).send("Error: " + error.message);
   }
 });
-// app.get("/login", function (req, res) {
-//   // const state = generateRandomString(16);
-//   const scope = "user-read-private%20user-read-email";
-
-//   res.redirect(
-//     `https://accounts.spotify.com/authorize?&client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&response_type=code`,
-//   );
-// });
-
-// app.get("/callback", function (req, res) {
-//   const code = req.query.code || null;
-//   const state = req.query.state || null;
-
-//   if (state === null) {
-//     res.redirect(
-//       "/#" +
-//         JSON.stringify({
-//           error: "state_mismatch",
-//         }),
-//     );
-//   } else {
-//   }
-// });
 
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/yoga", yogaRoutes);
 app.use("/api/v1/meditation", meditationRoutes);
+app.use("/api/spotify", spotifyRouter);
 
 await mongoose.connect(process.env.MONGO_URL, { dbName: "SilentMoon" });
 app.listen(PORT, () => console.log("Server ready at", PORT));
