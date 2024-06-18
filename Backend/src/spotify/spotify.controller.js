@@ -82,7 +82,7 @@ const getTrack = async (req, res) => {
 
 const getPlaylist = async (req, res) => {
   const { id } = req.body;
-  console.log("1");
+
   try {
     console.log("2");
     const authResponse = await fetch(authOptions.url, {
@@ -107,8 +107,6 @@ const getPlaylist = async (req, res) => {
       },
     });
     console.log("4");
-
-    // console.log(response.ok);
 
     if (response.ok) {
       const spotifyData = await response.json();
