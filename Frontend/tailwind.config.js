@@ -10,7 +10,12 @@ export default {
       subtext: "#A1A4B2",
       circle: "#FAF2DA",
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        landingImg: "url('/image/FrameLanding.png')",
+        getStartedImg: "url('/image/getStartedImg.png')",
+      },
+    },
   },
   plugins: [],
 };
