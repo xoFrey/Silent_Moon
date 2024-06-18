@@ -13,31 +13,40 @@ import MeditationPage from "./pages/MeditationPage";
 import MusicPage from "./pages/MusicPage";
 import ProfilePage from "./pages/ProfilePage";
 import Navbar from "./components/Navbar";
+import { useState } from "react";
+import { TokenContext, RefreshContext, UserContext } from "../context/Context";
 
 function App() {
+  const [refresh, setRefresh] = useState(false);
+  const [token, setToken] = useState();
+  const [user, setUser] = useState();
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Registration />} />
-          <Route path="/get-started" element={<GetStarted />} />
-          <Route path="/notification" element={<Notification />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/yoga" element={<YogaPage />} />
-          <Route path="/yoga/:yogaId" element={<YogaDetail />} />
-          <Route path="/meditation" element={<MeditationPage />} />
-          <Route
-            path="/meditation/:meditationId"
-            element={<MeditationDetail />}
-          />
-          <Route path="/music" element={<MusicPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-        </Routes>
-        <Navbar />
-      </BrowserRouter>
-    </>
+    <RefreshContext.Provider value={{ refresh, setRefresh }}>
+      <TokenContext.Provider value={{ token, setToken }}>
+        <UserContext.Provider value={{ user, setUser }}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Registration />} />
+              <Route path="/get-started" element={<GetStarted />} />
+              <Route path="/notification" element={<Notification />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/yoga" element={<YogaPage />} />
+              <Route path="/yoga/:yogaId" element={<YogaDetail />} />
+              <Route path="/meditation" element={<MeditationPage />} />
+              <Route
+                path="/meditation/:meditationId"
+                element={<MeditationDetail />}
+              />
+              <Route path="/music" element={<MusicPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+            </Routes>
+            <Navbar />
+          </BrowserRouter>
+        </UserContext.Provider>
+      </TokenContext.Provider>
+    </RefreshContext.Provider>
   );
 }
 
