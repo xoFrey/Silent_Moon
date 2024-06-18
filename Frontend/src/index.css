@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-img{
-    max-width: 100%;
+@font-face {
+  font-family: sourceSans;
+  src: url(/fonts/SourceSans3-VariableFont_wght.ttf);
+}
+
+img {
+  max-width: 100%;
+}
+
+* {
+  font-family: sourceSans !important;
 }
