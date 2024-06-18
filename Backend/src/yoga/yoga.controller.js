@@ -14,18 +14,6 @@ const createYogaCtrl = async (req, res) => {
   }
 };
 
-const getAllYogasCtrl = async (req, res) => {
-  try {
-    const result = await YogaService.getAllYogas();
-
-    res.json({ result });
-  } catch (err) {
-    console.log(err);
-    res
-      .status(500)
-      .json({ err, message: err.message || "Could not get all yogas" });
-  }
-};
 const getYogaDetailCtrl = async (req, res) => {
   try {
     const yogaId = req.params.yogaId;
@@ -39,11 +27,40 @@ const getYogaDetailCtrl = async (req, res) => {
   }
 };
 
+const getYogasByLevelCtrl = async (req, res) => {
+  try {
+    const yogaByLevel = req.query.levelSelection;
+
+    const result = await YogaService.getYogasByLevel(yogaByLevel);
+    res.json({ result });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      err,
+      message: err.message || "Could not get yogas by level",
+    });
+  }
+};
+const getYogasByCategoryCtrl = async (req, res) => {
+  try {
+    const yogaByCategory = req.query.categorySelection;
+
+    const result = await YogaService.getYogasByCategory(yogaByCategory);
+    res.json({ result });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      err,
+      message: err.message || "Could not get yogas by category",
+    });
+  }
+};
+
 export const YogaController = {
-  // getRecommendedCtrl,
   getYogaDetailCtrl,
-  getAllYogasCtrl,
   createYogaCtrl,
+  getYogasByLevelCtrl,
+  getYogasByCategoryCtrl,
   // addFavoriteCtrl,
   // removeFavoriteCtrl,
 };
