@@ -1,9 +1,11 @@
 import { createYoga } from "./yoga.createYoga.js";
-import { getAllYogas } from "./yoga.getAllYogas.js";
+import { getYogasByCategory } from "./yoga.getYogaByCategory.js";
 import { getYogaDetail } from "./yoga.getYogaDetail.js";
+import { getYogasByLevel } from "./yoga.getYogasByLevel.js";
 
 export const YogaService = {
   createYoga,
-  getAllYogas,
   getYogaDetail,
+  getYogasByLevel,
+  getYogasByCategory,
 };

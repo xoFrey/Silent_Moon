@@ -7,10 +7,10 @@ const meditationSchema = new mongoose.Schema(
     description: { type: String, required: true, trim: true },
     level: { type: String, enum: ["Beginner", "Intermediate", "Expert"] },
     duration: { type: String, require: true },
-    category: { type: String, enum: ["All", "Anxious", "Sleep", "Kids"] },
+    category: { type: String, enum: ["Anxious", "Sleep", "Kids"] },
     playlistId: { type: String, require: true },
   },
-  { collection: "meditations", timestamps: true },
+  { collection: "meditations", timestamps: true }
 );
 
 export const Meditation = mongoose.model("Meditation", meditationSchema);
