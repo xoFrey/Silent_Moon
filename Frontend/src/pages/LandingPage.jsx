@@ -6,8 +6,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   const getRouted = () => {
-    let path = `/login`;
-    navigate(path);
+    navigate(`/login`);
   };
 
   return (
