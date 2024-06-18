@@ -25,11 +25,11 @@ const spotifyAuth = async (req, res) => {
       },
       body: authOptions.body,
     });
-    console.log(response);
+
     if (response.ok) {
       const token = await response.json();
       const access_token = token.access_token;
-      console.log(access_token);
+
       res.send("Token generated");
     } else {
       res.status(response.status || 500).send("Error: " + response.statusText);
@@ -68,8 +68,6 @@ const getTrack = async (req, res) => {
       },
     );
 
-    console.log(response);
-
     if (response.ok) {
       const spotifyData = await response.json();
 
@@ -84,8 +82,9 @@ const getTrack = async (req, res) => {
 
 const getPlaylist = async (req, res) => {
   const { id } = req.body;
-
+  console.log("1");
   try {
+    console.log("2");
     const authResponse = await fetch(authOptions.url, {
       method: "POST",
       headers: {
@@ -96,6 +95,7 @@ const getPlaylist = async (req, res) => {
     });
 
     if (!authResponse.ok) return res.status(500).json({ error: "Auth failed" });
+    console.log("3");
 
     const authData = await authResponse.json();
     const accessToken = authData.access_token;
@@ -106,12 +106,12 @@ const getPlaylist = async (req, res) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+    console.log("4");
 
-    console.log(response);
+    // console.log(response.ok);
 
     if (response.ok) {
       const spotifyData = await response.json();
-
       res.json(spotifyData);
     } else {
       res.status(500).json({ error: "Cant fetch Spotify Data" });

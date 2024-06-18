@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 @font-face {
   font-family: sourceSans;
   src: url(/fonts/SourceSans3-VariableFont_wght.ttf);
@@ -13,4 +15,10 @@ img {
 
 * {
   font-family: sourceSans !important;
+}
+
+
+.react-ios-time-picker {
+    margin-bottom: 400px !important;
+
 }
