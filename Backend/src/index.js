@@ -8,7 +8,7 @@ import "dotenv/config";
 import { userRoutes } from "./user/user.routes.js";
 import { yogaRoutes } from "./yoga/yoga.routes.js";
 import { meditationRoutes } from "./meditation/meditation.routes.js";
-import { spotifyRouter } from "./spotify/spotify.js";
+import { spotifyRouter } from "./spotify/spotify.router.js";
 
 const app = express();
 const PORT = process.env.PORT;

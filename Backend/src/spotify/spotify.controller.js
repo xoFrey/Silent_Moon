@@ -1,7 +1,7 @@
 const client_id = process.env.SPOTIFY_ID;
 const client_secret = process.env.SPOTIFY_SECRET;
-const redirect_uri = "http://localhost:5173/music";
-const code = "code"; // Diese Variable wird nicht verwendet, aber behalten, falls sie später benötigt wird
+// const redirect_uri = "http://localhost:5173/music";
+// const code = "code";
 
 let authOptions = {
   url: "https://accounts.spotify.com/api/token",
@@ -15,7 +15,7 @@ let authOptions = {
   }),
 };
 
-export const spotifyAuth = async (req, res) => {
+const spotifyAuth = async (req, res) => {
   try {
     const response = await fetch(authOptions.url, {
       method: "POST",
@@ -40,11 +40,10 @@ export const spotifyAuth = async (req, res) => {
   }
 };
 
-export const getTrack = async (req, res) => {
+const getTrack = async (req, res) => {
   const { id } = req.body;
 
   try {
-    console.log("im trying");
     const authResponse = await fetch(authOptions.url, {
       method: "POST",
       headers: {
@@ -58,7 +57,6 @@ export const getTrack = async (req, res) => {
 
     const authData = await authResponse.json();
     const accessToken = authData.access_token;
-    console.log(authData);
 
     const response = await fetch(
       `https://api.spotify.com/v1/playlists/${id}/tracks`,
@@ -74,7 +72,46 @@ export const getTrack = async (req, res) => {
 
     if (response.ok) {
       const spotifyData = await response.json();
-      console.log("Data", spotifyData);
+
+      res.json(spotifyData);
+    } else {
+      res.status(500).json({ error: "Cant fetch Spotify Data" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const getPlaylist = async (req, res) => {
+  const { id } = req.body;
+
+  try {
+    const authResponse = await fetch(authOptions.url, {
+      method: "POST",
+      headers: {
+        Authorization: authOptions.headers.Authorization,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: authOptions.body,
+    });
+
+    if (!authResponse.ok) return res.status(500).json({ error: "Auth failed" });
+
+    const authData = await authResponse.json();
+    const accessToken = authData.access_token;
+
+    const response = await fetch(`https://api.spotify.com/v1/playlists/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    console.log(response);
+
+    if (response.ok) {
+      const spotifyData = await response.json();
+
       res.json(spotifyData);
     } else {
       res.status(500).json({ error: "Cant fetch Spotify Data" });
@@ -87,4 +124,5 @@ export const getTrack = async (req, res) => {
 export const SpotifyController = {
   spotifyAuth,
   getTrack,
+  getPlaylist,
 };
