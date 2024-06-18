@@ -1,6 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
+import ButtonPink from "../components/ButtonPink";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
+
+  const getRouted = () => {
+    let path = `/login`;
+    navigate(path);
+  };
+
   return (
     <section className="h-screen ">
       <div className="bg-landingImg  bg-top bg-contain bg-no-repeat h-3/4">
@@ -16,8 +25,8 @@ const LandingPage = () => {
         </p>
       </div>
       <div>
-        <button>Sign Up</button>
-        <p className="uppercase text-subtext leading-5 text-center mt-3.5 mx-3.5 font-semibold">
+        <ButtonPink name="Login" funktion={getRouted} />
+        <p className="uppercase text-subtext leading-5 text-center pb-24 mt-3.5 mx-3.5 font-semibold">
           already have an account?
           <a href="/login" className="pl-1 text-pink">
             log in
