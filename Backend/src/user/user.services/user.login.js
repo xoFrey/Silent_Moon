@@ -4,8 +4,13 @@ import { userToView } from "../user.helpers.js";
 import { createToken } from "../../utils/createToken.js";
 
 export async function loginUser({ email, password }) {
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email })
+    .populate("meditationFavorites")
+    .populate("yogaFavorites"); // ! populate yoga and meditation
   if (!user) throw new Error("Invalid login");
+
+  console.log(user);
+  console.log(userToView(user));
 
   if (!user.isVerified) throw new Error("Email not verified, login aborted");
 
