@@ -6,6 +6,7 @@ export const yogaRoutes = express
   // .get("/", YogaController.getRecommendedCtrl)
   // .get("/", YogaController.getCategoriesCtrl)
   .get("/", YogaController.getAllYogasCtrl)
+  .get("/:yogaId", YogaController.getYogaDetailCtrl)
   .post("/", YogaController.createYogaCtrl);
 // .patch("/", YogaController.addFavoriteCtrl)
 // .patch("/", YogaController.removeFavoriteCtrl);

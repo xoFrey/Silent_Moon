@@ -26,11 +26,41 @@ const getAllMeditationsCtrl = async (req, res) => {
   }
 };
 
+const getMeditationDetailCtrl = async (req, res) => {
+  try {
+    const meditationId = req.params.meditationId;
+    const result = await MeditationService.getMeditationDetail(meditationId);
+    res.json({ result });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ err, message: err.message || "Could not get meditation-detail" });
+  }
+};
+const getMeditationsByLevelCtrl = async (req, res) => {
+  try {
+    const meditationByLevel = req.query.levelSelection;
+
+    const result = await MeditationService.getMeditationsByLevel(
+      meditationByLevel
+    );
+    res.json({ result });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      err,
+      message: err.message || "Could not get meditations by level",
+    });
+  }
+};
+
 export const MeditationController = {
   // getRecommendedCtrl,
-  // getCategoriesCtrl,
+  getMeditationDetailCtrl,
   getAllMeditationsCtrl,
   createMeditationCtrl,
+  getMeditationsByLevelCtrl,
   // addFavoriteCtrl,
   // removeFavoriteCtrl,
 };

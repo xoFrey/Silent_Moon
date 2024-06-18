@@ -14,8 +14,7 @@ export const userRoutes = express
     "/refresh-token",
     validateRefreshTokenInCookieSession,
     UserController.refreshTokenCtrl
-  );
-// .patch("/", UserController.editUserCtrl)
-// .patch("/:id/favorites", UserController.addFavoriteCtrl);
-
-// .post("/logout", UserController.logoutUserCtrl)
+  )
+  // .patch("/", UserController.editUserCtrl)
+  // .patch("/:id/favorites", UserController.addFavoriteCtrl);
+  .post("/logout", UserController.logoutUserCtrl);

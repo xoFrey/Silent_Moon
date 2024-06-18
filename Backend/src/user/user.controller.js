@@ -93,12 +93,17 @@ const addFavoriteCtrl = async (req, res) => {
   }
 };
 
+async function logoutUserCtrl(req, res) {
+  req.session.refreshToken = null;
+  res.status(200).json({ result: { message: "You are now logged out" } });
+}
+
 export const UserController = {
   registerUserCtrl,
   verifyUserEmailCtrl,
   loginUserCtrl,
   refreshTokenCtrl,
-  //   logoutUserCtrl,
+  logoutUserCtrl,
   editUserCtrl,
   addFavoriteCtrl,
 };

@@ -26,10 +26,22 @@ const getAllYogasCtrl = async (req, res) => {
       .json({ err, message: err.message || "Could not get all yogas" });
   }
 };
+const getYogaDetailCtrl = async (req, res) => {
+  try {
+    const yogaId = req.params.yogaId;
+    const result = await YogaService.getYogaDetail(yogaId);
+    res.json({ result });
+  } catch (err) {
+    console
+      .log(err)
+      .status(500)
+      .json({ err, message: err.message || "Could not get yoga-detail" });
+  }
+};
 
 export const YogaController = {
   // getRecommendedCtrl,
-  // getCategoriesCtrl,
+  getYogaDetailCtrl,
   getAllYogasCtrl,
   createYogaCtrl,
   // addFavoriteCtrl,
