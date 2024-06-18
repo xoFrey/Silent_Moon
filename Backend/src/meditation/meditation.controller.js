@@ -13,19 +13,6 @@ const createMeditationCtrl = async (req, res) => {
   }
 };
 
-const getAllMeditationsCtrl = async (req, res) => {
-  try {
-    const result = await MeditationService.getAllMeditations();
-
-    res.json({ result });
-  } catch (err) {
-    console.log(err);
-    res
-      .status(500)
-      .json({ err, message: err.message || "Could not get all meditations" });
-  }
-};
-
 const getMeditationDetailCtrl = async (req, res) => {
   try {
     const meditationId = req.params.meditationId;
@@ -54,13 +41,29 @@ const getMeditationsByLevelCtrl = async (req, res) => {
     });
   }
 };
+const getMeditationsByCategoryCtrl = async (req, res) => {
+  try {
+    const meditationByCategory = req.query.categorySelection;
+
+    const result = await MeditationService.getMeditationsByCategory(
+      meditationByCategory
+    );
+    res.json({ result });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      err,
+      message: err.message || "Could not get meditations by category",
+    });
+  }
+};
 
 export const MeditationController = {
-  // getRecommendedCtrl,
   getMeditationDetailCtrl,
-  getAllMeditationsCtrl,
+
   createMeditationCtrl,
   getMeditationsByLevelCtrl,
+  getMeditationsByCategoryCtrl,
   // addFavoriteCtrl,
   // removeFavoriteCtrl,
 };
