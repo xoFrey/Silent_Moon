@@ -26,7 +26,7 @@ const Login = () => {
     });
 
     const data = await res.json();
-    console.log("+++++DATA+++", data);
+
     if (!data.result) return setErrorMessage(data.message || "Failed login");
 
     setUser(data?.result.user);
