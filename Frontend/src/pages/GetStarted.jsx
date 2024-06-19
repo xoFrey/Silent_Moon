@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import ButtonPink from "../components/ButtonPink";
 import Header from "../components/Header";
+import TileCards from "../components/TileCards";
 
 const GetStarted = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const GetStarted = () => {
           </h1>
         </div>
       </div>
-      <div className="mt-16 pb-20">
+      <div className="-mt-24 pb-20">
         <ButtonPink name="GET STARTED" funktion={getRouted} />
       </div>
     </section>
