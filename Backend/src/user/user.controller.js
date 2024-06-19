@@ -3,6 +3,7 @@ import { UserService } from "./user.services/user.index.js";
 async function registerUserCtrl(req, res) {
   try {
     const userInfo = req.body;
+    console.log("+++++B userInfo++++", userInfo);
     const result = await UserService.registerUser(userInfo);
     res.json({ result });
   } catch (err) {
