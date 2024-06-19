@@ -5,4 +5,4 @@ export const spotifyRouter = express
   .Router()
   .post("/auth", SpotifyController.spotifyAuth)
   .post("/playlist", SpotifyController.getPlaylist)
-  .post("/track", SpotifyController.getTrack);
+  .post("/track/:trackId", SpotifyController.getTrack);
