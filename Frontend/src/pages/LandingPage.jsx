@@ -24,7 +24,9 @@ const LandingPage = () => {
         </p>
       </div>
       <div>
-        <ButtonPink name="Login" funktion={getRouted} />
+        <div className=" mt-16 mb-5">
+          <ButtonPink name="Login" funktion={getRouted} />
+        </div>
         <p className="uppercase text-subtext leading-5 text-center pb-24 mt-3.5 mx-3.5 font-semibold">
           already have an account?
           <a href="/login" className="pl-1 text-pink">
