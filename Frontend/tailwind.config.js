@@ -4,6 +4,7 @@ export default {
   theme: {
     colors: {
       white: "#ffffff",
+      lightcreme: "#FEFCF8",
       pink: " #E28F83",
       green: "#8E9775",
       maintext: "#3F414E",
