@@ -58,7 +58,7 @@ const Login = () => {
             <input
               className="mb-5 h-16 w-11/12 border-solid border border-pink text-subtext rounded-full text-center text-base font-semibold leading-5 tracking-wider"
               id="password"
-              type="text"
+              type="password"
               placeholder="Password"
               // value={password}
               onChange={(e) => setPassword(e.target.value)}

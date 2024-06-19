@@ -78,7 +78,7 @@ const editUserCtrl = async (req, res) => {
 const addFavoriteCtrl = async (req, res) => {
   try {
     const updateInfo = {
-      userId: req.authenticatedUserId,
+      userId: req.body.userId,
       id: req.params.id,
     };
     const result = await UserService.addFavorite(updateInfo);

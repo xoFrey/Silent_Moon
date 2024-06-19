@@ -4,39 +4,33 @@ import { Yoga } from "../../yoga/yoga.model.js";
 import { Meditation } from "../../meditation/meditation.model.js";
 
 export const addFavorite = async (updateInfo) => {
-  const meditation = Meditation.findById(updateInfo.id);
-  if (!meditation) throw new Error("Meditation does not exist");
+  const [user, meditation, yoga] = await Promise.all([
+    User.findById(updateInfo.userId),
+    Meditation.findById(updateInfo.id),
+    Yoga.findById(updateInfo.id),
+  ]);
 
-  const yoga = Yoga.findById(updateInfo.id);
-  if (!yoga) throw new Error("Yoga does not exist");
-  if (!yoga && !meditation) throw new Error("Id not found");
-
-  const user = User.findById(updateInfo.userId);
   if (!user) throw new Error("User not found");
+  if (!meditation && !yoga) throw new Error("Inserted Id not found");
 
-  if (user.yogaFavorites.includes(updateInfo.id))
-    throw new Error("You already like this Yoga!");
-  if (user.meditationFavorites.includes(updateInfo.id))
-    throw new Error("You already like this Meditation!");
+  console.log(user);
+  console.log(meditation);
+  console.log(yoga);
 
-  const updatedUser = await User.findByIdAndUpdate(
-    updateInfo.userId,
-    yoga
-      ? ({
-          $push: {
-            yogaFavorites: updateInfo.id,
-          },
-        },
-        { new: true })
-      : ({
-          $push: {
-            meditationFavorites: updateInfo.id,
-          },
-        },
-        { new: true })
+  const isFavoritesInYoga = user.yogaFavorites.includes(updateInfo.id);
+  const isFavoritesInMeditation = user.meditationFavorites.includes(
+    updateInfo.id,
   );
 
-  return {
-    user: userToView(updatedUser),
-  };
+  if (isFavoritesInYoga || isFavoritesInMeditation)
+    throw new Error("Is already in Favorites");
+
+  if (yoga) {
+    user.yogaFavorites.push(updateInfo.id);
+  } else {
+    user.meditationFavorites.push(updateInfo.id);
+  }
+  user.save();
+
+  return userToView(user);
 };

@@ -48,7 +48,6 @@ const Registration = () => {
 
   };
 
-  console.log(level);
 
   return (
     <main>
