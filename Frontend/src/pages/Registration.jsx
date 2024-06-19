@@ -9,14 +9,14 @@ const Registration = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [level, setLevel] = useState("");
+  const [level, setLevel] = useState("Beginner");
 
   const { setUser } = useContext(UserContext);
   const { setToken } = useContext(TokenContext);
 
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-
+  console.log("----", level);
   const registerUser = async (e) => {
     e.preventDefault();
 
@@ -86,13 +86,30 @@ const Registration = () => {
           </div>
           <div>
             <input
-              className=" w-72 mb-5 bg-slate-600 text-slate-200 px-4 py-2 rounded-lg"
-              id="level"
-              type="text"
-              placeholder="Level"
+              defaultChecked={true}
+              type="radio"
+              id="Beginner"
+              name="level"
               value={level}
-              onChange={(e) => setLevel(e.target.value)}
+              onChange={() => setLevel("Beginner")}
             />
+            <label htmlFor="Beginner">Beginner</label>
+            <input
+              type="radio"
+              id="Intermediate"
+              name="level"
+              value={level}
+              onChange={() => setLevel("Intermediate")}
+            />
+            <label htmlFor="Intermediate">Intermediate</label>
+            <input
+              type="radio"
+              id="Expert"
+              name="level"
+              value={level}
+              onChange={() => setLevel("Expert")}
+            />
+            <label htmlFor="Expert">Expert</label>
           </div>
 
           <div>
