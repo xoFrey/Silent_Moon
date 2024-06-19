@@ -3,7 +3,7 @@ import { UserService } from "./user.services/user.index.js";
 async function registerUserCtrl(req, res) {
   try {
     const userInfo = req.body;
-    console.log("+++++B userInfo++++", userInfo);
+
     const result = await UserService.registerUser(userInfo);
     res.json({ result });
   } catch (err) {
@@ -63,10 +63,7 @@ const refreshTokenCtrl = async (req, res) => {
 
 const editUserCtrl = async (req, res) => {
   try {
-    const userInfo = {
-      userId: req.authenticatedUserId,
-      userInfo: req.body,
-    };
+    const userInfo = req.body;
 
     const result = await UserService.editUser(userInfo);
     res.json({ result });

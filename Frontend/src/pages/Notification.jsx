@@ -4,16 +4,18 @@ import { MultiSectionDigitalClock } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { convertDateAndTime } from "../../helperfunctions/helpers";
 import ButtonPink from "../components/ButtonPink";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { backendUrl } from "../api/api";
+import { TokenContext, UserContext } from "../../context/Context";
 
 
 const Notification = () => {
     const [timeValue, setTimeValue] = useState(dayjs(Date.now()));
     const [selectedDays, setSelectedDays] = useState([]);
-    const { token } = useContext();
+    const { token } = useContext(TokenContext);
+    const { user, setUser } = useContext(UserContext);
 
-    console.log(convertDateAndTime(timeValue.$d));
+    const navigate = useNavigate();
 
     const selectWeekdays = (day) => {
         setSelectedDays((selected) => {
@@ -25,11 +27,17 @@ const Notification = () => {
         });
     };
 
+
+
     const updateUserInfo = async () => {
+        const newTime = convertDateAndTime(timeValue.$d);
         const updateInfo = {
-            alertTime: timeValue,
+            userId: user.id,
+            alertTime: newTime,
             alertWeekdays: selectedDays
         };
+
+
         const res = await fetch(`${backendUrl}/api/v1/users`, {
             method: "PATCH",
             headers: {
@@ -39,7 +47,14 @@ const Notification = () => {
             body: JSON.stringify(updateInfo)
 
         });
+
+        const data = await res.json();
+        setUser(data.result);
+
+        navigate("/home");
+
     };
+
 
     const weekdays = ["SU", "M", "T", "W", "TH", "F", "S"];
     return (
@@ -79,7 +94,7 @@ const Notification = () => {
                 </div>
             </section>
             <div className="mb-24">
-                <ButtonPink name={"SAVE"} />
+                <ButtonPink name={"SAVE"} funktion={(updateUserInfo)} />
                 <Link to="/home" className="text-center">
                     <p className="mt-5 text-pink font-semibold">NO THANKS</p>
                 </Link>

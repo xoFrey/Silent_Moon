@@ -18,6 +18,7 @@ import { TokenContext, RefreshContext, UserContext } from "../context/Context";
 import MusikDetail from "./pages/MusicDetail";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import AuthRequired from "./components/AuthRequired";
 
 function App() {
   const [refresh, setRefresh] = useState(false);

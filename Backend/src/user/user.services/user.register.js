@@ -36,7 +36,7 @@ export async function registerUser({
   });
   const accessToken = createToken(user, "access"); // header.payload.signature
   const refreshToken = createToken(user, "refresh"); // header.payload.signature
-
+  console.log(user);
   // await sendEmailVerification(user);
   return {
     user: userToView(user),

@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true, trim: true },
     isVerified: { type: Boolean, default: false },
     sixDigitCode: { type: String, required: true },
-    alertTime: { type: String, required: false },
+    alertTime: { type: String, default: "10:00" },
     alertWeekdays: [{ type: String, required: false }],
     userLevel: { type: String, enum: ["Beginner", "Intermediate", "Expert"] },
     yogaFavorites: [{ type: mongoose.Types.ObjectId, ref: "Yoga" }],

@@ -15,6 +15,7 @@ export default {
       backgroundImage: {
         landingImg: "url('/image/FrameLanding.png')",
         getStartedImg: "url('/image/getStartedImg.png')",
+        SilentMoonLogo: "url('./public/image/SilentMoonLogo.png')",
       },
     },
   },
