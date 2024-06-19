@@ -13,10 +13,6 @@ export const addFavorite = async (updateInfo) => {
   if (!user) throw new Error("User not found");
   if (!meditation && !yoga) throw new Error("Inserted Id not found");
 
-  console.log(user);
-  console.log(meditation);
-  console.log(yoga);
-
   const isFavoritesInYoga = user.yogaFavorites.includes(updateInfo.id);
   const isFavoritesInMeditation = user.meditationFavorites.includes(
     updateInfo.id,

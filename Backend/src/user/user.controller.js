@@ -91,6 +91,22 @@ const addFavoriteCtrl = async (req, res) => {
   }
 };
 
+const removeFavoriteCtrl = async (req, res) => {
+  try {
+    const updateInfo = {
+      userId: req.body.userId,
+      id: req.params.id,
+    };
+    const result = await UserService.removeFavorite(updateInfo);
+    res.json({ result });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ err, message: err.message || "Could not add Favorite" });
+  }
+};
+
 async function logoutUserCtrl(req, res) {
   req.session.refreshToken = null;
   res.status(200).json({ result: { message: "You are now logged out" } });
@@ -104,4 +120,5 @@ export const UserController = {
   logoutUserCtrl,
   editUserCtrl,
   addFavoriteCtrl,
+  removeFavoriteCtrl,
 };
