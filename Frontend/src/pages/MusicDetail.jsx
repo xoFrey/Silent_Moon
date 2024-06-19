@@ -47,7 +47,7 @@ const MusikDetail = () => {
     return (
         <section className='bg-circle '>
             <Link to='/music'>
-                <div className='mt-8 mx-5 border rounded-full border border-white bg-white p-2 inline-block'>
+                <div className='mt-8 mx-5 border rounded-full border-white bg-white p-2 inline-block'>
                     <IoCloseOutline size={"30px"} />
                 </div>
             </Link>

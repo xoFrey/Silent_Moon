@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema(
     isVerified: { type: Boolean, default: false },
     sixDigitCode: { type: String, required: true },
     alertTime: { type: String, required: false },
+    alertWeekdays: [{ type: String, required: false }],
     userLevel: { type: String, enum: ["Beginner", "Intermediate", "Expert"] },
     yogaFavorites: [{ type: mongoose.Types.ObjectId, ref: "Yoga" }],
     meditationFavorites: [{ type: mongoose.Types.ObjectId, ref: "Meditation" }],

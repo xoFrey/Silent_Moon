@@ -7,3 +7,13 @@ export const convertMStoMinSek = (ms) => {
 
   return `${minutes}:${secondsWithZero}`;
 };
+
+export const convertDateAndTime = (dateString) => {
+  const date = new Date(dateString);
+
+  const timeOptions = { hour: "2-digit", minute: "2-digit" };
+
+  const time = date.toLocaleTimeString("de-DE", timeOptions);
+
+  return time;
+};
