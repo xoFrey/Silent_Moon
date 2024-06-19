@@ -6,7 +6,7 @@ import { createToken } from "../../utils/createToken.js";
 export async function loginUser({ email, password }) {
   const user = await User.findOne({ email })
     .populate("meditationFavorites")
-    .populate("yogaFavorites"); // ! populate yoga and meditation
+    .populate("yogaFavorites");
   if (!user) throw new Error("Invalid login");
 
   console.log(user);
@@ -18,11 +18,7 @@ export async function loginUser({ email, password }) {
   const passwordHash = await bcrypt.hash(password, saltRounds);
 
   const isPasswordCorrect = await bcrypt.compare(password, user.password);
-  if (!isPasswordCorrect) {
-    return res
-      .status(400)
-      .json({ message: "Password incorrect. Please try again." });
-  }
+  if (!isPasswordCorrect) throw new Error("Password is incorrect - try again");
 
   const accessToken = createToken(user, "access");
   const refreshToken = createToken(user, "refresh");
