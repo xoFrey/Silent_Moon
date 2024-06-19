@@ -14,7 +14,7 @@ const LandingPage = () => {
       <div className="bg-landingImg  bg-top bg-contain bg-no-repeat h-3/4">
         <Header />
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col -mt-16">
         <h4 className="font-bold text-maintext text-3xl leading-10 text-center">
           We are what we do
         </h4>
@@ -25,7 +25,7 @@ const LandingPage = () => {
       </div>
       <div>
         <div className=" mt-16 mb-5">
-          <ButtonPink name="Login" funktion={getRouted} />
+          <ButtonPink name="Sign Up" funktion={getRouted} />
         </div>
         <p className="uppercase text-subtext leading-5 text-center pb-24 mt-3.5 mx-3.5 font-semibold">
           already have an account?
