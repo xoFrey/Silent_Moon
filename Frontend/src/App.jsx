@@ -15,6 +15,7 @@ import ProfilePage from "./pages/ProfilePage";
 import Navbar from "./components/Navbar";
 import { useState } from "react";
 import { TokenContext, RefreshContext, UserContext } from "../context/Context";
+import MusikDetail from "./pages/MusicDetail";
 
 function App() {
   const [refresh, setRefresh] = useState(false);
@@ -40,6 +41,7 @@ function App() {
                 element={<MeditationDetail />}
               />
               <Route path="/music" element={<MusicPage />} />
+              <Route path="/musicdetails/:trackId" element={<MusikDetail />} />
               <Route path="/profile" element={<ProfilePage />} />
             </Routes>
             <Navbar />

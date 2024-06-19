@@ -5,6 +5,7 @@ import { FaHeart } from "react-icons/fa";
 import { IoHeadset } from "react-icons/io5";
 import { convertMStoMinSek } from "../../helperfunctions/helpers";
 import { IoPlayCircleOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 
 const MusicPage = () => {
@@ -27,9 +28,6 @@ const MusicPage = () => {
         fetchPlaylist();
     }, []);
 
-    const onClickEvent = () => {
-
-    };
 
 
     return <>
@@ -51,13 +49,15 @@ const MusicPage = () => {
         </div>
         <section className="flex flex-col gap-5 px-5">
             {playlistInfo?.tracks.items.slice(0, 10).map((item) => (
-                <div key={item.track.id} onClick={() => console.log(item.track.name)} className="flex items-center gap-2 border-b border-subtext/20 pb-4 cursor-pointer">
-                    <IoPlayCircleOutline size={"50px"} fill="#A1A4B2" stroke="#A1A4B2" />
-                    <div>
-                        <p className=" text-base font-semibold text-maintext ">{item.track.name}</p>
-                        <p className=" text-xs text-subtext font-semibold">{convertMStoMinSek(item.track.duration_ms)} </p>
+                <Link to={`/musicdetails/${item.track.id}`} key={item.track.id}>
+                    <div className="flex items-center gap-2 border-b border-subtext/20 pb-4 cursor-pointer">
+                        <IoPlayCircleOutline size={"50px"} fill="#A1A4B2" stroke="#A1A4B2" />
+                        <div>
+                            <p className=" text-base font-semibold text-maintext ">{item.track.name}</p>
+                            <p className=" text-xs text-subtext font-semibold">{convertMStoMinSek(item.track.duration_ms)} </p>
+                        </div>
                     </div>
-                </div>
+                </Link>
 
             ))}
         </section>

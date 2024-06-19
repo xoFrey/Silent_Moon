@@ -41,7 +41,7 @@ const spotifyAuth = async (req, res) => {
 };
 
 const getTrack = async (req, res) => {
-  const { id } = req.body;
+  const trackId = req.params.trackId;
 
   try {
     const authResponse = await fetch(authOptions.url, {
@@ -59,7 +59,7 @@ const getTrack = async (req, res) => {
     const accessToken = authData.access_token;
 
     const response = await fetch(
-      `https://api.spotify.com/v1/playlists/${id}/tracks`,
+      `https://api.spotify.com/v1/tracks/${trackId}`,
       {
         method: "GET",
         headers: {
