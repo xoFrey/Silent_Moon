@@ -51,7 +51,7 @@ const Notification = () => {
         const data = await res.json();
         setUser(data.result);
 
-        navigate("/home");
+        navigate("/login");
 
     };
 

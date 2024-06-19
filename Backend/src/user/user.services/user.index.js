@@ -3,6 +3,7 @@ import { editUser } from "./user.editUser.js";
 import { loginUser } from "./user.login.js";
 import { refreshToken } from "./user.refreshToken.js";
 import { registerUser } from "./user.register.js";
+import { removeFavorite } from "./user.removeFavorite.js";
 import { verifyUserEmail } from "./user.verify.js";
 
 export const UserService = {
@@ -12,4 +13,5 @@ export const UserService = {
   editUser,
   addFavorite,
   refreshToken,
+  removeFavorite,
 };
