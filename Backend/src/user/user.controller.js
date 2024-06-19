@@ -56,7 +56,7 @@ const refreshTokenCtrl = async (req, res) => {
     console.log(err);
     res
       .status(500)
-      .json({ err, message: err.message || "Could not refresh token" });
+      .json({ err, message: err.message || "Could not refresh access token" });
   }
 };
 
