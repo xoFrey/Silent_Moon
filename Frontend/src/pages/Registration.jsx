@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { TokenContext, UserContext } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
 import { backendUrl } from "../api/api";
+import GoBackButton from "../components/GoBackButton";
+import ButtonPink from "../components/ButtonPink";
 
 const Registration = () => {
   const [userName, setUserName] = useState("");
@@ -9,7 +11,7 @@ const Registration = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [level, setLevel] = useState("Beginner");
+  const [level, setLevel] = useState("");
 
   const { setUser } = useContext(UserContext);
   const { setToken } = useContext(TokenContext);
@@ -47,15 +49,19 @@ const Registration = () => {
   };
 
   return (
-    <>
-      <h4 className="font-bold text-maintext text-3xl leading-10 text-center mt-36">
+    <main>
+      <GoBackButton />
+      <div className="flex justify-center">
+        <img src="../../public/image/SilentMoonLogo.png" className=" h-36" />
+      </div>
+      <h4 className="font-black text-maintext text-4xl leading-10 text-center mt-12 mb-20 tracking-wide">
         Create your account
       </h4>
-      <form className="flex flex-col items-center gap-7">
+      <form>
         <div>
-          <div>
+          <div className="flex flex-col items-center">
             <input
-              className=" w-72 mb-5 bg-slate-600 text-slate-200 px-4 py-2 rounded-lg"
+              className="mb-5 h-16 w-11/12 border-solid border border-pink text-subtext rounded-full text-center text-base font-semibold leading-5 tracking-wider"
               id="username"
               type="text"
               placeholder="Username"
@@ -64,19 +70,19 @@ const Registration = () => {
             />
           </div>
 
-          <div>
+          <div className="flex flex-col items-center">
             <input
-              className=" w-72 mb-5 bg-slate-600 text-slate-200 px-4 py-2 rounded-lg"
+              className="mb-5 h-16 w-11/12 border-solid border border-pink text-subtext rounded-full text-center text-base font-semibold leading-5 tracking-wider"
               id="firstname"
               type="text"
-              placeholder="Fristname"
+              placeholder="Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
-          <div>
+          <div className="flex flex-col items-center">
             <input
-              className=" w-72 mb-5 bg-slate-600 text-slate-200 px-4 py-2 rounded-lg"
+              className="mb-5 h-16 w-11/12 border-solid border border-pink text-subtext rounded-full text-center text-base font-semibold leading-5 tracking-wider"
               id="lastname"
               type="text"
               placeholder="Lastname"
@@ -84,64 +90,96 @@ const Registration = () => {
               onChange={(e) => setLastName(e.target.value)}
             />
           </div>
-          <div>
-            <input
-              defaultChecked={true}
-              type="radio"
-              id="Beginner"
-              name="level"
-              value={level}
-              onChange={() => setLevel("Beginner")}
-            />
-            <label htmlFor="Beginner">Beginner</label>
-            <input
-              type="radio"
-              id="Intermediate"
-              name="level"
-              value={level}
-              onChange={() => setLevel("Intermediate")}
-            />
-            <label htmlFor="Intermediate">Intermediate</label>
-            <input
-              type="radio"
-              id="Expert"
-              name="level"
-              value={level}
-              onChange={() => setLevel("Expert")}
-            />
-            <label htmlFor="Expert">Expert</label>
+          <p className="text-center text-subtext text-base font-semibold leading-5 tracking-wider mb-2">
+            How would you rate your Meditation or Yoga Knowledge?
+          </p>
+          <div className="flex items-center flex-col mb-5">
+            <div className="grid w-11/12 grid-cols-3 rounded-full border border-solid border-pink p-2">
+              <div>
+                <input
+                  type="radio"
+                  name="level"
+                  id="beginner"
+                  value={level}
+                  className="peer hidden"
+                  onChange={() => setLevel("Beginner")}
+                  defaultChecked
+                />
+                <label
+                  htmlFor="beginner"
+                  className="block select-none rounded-full p-2 text-center peer-checked:bg-pink peer-checked:font-bold peer-checked:text-circle"
+                >
+                  Beginner
+                </label>
+              </div>
+
+              <div>
+                <input
+                  type="radio"
+                  name="level"
+                  id="Intermediate"
+                  value={level}
+                  className="peer hidden"
+                  onChange={() => setLevel("Intermediate")}
+                />
+                <label
+                  htmlFor="Intermediate"
+                  className="block select-none rounded-full p-2 text-center peer-checked:bg-pink peer-checked:font-bold peer-checked:text-circle"
+                >
+                  Intermediate
+                </label>
+              </div>
+
+              <div>
+                <input
+                  type="radio"
+                  name="level"
+                  id="Expert"
+                  value={level}
+                  className="peer hidden"
+                  onChange={() => setLevel("Expert")}
+                />
+                <label
+                  htmlFor="Expert"
+                  className="block select-none rounded-full p-2 text-center peer-checked:bg-pink peer-checked:font-bold peer-checked:text-circle"
+                >
+                  Expert
+                </label>
+              </div>
+            </div>
           </div>
 
-          <div>
+          <div className="flex flex-col items-center">
             <input
-              className=" w-72 mb-5 bg-slate-600 text-slate-200 px-4 py-2 rounded-lg"
+              className="mb-5 h-16 w-11/12 border-solid border border-pink text-subtext rounded-full text-center text-base font-semibold leading-5 tracking-wider"
               id="email"
               type="email"
-              placeholder="Email"
+              placeholder="E-Mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div>
+          <div className="flex flex-col items-center">
             <input
-              className=" w-72 mb-5 bg-slate-600 text-slate-200 px-4 py-2 rounded-lg"
+              className="mb-5 h-16 w-11/12 border-solid border border-pink text-subtext rounded-full text-center text-base font-semibold leading-5 tracking-wider"
               id="password"
               type="password"
               placeholder="Password"
-              value={password}
+              // value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
         </div>
-        <button
-          className=" border-slate-600 border px-4 py-2 rounded-lg duration-300 hover:scale-105 hover:bg-slate-600 hover:text-slate-200"
-          onClick={registerUser}
-        >
-          Register
-        </button>
+        <ButtonPink name="REGISTER" funktion={registerUser} />
         <p className=" text-center">{errorMessage}</p>
       </form>
-    </>
+      <p className="uppercase text-subtext leading-5 text-center pb-16 mt-3.5 mx-3.5 font-semibold">
+        already have an account?
+        <a href="/login" className="pl-1 text-pink">
+          log in
+        </a>
+      </p>
+    </main>
   );
 };
 
