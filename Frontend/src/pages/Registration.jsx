@@ -11,14 +11,14 @@ const Registration = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [level, setLevel] = useState("");
+  const [level, setLevel] = useState("Beginner");
 
-  const { setUser } = useContext(UserContext);
-  const { setToken } = useContext(TokenContext);
+  const { user, setUser } = useContext(UserContext);
+  const { token, setToken } = useContext(TokenContext);
 
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  console.log("----", level);
+
   const registerUser = async (e) => {
     e.preventDefault();
 
@@ -42,11 +42,13 @@ const Registration = () => {
         data.message || "Failed to register, please try again"
       );
 
-    navigate(`/get-started`);
-
     setToken(data.result.tokens.accessToken);
     setUser(data.result.user);
+    navigate(`/get-started`);
+
   };
+
+  console.log(level);
 
   return (
     <main>
