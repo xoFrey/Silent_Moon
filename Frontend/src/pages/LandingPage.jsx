@@ -6,7 +6,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   const getRouted = () => {
-    navigate(`/login`);
+    navigate(`/register`);
   };
 
   return (
