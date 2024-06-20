@@ -59,27 +59,27 @@ function App() {
               />
               <Route
                 path='/yoga'
-                element={<YogaPage />}
+                element={<AuthRequired><YogaPage /></AuthRequired>}
               />
               <Route
                 path='/yoga/:yogaId'
-                element={<YogaDetail />}
+                element={<AuthRequired><YogaDetail /></AuthRequired>}
               />
               <Route
                 path='/meditation'
-                element={<MeditationPage />}
+                element={<AuthRequired><MeditationPage /></AuthRequired>}
               />
               <Route
                 path='/meditation/:meditationId'
-                element={<MeditationDetail />}
+                element={<AuthRequired><MeditationDetail /></AuthRequired>}
               />
               <Route
                 path='/music'
-                element={<MusicPage />}
+                element={<AuthRequired><MusicPage /></AuthRequired>}
               />
               <Route
                 path='/musicdetails/:trackId'
-                element={<MusikDetail />}
+                element={<AuthRequired><MusikDetail /></AuthRequired>}
               />
               <Route
                 path='/profile'

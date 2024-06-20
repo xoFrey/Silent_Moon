@@ -7,11 +7,13 @@ import ButtonDownload from "../components/ButtonDownload";
 
 const MeditationDetail = () => {
   const { meditationId } = useParams();
-  console.log(meditationId);
+
   const [oneMeditation, setOneMeditation] = useState({});
   const { token } = useContext(TokenContext);
 
   useEffect(() => {
+
+
     const fetchMeditation = async () => {
       const res = await fetch(
         `${backendUrl}/api/v1/meditation/detail/${meditationId}`
@@ -24,6 +26,8 @@ const MeditationDetail = () => {
     };
     fetchMeditation();
   }, []);
+
+
   return (
     <>
       <>

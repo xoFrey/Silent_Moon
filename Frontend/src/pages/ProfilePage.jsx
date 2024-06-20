@@ -14,6 +14,7 @@ const ProfilePage = () => {
     const [showSidebar, setShowSidebar] = useState(false);
     const [showEditField, setShowEditField] = useState(false);
     console.log(user);
+
     return (
         <section className=' mb-24'>
             <Header />
@@ -30,7 +31,7 @@ const ProfilePage = () => {
             <div className='flex items-center gap-8 mt-6 mb-8 px-5'>
                 <img
                     className='rounded-full w-16 h-16 object-cover'
-                    src={`${backendUrl}/${user.fileUrl}`}
+                    src={`${backendUrl}/${user?.fileUrl}`}
                     alt='Pic'
                 />
                 <div className='flex items-center justify-center gap-32'>
@@ -68,7 +69,7 @@ const ProfilePage = () => {
                     Favorite Meditation Sessions
                 </h2>
                 <div className='flex items-baseline overflow-x-scroll '>
-                    {user?.meditationFavorites.map((item) => (
+                    {user?.meditationFavorites?.map((item) => (
                         <Link
                             key={item._id}
                             to={`/meditation/${item._id}`}>

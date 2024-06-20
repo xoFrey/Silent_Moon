@@ -6,7 +6,7 @@ import { backendUrl } from "../api/api";
 const EditField = ({ setShowEditField, showEditField }) => {
     const { user, setUser } = useContext(UserContext);
     const { token } = useContext(TokenContext);
-    const [usernameInput, setUsernameInput] = useState(user.username);
+    const [usernameInput, setUsernameInput] = useState(user?.username);
     const [upload, setUpload] = useState();
 
 

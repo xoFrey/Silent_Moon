@@ -3,7 +3,9 @@ import { User } from "../user.model.js";
 
 export const editUser = async (updateInfo) => {
   console.log(updateInfo);
-  const user = await User.findById(updateInfo.userId);
+  const user = await User.findById(updateInfo.userId)
+    .populate("meditationFavorites")
+    .populate("yogaFavorites");
 
   if (!user) throw new Error("User not found");
 
