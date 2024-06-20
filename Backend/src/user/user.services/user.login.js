@@ -9,13 +9,8 @@ export async function loginUser({ email, password }) {
     .populate("yogaFavorites");
   if (!user) throw new Error("Invalid login");
 
-  console.log(user);
-  console.log(userToView(user));
-
-  if (!user.isVerified) throw new Error("Email not verified, login aborted");
-
-  const saltRounds = 10;
-  const passwordHash = await bcrypt.hash(password, saltRounds);
+  // if (!user.isVerified)
+  //   throw new Error("Email not verified, please verify first!");
 
   const isPasswordCorrect = await bcrypt.compare(password, user.password);
   if (!isPasswordCorrect) throw new Error("Password is incorrect - try again");

@@ -55,7 +55,7 @@ function App() {
 
               <Route
                 path='/home'
-                element={<Home />}
+                element={<AuthRequired><Home /></AuthRequired>}
               />
               <Route
                 path='/yoga'
@@ -83,7 +83,7 @@ function App() {
               />
               <Route
                 path='/profile'
-                element={<ProfilePage />}
+                element={<AuthRequired><ProfilePage /></AuthRequired>}
               />
             </Routes>
             <Navbar />
