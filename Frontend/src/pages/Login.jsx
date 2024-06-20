@@ -5,6 +5,7 @@ import { backendUrl } from "../api/api.js";
 import { TokenContext, UserContext } from "../../context/Context.jsx";
 import GoBackButton from "../components/GoBackButton.jsx";
 import Header from "../components/Header.jsx";
+import Categorys from "../components/Categorys.jsx";
 
 const Login = () => {
   const [email, setEmail] = useState("izel.acxr@gmail.com");
@@ -76,6 +77,8 @@ const Login = () => {
           sign up
         </a>
       </p>
+
+      <Categorys />
     </main>
   );
 };
