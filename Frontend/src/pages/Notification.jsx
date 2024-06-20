@@ -27,8 +27,6 @@ const Notification = () => {
         });
     };
 
-
-
     const updateUserInfo = async () => {
         const newTime = convertDateAndTime(timeValue.$d);
         const updateInfo = {
@@ -51,7 +49,7 @@ const Notification = () => {
         const data = await res.json();
         setUser(data.result);
 
-        navigate("/login");
+        token ? navigate("/profile") : navigate("/login");
 
     };
 
