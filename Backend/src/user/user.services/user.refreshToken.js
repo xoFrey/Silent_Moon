@@ -1,4 +1,5 @@
 import { createToken } from "../../utils/createToken.js";
+import { userToView } from "../user.helpers.js";
 import { User } from "../user.model.js";
 
 export const refreshToken = async (authenticatedUserId) => {
@@ -6,8 +7,7 @@ export const refreshToken = async (authenticatedUserId) => {
   if (!user) throw new Error("User not found");
 
   if (!user.isVerified) throw new Error("User is not verified");
-  //   if (user.isBlocked) throw new Error("User blocked");
 
   const newAccessToken = createToken(user, "access");
-  return { newAccessToken };
+  return { user: userToView(user), newAccessToken };
 };

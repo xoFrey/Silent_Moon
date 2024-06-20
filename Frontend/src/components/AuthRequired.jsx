@@ -5,19 +5,16 @@ import { backendUrl } from "../api/api";
 import { TokenContext, UserContext } from "../../context/Context";
 
 const AuthRequired = ({ children }) => {
-  // assume just re-loaded
-  const timeoutRef = useRef(null); // aktuellen timeout für silent refresh
+
+  const timeoutRef = useRef(null);
   const { token, setToken } = useContext(TokenContext);
-  //   const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [loading, setLoading] = useState(token ? false : true);
   const navigate = useNavigate();
-
-  // try refreshing token --> get new access token
-  // if succes --> show children
-  // else --> navigate to login
+  console.log(user);
 
   useEffect(() => {
-    if (token) return doSilentRefresh(token); // logged in
+    if (token) return doSilentRefresh(token);
 
     async function checkLoggedIn() {
       const response = await fetch(`${backendUrl}/api/v1/users/refresh-token`, {
@@ -28,7 +25,7 @@ const AuthRequired = ({ children }) => {
       const data = await response.json();
       if (data.result) {
         setToken(data.result.newAccessToken);
-        // setUser({ user: data.result.user, tweets: data.result.tweets });
+        setUser(data.result.user);
         doSilentRefresh(data.result.newAccessToken);
       } else {
         navigate("/");
@@ -40,8 +37,7 @@ const AuthRequired = ({ children }) => {
     checkLoggedIn();
 
     function doSilentRefresh(currentAccessToken) {
-      const tokenExpiration = calcTokenExpDuration(currentAccessToken); // per gegebenen token die expiration -10s berechnen
-
+      const tokenExpiration = calcTokenExpDuration(currentAccessToken);
       timeoutRef.current = setTimeout(async () => {
         try {
           console.log("fetching backend for silent refresh");
@@ -57,9 +53,9 @@ const AuthRequired = ({ children }) => {
 
           const data = await response.json();
           setToken(data.result.newAccessToken);
-          doSilentRefresh(data.result.newAccessToken); // rekursion (eine funktion sich selbst aufruft)
+          setUser(data.result.user);
+          doSilentRefresh(data.result.newAccessToken);
         } catch (err) {
-          // error handling
           console.log(err);
           navigate("/login");
         }
@@ -75,7 +71,7 @@ const AuthRequired = ({ children }) => {
       return nextFetchAfter * 1000;
     }
 
-    // clean up callback return
+
     return () => clearTimeout(timeoutRef.current);
   }, []);
 
@@ -90,8 +86,3 @@ const AuthRequired = ({ children }) => {
 
 export default AuthRequired;
 
-/* <AuthRequired>
-    // ... children
-    // ... children
-    // ... children
-    </AuthRequired>; */

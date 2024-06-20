@@ -16,39 +16,81 @@ import Navbar from "./components/Navbar";
 import { useState } from "react";
 import { TokenContext, RefreshContext, UserContext } from "../context/Context";
 import MusikDetail from "./pages/MusicDetail";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import AuthRequired from "./components/AuthRequired";
 
 function App() {
   const [refresh, setRefresh] = useState(false);
   const [token, setToken] = useState();
   const [user, setUser] = useState();
-  return (
+  return (<LocalizationProvider dateAdapter={AdapterDayjs}>
     <RefreshContext.Provider value={{ refresh, setRefresh }}>
       <TokenContext.Provider value={{ token, setToken }}>
         <UserContext.Provider value={{ user, setUser }}>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Registration />} />
-              <Route path="/get-started" element={<GetStarted />} />
-              <Route path="/notification" element={<Notification />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/yoga" element={<YogaPage />} />
-              <Route path="/yoga/:yogaId" element={<YogaDetail />} />
-              <Route path="/meditation" element={<MeditationPage />} />
               <Route
-                path="/meditation/:meditationId"
+                path='/'
+                element={<LandingPage />}
+              />
+              <Route
+                path='/login'
+                element={<Login />}
+              />
+              <Route
+                path='/register'
+                element={<Registration />}
+              />
+              <Route
+                path='/get-started'
+                element={<GetStarted />}
+              />
+
+              <Route
+                path='/notification'
+                element={<Notification />}
+              />
+
+
+              <Route
+                path='/home'
+                element={<AuthRequired><Home /></AuthRequired>}
+              />
+              <Route
+                path='/yoga'
+                element={<YogaPage />}
+              />
+              <Route
+                path='/yoga/:yogaId'
+                element={<YogaDetail />}
+              />
+              <Route
+                path='/meditation'
+                element={<MeditationPage />}
+              />
+              <Route
+                path='/meditation/:meditationId'
                 element={<MeditationDetail />}
               />
-              <Route path="/music" element={<MusicPage />} />
-              <Route path="/musicdetails/:trackId" element={<MusikDetail />} />
-              <Route path="/profile" element={<ProfilePage />} />
+              <Route
+                path='/music'
+                element={<MusicPage />}
+              />
+              <Route
+                path='/musicdetails/:trackId'
+                element={<MusikDetail />}
+              />
+              <Route
+                path='/profile'
+                element={<AuthRequired><ProfilePage /></AuthRequired>}
+              />
             </Routes>
             <Navbar />
           </BrowserRouter>
         </UserContext.Provider>
       </TokenContext.Provider>
-    </RefreshContext.Provider>
+    </RefreshContext.Provider>   </LocalizationProvider>
   );
 }
 

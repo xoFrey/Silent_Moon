@@ -6,8 +6,8 @@ import { TokenContext, UserContext } from "../../context/Context.jsx";
 import GoBackButton from "../components/GoBackButton.jsx";
 
 const Login = () => {
-  const [email, setEmail] = useState("goodomen@outlook.org");
-  const [password, setPassword] = useState("hallo123");
+  const [email, setEmail] = useState("izel.acxr@gmail.com");
+  const [password, setPassword] = useState("hallo");
 
   const { user, setUser } = useContext(UserContext);
   const { token, setToken } = useContext(TokenContext);
@@ -29,8 +29,8 @@ const Login = () => {
 
     if (!data.result) return setErrorMessage(data.message || "Failed login");
 
-    setUser(data?.result.user);
-    setToken(data?.result.tokens.accessToken);
+    await setUser(data?.result.user);
+    await setToken(data?.result.tokens.accessToken);
     navigate("/home");
   };
   return (
@@ -50,7 +50,7 @@ const Login = () => {
               id="email"
               type="email"
               placeholder="E-Mail"
-              // value={email}
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -58,9 +58,9 @@ const Login = () => {
             <input
               className="mb-5 h-16 w-11/12 border-solid border border-pink text-subtext rounded-full text-center text-base font-semibold leading-5 tracking-wider"
               id="password"
-              type="text"
+              type="password"
               placeholder="Password"
-              // value={password}
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>

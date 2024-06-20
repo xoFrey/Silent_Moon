@@ -3,7 +3,7 @@ import { UserService } from "./user.services/user.index.js";
 async function registerUserCtrl(req, res) {
   try {
     const userInfo = req.body;
-    console.log("+++++B userInfo++++", userInfo);
+
     const result = await UserService.registerUser(userInfo);
     res.json({ result });
   } catch (err) {
@@ -63,10 +63,7 @@ const refreshTokenCtrl = async (req, res) => {
 
 const editUserCtrl = async (req, res) => {
   try {
-    const userInfo = {
-      userId: req.authenticatedUserId,
-      userInfo: req.body,
-    };
+    const userInfo = req.body;
 
     const result = await UserService.editUser(userInfo);
     res.json({ result });
@@ -81,10 +78,26 @@ const editUserCtrl = async (req, res) => {
 const addFavoriteCtrl = async (req, res) => {
   try {
     const updateInfo = {
-      userId: req.authenticatedUserId,
+      userId: req.body.userId,
       id: req.params.id,
     };
     const result = await UserService.addFavorite(updateInfo);
+    res.json({ result });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ err, message: err.message || "Could not add Favorite" });
+  }
+};
+
+const removeFavoriteCtrl = async (req, res) => {
+  try {
+    const updateInfo = {
+      userId: req.body.userId,
+      id: req.params.id,
+    };
+    const result = await UserService.removeFavorite(updateInfo);
     res.json({ result });
   } catch (err) {
     console.log(err);
@@ -107,4 +120,5 @@ export const UserController = {
   logoutUserCtrl,
   editUserCtrl,
   addFavoriteCtrl,
+  removeFavoriteCtrl,
 };

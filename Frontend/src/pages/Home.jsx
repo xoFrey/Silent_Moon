@@ -5,6 +5,7 @@ import { TokenContext, UserContext } from "../../context/Context.jsx";
 const Home = () => {
   const { user, setUser } = useContext(UserContext);
   const { token, setToken } = useContext(TokenContext);
+  console.log(user);
 
   return (
     <>
