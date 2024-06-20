@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { backendUrl } from "../api/api.js";
 import { TokenContext, UserContext } from "../../context/Context.jsx";
 import GoBackButton from "../components/GoBackButton.jsx";
+import Header from "../components/Header.jsx";
 
 const Login = () => {
   const [email, setEmail] = useState("izel.acxr@gmail.com");
@@ -36,8 +37,8 @@ const Login = () => {
   return (
     <main>
       <GoBackButton />
-      <div className="flex justify-center">
-        <img src="../../public/image/SilentMoonLogo.png" className=" h-36" />
+      <div className="flex justify-center -mt-11">
+        <Header />
       </div>
       <h4 className="font-black text-maintext text-4xl leading-10 text-center mt-12 mb-20 tracking-wide">
         Welcome Back!
