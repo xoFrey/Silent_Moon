@@ -29,15 +29,14 @@ const cookieSessionOptions = {
   secure: isFrontendLocalhost ? false : true,
 };
 app.use(cookieSession(cookieSessionOptions));
-
-app.use(morgan("dev"));
-app.use(express.json());
-app.use(express.static("uploads"));
-
 const upload = multer({ dest: "./uploads" });
 app.post("/api/v1/files/upload", upload.single("files"), (req, res) => {
   res.json({ fileUrl: req.file.filename });
 });
+
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.static("uploads"));
 
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/yoga", yogaRoutes);

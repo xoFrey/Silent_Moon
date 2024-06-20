@@ -7,6 +7,7 @@ import ButtonDownload from "../components/ButtonDownload";
 
 const MeditationDetail = () => {
   const { meditationId } = useParams();
+  console.log(meditationId);
   const [oneMeditation, setOneMeditation] = useState({});
   const { token } = useContext(TokenContext);
 
@@ -14,10 +15,9 @@ const MeditationDetail = () => {
     const fetchMeditation = async () => {
       const res = await fetch(
         `${backendUrl}/api/v1/meditation/detail/${meditationId}`
-      );
-      // , {
-      //   headers: { authorization: `Bearer ${token}` },
-      // }
+        , {
+          headers: { authorization: `Bearer ${token}` },
+        });
       const data = await res.json();
       if (!data.result) return "Failed to fetch one Meditation";
       setOneMeditation(data?.result);
@@ -34,7 +34,7 @@ const MeditationDetail = () => {
             alt="meditationpicture"
           />
         </div>
-        <ButtonLike />
+        <ButtonLike id={meditationId} />
         <ButtonDownload />
         <div className="  absolute top-80">
           <h4 className="font-black text-maintext text-4xl mx-3.5 leading-10  tracking-wide">
