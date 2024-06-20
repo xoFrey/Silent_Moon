@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
+import HeaderDark from "../components/HeaderDark";
 import ButtonPink from "../components/ButtonPink";
 
 const LandingPage = () => {
@@ -12,7 +12,7 @@ const LandingPage = () => {
   return (
     <section className="h-screen ">
       <div className="bg-landingImg  bg-top bg-contain bg-no-repeat h-3/4">
-        <Header />
+        <HeaderDark />
       </div>
       <div className="flex flex-col -mt-16">
         <h4 className="font-bold text-maintext text-3xl leading-10 text-center">
