@@ -17,14 +17,14 @@ const ButtonDownload = () => {
           rx="27.5"
           transform="rotate(-180 55 55)"
           fill="#E28F83"
-          fill-opacity="0.5"
+          fillOpacity="0.5"
         />
         <path
           d="M33 24.4396L28 29.9753L23 24.4396M28 28.6467V17.2432M19 31.0824V35.511C19 36.7289 19.9 37.7253 21 37.7253H35C35.5304 37.7253 36.0391 37.492 36.4142 37.0767C36.7893 36.6615 37 36.0983 37 35.511V31.0824H19Z"
           stroke="#FAF2DA"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </>

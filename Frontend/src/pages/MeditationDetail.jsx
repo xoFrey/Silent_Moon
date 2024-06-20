@@ -6,25 +6,48 @@ import { TokenContext } from "../../context/Context";
 import ButtonDownload from "../components/ButtonDownload";
 
 const MeditationDetail = () => {
-    const { yogaId } = useParams();
-    const [oneYoga, setOneYoga] = useState({});
-    const { token } = useContext(TokenContext);
-  
-    useEffect(() => {
-      const fetchYoga = async () => {
-        const res = await fetch(`${backendUrl}/api/v1/yoga/detail/${yogaId}`);
-        // , {
-        //   headers: { authorization: `Bearer ${token}` },
-        // }
-        const data = await res.json();
-        if (!data.result) return "Failed to fetch one Yoga";
-        setOneYoga(data?.result);
-      };
-      fetchYoga();
-    }, []);
+  const { meditationId } = useParams();
+  const [oneMeditation, setOneMeditation] = useState({});
+  const { token } = useContext(TokenContext);
+
+  useEffect(() => {
+    const fetchMeditation = async () => {
+      const res = await fetch(
+        `${backendUrl}/api/v1/meditation/detail/${meditationId}`
+      );
+      // , {
+      //   headers: { authorization: `Bearer ${token}` },
+      // }
+      const data = await res.json();
+      if (!data.result) return "Failed to fetch one Meditation";
+      setOneMeditation(data?.result);
+    };
+    fetchMeditation();
+  }, []);
   return (
     <>
-      <h1>Meditation Detail</h1>
+      <>
+        <div className=" relative z-0">
+          <img
+            className=" absolute object-cover w-screen "
+            src="../../image/medit.avif"
+            alt="meditationpicture"
+          />
+        </div>
+        <ButtonLike />
+        <ButtonDownload />
+        <div className="  absolute top-80">
+          <h4 className="font-black text-maintext text-4xl mx-3.5 leading-10  tracking-wide">
+            {oneMeditation.title}
+          </h4>
+          <p className="uppercase text-subtext leading-5 pb-14  mt-4 mx-3.5 font-semibold">
+            {oneMeditation.level}
+          </p>
+          <p className=" text-subtext leading-5  pb-28  mx-3.5  font-semibold">
+            {oneMeditation.description}
+          </p>
+        </div>
+      </>
     </>
   );
 };

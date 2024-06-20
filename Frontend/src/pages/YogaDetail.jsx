@@ -33,7 +33,7 @@ const YogaDetail = () => {
           muted
           loop
         >
-          <source src="../../public/clips/Yoga-Ex.mp4" type="video/mp4" />
+          <source src="../../clips/Yoga-Ex.mp4" type="video/mp4" />
         </video>
       </div>
       <ButtonLike />
