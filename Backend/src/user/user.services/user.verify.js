@@ -8,9 +8,9 @@ export async function verifyUserEmail({ userId, sixDigitCode }) {
   if (!codeMatched) throw new Error("Invalid six digit code, please try again");
 
   user.isVerified = true;
-  await user.save(); // mongoose method
+  await user.save();
 
-  // await User.findByIdAndUpdate(userId, { $set: { isEmailVerified: true } });
+  // await User.findByIdAndUpdate(userId, { $set: { isVerified: true } });
 
-  return { message: "You can now log in" }; // return; empty result (aber 200 OK wird im controller gesendet)
+  return { message: "You can now log in" };
 }

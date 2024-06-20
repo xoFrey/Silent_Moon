@@ -17,6 +17,7 @@ export async function loginUser({ email, password }) {
 
   const accessToken = createToken(user, "access");
   const refreshToken = createToken(user, "refresh");
+  console.log(user);
 
   return {
     user: userToView(user),
