@@ -2,22 +2,28 @@ import { userToView } from "../user.helpers.js";
 import { User } from "../user.model.js";
 
 export const removeFavorite = async (updateInfo) => {
-  const user = await User.findById(updateInfo.userId);
+  const user = await User.findById(updateInfo.userId)
+    .populate("meditationFavorites")
+    .populate("yogaFavorites");
   if (!user) throw new Error("User not found");
 
-  console.log(user.meditationFavorites);
   if (
-    !user.yogaFavorites.includes(updateInfo.id) &&
-    !user.meditationFavorites.includes(updateInfo.id)
+    user.yogaFavorites.some((item) => item._id.toString() !== updateInfo.id) &&
+    user.meditationFavorites.some(
+      (item) => item._id.toString() !== updateInfo.id,
+    )
   )
-    throw new Error("Id not found");
+    throw "Id not found";
 
-  if (user.yogaFavorites.includes(updateInfo.id)) {
+  if (
+    user.yogaFavorites.some((item) => item._id.toString() === updateInfo.id)
+  ) {
     const userUpdate = await User.findByIdAndUpdate(
       updateInfo.userId,
       { $pull: { yogaFavorites: updateInfo.id } },
       { new: true },
     );
+    console.log(userUpdate, "yoga");
     return userToView(userUpdate);
   } else {
     const userUpdate = await User.findByIdAndUpdate(
@@ -25,6 +31,8 @@ export const removeFavorite = async (updateInfo) => {
       { $pull: { meditationFavorites: updateInfo.id } },
       { new: true },
     );
+
+    console.log(userUpdate);
     return userToView(userUpdate);
   }
 };

@@ -1,7 +1,9 @@
 import { User } from "../user.model.js";
 
 export async function verifyUserEmail({ userId, sixDigitCode }) {
-  const user = await User.findById(userId);
+  const user = await User.findById(userId)
+    .populate("meditationFavorites")
+    .populate("yogaFavorites");
   if (!user) throw new Error("User not found");
 
   const codeMatched = user.sixDigitCode === sixDigitCode;
