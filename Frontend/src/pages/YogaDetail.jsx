@@ -12,11 +12,11 @@ const YogaDetail = () => {
 
   useEffect(() => {
     const fetchYoga = async () => {
-      const res = await fetch(`${backendUrl}/api/v1/yoga/detail/${yogaId}`);
-      // , {
-      //   headers: { authorization: `Bearer ${token}` },
-      // }
+      const res = await fetch(`${backendUrl}/api/v1/yoga/detail/${yogaId}`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
       const data = await res.json();
+      console.log(data);
       if (!data.result) return "Failed to fetch one Yoga";
       setOneYoga(data?.result);
     };

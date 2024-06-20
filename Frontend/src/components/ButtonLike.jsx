@@ -9,10 +9,7 @@ const ButtonLike = ({ id }) => {
   const { user, setUser } = useContext(UserContext);
   const { token } = useContext(TokenContext);
   const [isFavorite, setIsFavorite] = useState(false);
-
-  console.log(user);
   console.log(id);
-
   const addFavorite = async () => {
     const res = await fetch(`${backendUrl}/api/v1/users/${id}/like`, {
       method: "PATCH",
@@ -26,7 +23,7 @@ const ButtonLike = ({ id }) => {
     const data = await res.json();
     setUser(data.result);
     if (user.meditationFavorites.map((item) => item._id === id)) setIsFavorite(true);
-    console.log(user);
+
   };
 
 
@@ -43,7 +40,7 @@ const ButtonLike = ({ id }) => {
     const data = await res.json();
     setUser(data.result);
     if (user.meditationFavorites.map((item) => item._id !== id)) setIsFavorite(false);
-    console.log(user);
+
   };
 
   return (

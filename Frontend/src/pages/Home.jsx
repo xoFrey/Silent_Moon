@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <main className="">
       <Header />
-      <h2 className="text-2xl font-black w-4/5 mx-3.5 mb-3.5 mt-5 text-maintext ">
+      {/* <h2 className="text-2xl font-black w-4/5 mx-3.5 mb-3.5 mt-5 text-maintext ">
         Good Morning {user.firstname}
       </h2>
       <p className=" text-subtext leading-5  pb-10 mx-3.5  font-semibold">
@@ -42,7 +42,7 @@ const Home = () => {
             {user.meditationFavorites[0].title}
           </p>
         </div>
-      </div>
+      </div> */}
     </main>
   );
 };

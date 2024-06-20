@@ -20,7 +20,7 @@ const MeditationDetail = () => {
         });
       const data = await res.json();
       if (!data.result) return "Failed to fetch one Meditation";
-      setOneMeditation(data?.result);
+      setOneMeditation(data.result);
     };
     fetchMeditation();
   }, []);
