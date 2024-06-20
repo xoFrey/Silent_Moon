@@ -8,6 +8,7 @@ import Sidebar from "../components/Sidebar";
 
 
 const ProfilePage = () => {
+
     const { user } = useContext(UserContext);
     const [showSidebar, setShowSidebar] = useState(false);
 
@@ -45,6 +46,7 @@ const ProfilePage = () => {
         </section>
 
     </section >;
+
 };
 
 export default ProfilePage;

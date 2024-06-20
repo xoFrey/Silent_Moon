@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { backendUrl } from "../api/api";
 import GoBackButton from "../components/GoBackButton";
 import ButtonPink from "../components/ButtonPink";
+import Header from "../components/Header";
 
 const Registration = () => {
   const [userName, setUserName] = useState("");
@@ -45,15 +46,13 @@ const Registration = () => {
     setToken(data.result.tokens.accessToken);
     setUser(data.result.user);
     navigate(`/get-started`);
-
   };
-
 
   return (
     <main>
       <GoBackButton />
-      <div className="flex justify-center">
-        <img src="../../public/image/SilentMoonLogo.png" className=" h-36" />
+      <div className="flex justify-center -mt-11">
+        <Header />
       </div>
       <h4 className="font-black text-maintext text-4xl leading-10 text-center mt-12 mb-20 tracking-wide">
         Create your account
