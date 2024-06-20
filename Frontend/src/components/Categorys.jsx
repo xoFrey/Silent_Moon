@@ -5,8 +5,8 @@ const Categorys = () => {
 
   return (
     <section className="flex justify-center mb-80">
-      <div className="flex place-content-between w-11/12">
-        <div>
+      <div className="flex gap-4 w-11/12 overflow-auto">
+        <div className="flex flex-col items-center">
           <input
             type="radio"
             name="option"
@@ -18,16 +18,19 @@ const Categorys = () => {
           />
           <label
             htmlFor="all"
-            className="block select-none rounded-2xl bg-subtext w-16 h-16 peer-checked:bg-green peer-checked:text-circle content-center p-5"
+            className="block select-none rounded-3xl bg-subtext w-16 h-16 peer-checked:bg-green peer-checked:text-circle content-center p-5"
           >
             <img src="/image/AllIcon.png" />
           </label>
-          <label htmlFor="all" className="text-subtext peer-checked:text-green">
+          <label
+            htmlFor="all"
+            className="text-subtext peer-checked:text-green font-semibold leading-5 text-base tracking-wider mt-1"
+          >
             All
           </label>
         </div>
 
-        <div>
+        <div className="flex flex-col items-center">
           <input
             type="radio"
             name="option"
@@ -38,19 +41,19 @@ const Categorys = () => {
           />
           <label
             htmlFor="favorites"
-            className="block select-none rounded-2xl bg-subtext w-16 h-16 peer-checked:bg-green peer-checked:text-circle content-center p-5"
+            className="block select-none rounded-3xl bg-subtext w-16 h-16 peer-checked:bg-green peer-checked:text-circle content-center p-5"
           >
             <img src="/image/FavoriteIcon.png" />
           </label>
           <label
             htmlFor="favorites"
-            className="text-subtext peer-checked:text-green"
+            className="text-subtext peer-checked:text-green font-semibold leading-5 text-base tracking-wider mt-1"
           >
             Favorites
           </label>
         </div>
 
-        <div>
+        <div className="flex flex-col items-center">
           <input
             type="radio"
             name="option"
@@ -61,19 +64,19 @@ const Categorys = () => {
           />
           <label
             htmlFor="anxious"
-            className="block select-none rounded-2xl bg-subtext w-16 h-16 peer-checked:bg-green peer-checked:text-circle content-center p-5"
+            className="block select-none rounded-3xl bg-subtext w-16 h-16 peer-checked:bg-green peer-checked:text-circle content-center p-5"
           >
             <img src="/image/AnxiousIcon.png" />
           </label>
           <label
             htmlFor="anxious"
-            className="text-subtext peer-checked:text-green"
+            className="text-subtext peer-checked:text-green font-semibold leading-5 text-base tracking-wider mt-1"
           >
             Anxious
           </label>
         </div>
 
-        <div>
+        <div className="flex flex-col items-center">
           <input
             type="radio"
             name="option"
@@ -84,19 +87,19 @@ const Categorys = () => {
           />
           <label
             htmlFor="sleep"
-            className="block select-none rounded-2xl bg-subtext w-16 h-16 peer-checked:bg-green peer-checked:text-circle content-center p-5"
+            className="block select-none rounded-3xl bg-subtext w-16 h-16 peer-checked:bg-green peer-checked:text-circle content-center p-5"
           >
             <img src="/image/SleepIcon.png" />
           </label>
           <label
             htmlFor="sleep"
-            className="text-subtext peer-checked:text-green"
+            className="text-subtext peer-checked:text-green font-semibold leading-5 text-base tracking-wider mt-1"
           >
             Sleep
           </label>
         </div>
 
-        <div className="">
+        <div className="flex flex-col items-center">
           <input
             type="radio"
             name="option"
@@ -107,13 +110,13 @@ const Categorys = () => {
           />
           <label
             htmlFor="kids"
-            className="block select-none rounded-2xl bg-subtext peer-checked:bg-green peer-checked:text-circle w-16 h-16 content-center p-5"
+            className="block select-none rounded-3xl bg-subtext peer-checked:bg-green peer-checked:text-circle w-16 h-16 content-center p-5"
           >
             <img src="/image/EkligIcon.png" />
           </label>
           <label
             htmlFor="kids"
-            className="text-subtext peer-checked:text-green"
+            className="text-subtext peer-checked:text-green font-semibold leading-5 text-base tracking-wider mt-1"
           >
             Kids
           </label>
