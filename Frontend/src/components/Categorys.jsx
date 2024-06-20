@@ -4,7 +4,7 @@ const Categorys = () => {
   const [category, setCategory] = useState("all");
 
   return (
-    <section className="flex justify-center mb-80">
+    <section className="flex justify-center">
       <div className="flex gap-4 w-11/12 overflow-auto">
         <div className="flex flex-col items-center">
           <input
