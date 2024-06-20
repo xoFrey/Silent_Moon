@@ -1,4 +1,5 @@
 const Searchbar = () => {
+
   return (
     <div class="relative flex justify-center bg-subtext bg-opacity-20 mx-4 rounded-full">
       <input

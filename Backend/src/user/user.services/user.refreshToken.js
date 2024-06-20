@@ -3,10 +3,10 @@ import { userToView } from "../user.helpers.js";
 import { User } from "../user.model.js";
 
 export const refreshToken = async (authenticatedUserId) => {
-  const user = await User.findById(authenticatedUserId);
+  const user = await User.findById(authenticatedUserId)
+    .populate("meditationFavorites")
+    .populate("yogaFavorites");
   if (!user) throw new Error("User not found");
-
-  if (!user.isVerified) throw new Error("User is not verified");
 
   const newAccessToken = createToken(user, "access");
   return { user: userToView(user), newAccessToken };

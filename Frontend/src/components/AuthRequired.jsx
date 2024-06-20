@@ -11,7 +11,7 @@ const AuthRequired = ({ children }) => {
   const { user, setUser } = useContext(UserContext);
   const [loading, setLoading] = useState(token ? false : true);
   const navigate = useNavigate();
-  console.log(user);
+
 
   useEffect(() => {
     if (token) return doSilentRefresh(token);
