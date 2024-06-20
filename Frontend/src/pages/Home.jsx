@@ -48,39 +48,6 @@ const Home = () => {
   return (
     <main className="">
       <Header />
-      <h2 className="text-2xl font-black w-4/5 mx-3.5 mb-3.5 mt-5 text-maintext ">
-        Good Morning {user.firstname}
-      </h2>
-      <p className=" text-subtext leading-5  pb-10 mx-3.5  font-semibold">
-        We hope you have a good day.
-      </p>
-      <div className=" flex gap-3 place-content-around mb-5">
-        <div className=" relative z-0">
-          <img src="../../image/RecoveryBigMeditate.png" alt="yoga image" />
-          <p className=" absolute text-white left-1 bottom-5 font-light">
-            {yogaByLevel[0]?.duration} MIN
-          </p>
-          <ButtonStart fill={"#FAF2DA"} typeColor={"#4A503D"} />
-          <p className=" absolute text-[#FAF2DA] top-11 left-1 text-xl">
-            {yogaByLevel[0]?.title}
-          </p>
-          <p className=" uppercase absolute text-[#FAF2DA] top-16 left-1 text-xs">
-            {yogaByLevel[0]?.level}
-          </p>
-        </div>
-        <div className=" relative z-0 ">
-          <img src="../../image/RecoveryBigYoga.png" alt="meditation image" />
-          <p className=" absolute text-white left-1 bottom-5 font-light">
-            {meditationByLevel[0]?.duration} MIN
-          </p>
-          <ButtonStart fill={"#4A503D"} typeColor={"#FAF2DA"} />
-          <p className=" absolute text-[#4A503D] top-11 left-1 text-xl">
-            {meditationByLevel[0]?.title}
-          </p>
-          <p className=" uppercase absolute text-[#4A503D] top-16 left-1 text-xs">
-            {meditationByLevel[0]?.level}
-          </p>
-        </div>
       </div>
       <Searchbar />
       {/* <h2 className="text-xl font-black w-4/5 mx-3.5 mb-3.5 mt-8 text-maintext ">
@@ -135,6 +102,7 @@ const Home = () => {
           <p>Loading...</p>
         )}
       </section>
+
     </main>
   );
 };

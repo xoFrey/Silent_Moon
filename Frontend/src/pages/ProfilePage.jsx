@@ -13,7 +13,7 @@ const ProfilePage = () => {
     const { user } = useContext(UserContext);
     const [showSidebar, setShowSidebar] = useState(false);
     const [showEditField, setShowEditField] = useState(false);
-
+    console.log(user);
     return (
         <section className=' mb-24'>
             <Header />
@@ -49,11 +49,9 @@ const ProfilePage = () => {
                 <h2 className=' text-2xl text-maintext font-bold tracking-wide pl-5 mb-6'>
                     Favorite Yoga Sessions
                 </h2>
-                {user?.yogaFavorites.map((item) => (
-                    <div
-                        key={item._id}
-                        className='flex items-center overflow-x-scroll '>
-                        <Link to={`/yoga/${item._id}`}>
+                <div className='flex flex-row items-center overflow-x-scroll '>
+                    {user?.yogaFavorites.map((item) => (
+                        <Link key={item._id} to={`/yoga/${item._id}`}>
                             <TileCards
                                 name={item.title}
                                 level={item.level}
@@ -61,19 +59,19 @@ const ProfilePage = () => {
                                 imgURL={item.fileUrl}
                             />
                         </Link>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </section>
 
             <section>
                 <h2 className=' text-2xl text-maintext font-bold tracking-wide pl-5 mb-6'>
                     Favorite Meditation Sessions
                 </h2>
-                {user?.meditationFavorites.map((item) => (
-                    <div
-                        key={item._id}
-                        className='flex items-center overflow-x-scroll '>
-                        <Link to={`/meditation/${item._id}`}>
+                <div className='flex items-baseline overflow-x-scroll '>
+                    {user?.meditationFavorites.map((item) => (
+                        <Link
+                            key={item._id}
+                            to={`/meditation/${item._id}`}>
                             <TileCards
                                 name={item.title}
                                 level={item.level}
@@ -81,8 +79,8 @@ const ProfilePage = () => {
                                 imgURL={item.fileUrl}
                             />
                         </Link>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </section>
         </section>
     );

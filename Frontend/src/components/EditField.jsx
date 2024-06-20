@@ -19,7 +19,7 @@ const EditField = ({ setShowEditField, showEditField }) => {
             formData.append("files", upload, upload.name);
             const result = await fetch(`${backendUrl}/api/v1/files/upload`, {
                 method: "POST",
-                headers: { authorization: `Bearer ${token}` },
+                headers: { Authorization: `Bearer ${token}` },
                 body: formData
             });
 
