@@ -1,21 +1,62 @@
 import { useContext, useState } from "react";
 import { IoMdHeart } from "react-icons/io";
 import { IoMdHeartEmpty } from "react-icons/io";
-import { UserContext } from "../../context/Context";
+import { TokenContext, UserContext } from "../../context/Context";
+import { backendUrl } from "../api/api";
 
 
-const ButtonLike = ({ id, }) => {
-  const { user } = useContext(UserContext);
+const ButtonLike = ({ id }) => {
+  const { user, setUser } = useContext(UserContext);
+  const { token } = useContext(TokenContext);
   const [isFavorite, setIsFavorite] = useState(false);
+
+  console.log(user);
+  console.log(id);
+
+  const addFavorite = async () => {
+    const res = await fetch(`${backendUrl}/api/v1/users/${id}/like`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ userId: user.id })
+
+    });
+    const data = await res.json();
+    setUser(data.result);
+    if (user.meditationFavorites.map((item) => item._id === id)) setIsFavorite(true);
+    console.log(user);
+  };
+
+
+  const removeFavorite = async () => {
+    const res = await fetch(`${backendUrl}/api/v1/users/${id}/unlike`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ userId: user.id })
+
+    });
+    const data = await res.json();
+    setUser(data.result);
+    if (user.meditationFavorites.map((item) => item._id !== id)) setIsFavorite(false);
+    console.log(user);
+  };
+
   return (
     <>
-      {isFavorite ? <button>
-        <IoMdHeart className=" z-10 absolute right-24 top-5 bg-pink/55 rounded-full p-3" size={"50px"} fill="#ffffff" />
-      </button> : <button>
-        <IoMdHeartEmpty className=" z-10 absolute right-24 top-5 bg-pink/55 rounded-full p-3" size={"50px"} fill="#ffffff" />
-      </button>
+      {isFavorite ?
+        <button onClick={removeFavorite}>
+          <IoMdHeart className=" z-10 absolute right-24 top-5 bg-pink/55 rounded-full p-3" size={"50px"} fill="#ffffff" />
+        </button>
+        :
+        <button onClick={addFavorite}>
+          <IoMdHeartEmpty className=" z-10 absolute right-24 top-5 bg-pink/55 rounded-full p-3" size={"50px"} fill="#ffffff" />
+        </button>
       }
-
 
     </>
 

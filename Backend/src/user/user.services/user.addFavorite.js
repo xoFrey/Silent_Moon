@@ -4,6 +4,7 @@ import { Yoga } from "../../yoga/yoga.model.js";
 import { Meditation } from "../../meditation/meditation.model.js";
 
 export const addFavorite = async (updateInfo) => {
+  console.log(updateInfo);
   const [user, meditation, yoga] = await Promise.all([
     User.findById(updateInfo.userId),
     Meditation.findById(updateInfo.id),
