@@ -1,6 +1,8 @@
 import { useState } from "react";
 
+
 const Searchbar = ({ setInputSearch, inputSearch }) => {
+
   return (
     <div className="relative flex justify-center bg-subtext bg-opacity-20 mx-4 rounded-full">
       <input
