@@ -14,16 +14,22 @@ const YogaPage = () => {
 
   useEffect(() => {
     const allMeditation = async () => {
-      const res = await fetch(`${backendUrl}/api/v1/yoga/filterCategory/?categorySelection=${category}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
+      const res = await fetch(
+        `${backendUrl}/api/v1/yoga/filterCategory/?categorySelection=${category}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
 
       const data = await res.json();
       if (!data.result)
-        return setErrorMessage(data.message || "No Yogas in this category found"), setYoga([]);
+        return (
+          setErrorMessage(data.message || "No Yogas in this category found"),
+          setYoga([])
+        );
       setYoga(data.result);
     };
 
@@ -63,12 +69,21 @@ const YogaPage = () => {
           <img src="/image/PlayVector.png" alt="" />
         </button>
       </div>
-      {yoga.length !== 0 ?
-        yoga.map((yogaItem) => (
-          <div key={yogaItem._id} className="mb-20">
-            <CatergoryTiles id={yogaItem._id} imgUrl={"test"} title={yogaItem.title} />
-          </div>
-        )) : <p>{errorMessage}</p>}
+      <section className="columns-2 ml-2">
+        {yoga.length !== 0 ? (
+          yoga.map((yogaItem) => (
+            <div key={yogaItem._id} className="">
+              <CatergoryTiles
+                id={yogaItem._id}
+                imgUrl={"test"}
+                title={yogaItem.title}
+              />
+            </div>
+          ))
+        ) : (
+          <p>{errorMessage}</p>
+        )}
+      </section>
     </main>
   );
 };
