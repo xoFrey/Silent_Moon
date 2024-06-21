@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { backendUrl } from "../api/api";
 import { TokenContext } from "../../context/Context";
 import ButtonDownload from "../components/ButtonDownload";
+import GoBackButtonDetails from "../components/GoBackButtonDetails";
 
 const YogaDetail = () => {
   const { yogaId } = useParams();
@@ -23,12 +24,10 @@ const YogaDetail = () => {
     fetchYoga();
   }, []);
   return (
-    <>
-      <div className=" relative h-96 overflow-hidden block">
+    <main className="h-screen">
+      <div className=" relative h-3/4 overflow-hidden">
         <video
-          width="410"
-          height="384"
-          className=" absolute -top-56"
+          className=" absolute -top-44 object-cover rounded-b-lg"
           autoPlay
           muted
           loop
@@ -36,20 +35,21 @@ const YogaDetail = () => {
           <source src="../../clips/Yoga-Ex.mp4" type="video/mp4" />
         </video>
       </div>
+      <GoBackButtonDetails />
       <ButtonLike id={yogaId} />
       <ButtonDownload />
-      <div className=" absolute bottom-24">
+      <div className=" -mt-16">
         <h4 className="font-black text-maintext text-4xl mx-3.5 leading-10  tracking-wide">
           {oneYoga.title}
         </h4>
-        <p className="uppercase text-subtext leading-5 pb-14  mt-4 mx-3.5 font-semibold">
+        <p className="uppercase text-subtext leading-5 pb-10  mt-4 mx-3.5 font-semibold">
           {oneYoga.level}
         </p>
-        <p className=" text-subtext leading-5  pb-28  mx-3.5  font-semibold">
+        <p className=" text-subtext leading-5    mx-3.5  font-semibold">
           {oneYoga.description}
         </p>
       </div>
-    </>
+    </main>
   );
 };
 
