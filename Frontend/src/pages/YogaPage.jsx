@@ -36,6 +36,8 @@ const YogaPage = () => {
     allYoga();
   }, [category]);
 
+  console.log();
+
   return (
     <main>
       <Header />
@@ -66,7 +68,7 @@ const YogaPage = () => {
           </p>
         </div>
         <button className=" bg-maintext bg-opacity-80 w-10 h-10 rounded-full justify-center items-center flex mr-4">
-          <img src="/image/PlayVector.png" alt="" />
+          <img src={"/image/PlayVector.png"} alt="" />
         </button>
       </div>
       <section className="columns-2 ml-2">
@@ -75,7 +77,7 @@ const YogaPage = () => {
             <div key={yogaItem._id} className="">
               <CatergoryTiles
                 id={yogaItem._id}
-                imgUrl={"test"}
+                imgUrl={`${backendUrl}/${yoga[6].fileUrl?.split("\\")[1]}`}
                 title={yogaItem.title}
               />
             </div>
