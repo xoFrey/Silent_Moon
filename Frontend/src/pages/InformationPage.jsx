@@ -1,8 +1,11 @@
+import GoBackButton from "../components/GoBackButton";
 import Header from "../components/Header";
 
 const InformationPage = () => {
   return (
-    <>
+    <><div className="fixed">
+      <GoBackButton />
+    </div>
       <Header />
       <h4 className="font-black text-maintext text-4xl mt-10 mx-3.5 leading-10 text-center  tracking-wide">
         SILENT MOON 2.0

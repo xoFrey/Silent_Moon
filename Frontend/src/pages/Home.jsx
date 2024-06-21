@@ -1,6 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-
-import Navbar from "../components/Navbar";
 import { TokenContext, UserContext } from "../../context/Context.jsx";
 import Header from "../components/Header.jsx";
 import ButtonStart from "../components/ButtonStart.jsx";
@@ -9,6 +7,7 @@ import { Link } from "react-router-dom";
 import TileCards from "../components/TileCards.jsx";
 import { backendUrl } from "../api/api";
 
+
 const Home = () => {
   const { user, setUser } = useContext(UserContext);
   const { token, setToken } = useContext(TokenContext);
@@ -16,8 +15,8 @@ const Home = () => {
   const [meditationByLevel, setMeditationByLevel] = useState("");
   const [inputSearch, setInputSearch] = useState("");
   const [dayTime, setDayTime] = useState("");
-  const [randomYogaNumber, setRandomYogaNumber] = useState();
-  const [randomMeditationNumber, setRandomMeditationNumber] = useState();
+  const [randomYoga, setRandomYoga] = useState();
+  const [randomMeditation, setRandomMeditation] = useState();
 
 
   useEffect(() => {
@@ -64,32 +63,32 @@ const Home = () => {
   }, [inputSearch]);
 
 
-  const date = new Date(Date.now());
-  const time = Number(date.toLocaleTimeString({ hour: '2-digit' }).split(":")[0]);
+  const generateRandomNumber = (array) => Math.floor(Math.random() * array.length);
 
+  const updateRandomActivities = () => {
+    const randomYogaNumber = generateRandomNumber(yogaByLevel);
+    const randomMeditationNumber = generateRandomNumber(meditationByLevel);
+    setRandomYoga(yogaByLevel[randomYogaNumber]);
+    setRandomMeditation(meditationByLevel[randomMeditationNumber]);
+  };
+
+  const date = new Date(Date.now());
+  const time = Number(date.toLocaleTimeString([], { hour: '2-digit' }).split(":")[0]);
   useEffect(() => {
+
 
     if (time <= 13) {
       setDayTime("Morning");
-      setRandomYogaNumber(generateRandomNumber(yogaByLevel));
-      setRandomMeditationNumber(generateRandomNumber(meditationByLevel));
-
     } else if (time <= 17) {
       setDayTime("Afternoon");
-      setRandomYogaNumber(generateRandomNumber(yogaByLevel));
-      setRandomMeditationNumber(generateRandomNumber(meditationByLevel));
     } else {
       setDayTime("Evening");
-      setRandomYogaNumber(generateRandomNumber(yogaByLevel));
-      setRandomMeditationNumber(generateRandomNumber(meditationByLevel));
     }
+    updateRandomActivities();
 
-  }, [time, date]);
+  }, [date, time]);
 
 
-  const generateRandomNumber = (item) => {
-    return Math.floor(Math.random() * item.length);
-  };
 
   return (
     <main className="">
@@ -101,32 +100,35 @@ const Home = () => {
         We hope you have a good day.
       </p>
       <div className=" flex gap-3 place-content-around mb-5">
-        <div className=" relative z-0">
-          <img src="../../image/RecoveryBigMeditate.png" alt="yoga image" />
-          <p className=" absolute text-white left-1 bottom-5 font-light">
-            {yogaByLevel[randomYogaNumber]?.duration} MIN
-          </p>
-          <ButtonStart fill={"#FAF2DA"} typeColor={"#4A503D"} />
-          <p className=" absolute text-[#FAF2DA] top-11 left-1 text-xl">
-            {yogaByLevel[randomYogaNumber]?.title}
-          </p>
-          <p className=" uppercase absolute text-[#FAF2DA] top-16 left-1 text-xs">
-            {yogaByLevel[randomYogaNumber]?.level}
-          </p>
-        </div>
-        <div className=" relative z-0 ">
-          <img src="../../image/RecoveryBigYoga.png" alt="meditation image" />
-          <p className=" absolute text-white left-1 bottom-5 font-light">
-            {meditationByLevel[randomMeditationNumber]?.duration} MIN
-          </p>
-          <ButtonStart fill={"#4A503D"} typeColor={"#FAF2DA"} />
-          <p className=" absolute text-[#4A503D] top-11 left-1 text-xl">
-            {meditationByLevel[randomMeditationNumber]?.title}
-          </p>
-          <p className=" uppercase absolute text-[#4A503D] top-16 left-1 text-xs">
-            {meditationByLevel[randomMeditationNumber]?.level}
-          </p>
-        </div>
+        <Link to={`/yoga/${randomYoga?._id}`}>
+          <div className=" relative z-0">
+            <img src="../../image/RecoveryBigMeditate.png" alt="yoga image" />
+            <p className=" absolute text-white left-1 bottom-5 font-light">
+              {randomYoga?.duration} MIN
+            </p>
+            <ButtonStart fill={"#FAF2DA"} typeColor={"#4A503D"} />
+            <p className=" absolute text-[#FAF2DA] top-11 left-1 text-xl">
+              {randomYoga?.title}
+            </p>
+            <p className=" uppercase absolute text-[#FAF2DA] top-16 left-1 text-xs">
+              {randomYoga?.level}
+            </p>
+          </div>
+        </Link>
+        <Link to={`/yoga/${randomMeditation?._id}`}>
+          <div className=" relative z-0 ">
+            <img src="../../image/RecoveryBigYoga.png" alt="meditation image" />
+            <p className=" absolute text-white left-1 bottom-5 font-light">
+              {randomMeditation?.duration} MIN
+            </p>
+            <ButtonStart fill={"#4A503D"} typeColor={"#FAF2DA"} />
+            <p className=" absolute text-[#4A503D] top-11 left-1 text-xl">
+              {randomMeditation?.title}
+            </p>
+            <p className=" uppercase absolute text-[#4A503D] top-16 left-1 text-xs">
+              {randomMeditation?.level}
+            </p>
+          </div></Link>
       </div>
       <Searchbar inputSearch={inputSearch} setInputSearch={setInputSearch} />
 

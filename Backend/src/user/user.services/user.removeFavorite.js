@@ -7,15 +7,6 @@ export const removeFavorite = async (updateInfo) => {
     .populate("yogaFavorites");
   if (!user) throw new Error("User not found");
 
-  // if (user.yogaFavorites.some((item) => item._id.toString() !== updateInfo.id))
-  //   throw new Error("Yoga ID not found");
-  // if (
-  //   user.meditationFavorites.some(
-  //     (item) => item._id.toString() !== updateInfo.id,
-  //   )
-  // )
-  //   throw new Error("Meditation ID not found");
-
   const isFavYoga = user.yogaFavorites.some(
     (item) => item._id.toString() === updateInfo.id,
   );

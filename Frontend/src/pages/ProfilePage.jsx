@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
 import { UserContext } from "../../context/Context";
 import Searchbar from "../components/Searchbar";
@@ -13,7 +13,24 @@ const ProfilePage = () => {
   const { user } = useContext(UserContext);
   const [showSidebar, setShowSidebar] = useState(false);
   const [showEditField, setShowEditField] = useState(false);
-  console.log(user);
+  const [inputSearch, setInputSearch] = useState("");
+  const [filteredMeditation, setFilteredMeditation] = useState(user.meditationFavorites);
+  const [filteredYoga, setFilteredYoga] = useState(user.yogaFavorites);
+
+  useEffect(() => {
+    if (inputSearch.length === 0) {
+      setFilteredMeditation(user.meditationFavorites);
+      setFilteredYoga(user.yogaFavorites);
+    } else {
+      const filteredMeditation = user.meditationFavorites.filter((item) => item.title.toLowerCase().includes(inputSearch.toLowerCase()));
+      setFilteredMeditation(filteredMeditation);
+      const filteredYoga = user.yogaFavorites.filter((item) => item.title.toLowerCase().includes(inputSearch.toLowerCase()));
+      setFilteredYoga(filteredYoga);
+    }
+
+  }, [inputSearch]);
+  console.log(filteredMeditation);
+  console.log(filteredYoga);
   return (
     <section className=" mb-24">
       <Header />
@@ -48,13 +65,13 @@ const ProfilePage = () => {
           />
         </div>
       </div>
-      <Searchbar />
+      <Searchbar inputSearch={inputSearch} setInputSearch={setInputSearch} />
       <section className=" mb-10 mt-8">
         <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
           Favorite Yoga Sessions
         </h2>
         <div className="flex flex-row items-center overflow-x-scroll ">
-          {user?.yogaFavorites.map((item) => (
+          {filteredYoga.map((item) => (
             <Link key={item._id} to={`/yoga/${item._id}`}>
               <TileCards
                 name={item.title}
@@ -72,7 +89,7 @@ const ProfilePage = () => {
           Favorite Meditation Sessions
         </h2>
         <div className="flex items-baseline overflow-x-scroll ">
-          {user?.meditationFavorites.map((item) => (
+          {filteredMeditation.map((item) => (
             <Link key={item._id} to={`/meditation/${item._id}`}>
               <TileCards
                 name={item.title}
@@ -87,7 +104,7 @@ const ProfilePage = () => {
     </section>
   );
 
- 
+
 };
 
 export default ProfilePage;

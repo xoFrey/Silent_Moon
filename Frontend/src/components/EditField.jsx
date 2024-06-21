@@ -82,7 +82,7 @@ const EditField = ({ setShowEditField, showEditField }) => {
           onChange={(e) => setUpload(e.target.files[0])}
         />
 
-        <div className="flex items-center flex-col mb-5">
+        <div className="flex items-center flex-col mb-5 ">
           <div className="grid grid-cols-3 rounded-full border border-solid border-pink p-2">
             <div>
               <input
@@ -96,7 +96,7 @@ const EditField = ({ setShowEditField, showEditField }) => {
               />
               <label
                 htmlFor="beginner"
-                className="block select-none rounded-full p-2 text-center peer-checked:bg-pink peer-checked:text-circle"
+                className="block select-none rounded-full p-2 text-center peer-checked:bg-pink peer-checked:text-circle cursor-pointer"
               >
                 Beginner
               </label>
@@ -114,7 +114,7 @@ const EditField = ({ setShowEditField, showEditField }) => {
               />
               <label
                 htmlFor="Intermediate"
-                className="block select-none rounded-full p-2 text-center peer-checked:bg-pink  peer-checked:text-circle"
+                className="block select-none rounded-full p-2 text-center peer-checked:bg-pink  peer-checked:text-circle cursor-pointer"
               >
                 Intermediate
               </label>
@@ -132,7 +132,7 @@ const EditField = ({ setShowEditField, showEditField }) => {
               />
               <label
                 htmlFor="Expert"
-                className="block select-none rounded-full p-2 text-center peer-checked:bg-pink peer-checked:text-circle"
+                className="block select-none rounded-full p-2 text-center peer-checked:bg-pink peer-checked:text-circle cursor-pointer"
               >
                 Expert
               </label>

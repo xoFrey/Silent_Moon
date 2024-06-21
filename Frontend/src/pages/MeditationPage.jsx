@@ -11,7 +11,7 @@ const MeditationPage = () => {
   const [meditations, setMeditations] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const { token } = useContext(TokenContext);
-
+  const [inputSearch, setInputSearch] = useState("");
   useEffect(() => {
     const allMeditation = async () => {
       const res = await fetch(
@@ -35,8 +35,15 @@ const MeditationPage = () => {
       setMeditations(data.result);
     };
 
-    allMeditation();
-  }, [category]);
+    if (inputSearch.length === 0) {
+      allMeditation();
+    } else {
+      const filteredMeditation = meditations.filter((item) => item.title.toLowerCase().includes(inputSearch.toLowerCase()));
+      setMeditations(filteredMeditation);
+
+    }
+
+  }, [category, inputSearch]);
 
   console.log(meditations, errorMessage);
 
@@ -44,10 +51,10 @@ const MeditationPage = () => {
     <main>
       <Header />
       <div className="flex flex-col justify-center items-center">
-        <h1 className="font-black text-maintext text-4xl leading-10 text-center mt-12 tracking-wide">
+        <h1 className="font-black text-maintext text-4xl leading-10 text-center mt-8 tracking-wide">
           Meditate
         </h1>
-        <p className="text-subtext leading-5 text-center mt-7 mb-12 font-semibold max-w-80">
+        <p className="text-subtext leading-5 text-center mt-4 mb-8 font-semibold max-w-80">
           Audio-only meditation techniques to help you minimize your screen time
           and practice on the go.
         </p>
@@ -56,7 +63,7 @@ const MeditationPage = () => {
         <Categorys category={category} setCategory={setCategory} />
       </div>
       <div className="mb-5">
-        <Searchbar />
+        <Searchbar inputSearch={inputSearch} setInputSearch={setInputSearch} />
       </div>
       <div
         id="DailyCalmPlayerSub"
