@@ -10,6 +10,7 @@ const EditField = ({ setShowEditField, showEditField }) => {
   const [upload, setUpload] = useState();
   const [level, setLevel] = useState(user?.userLevel);
 
+  console.log(level);
   const editUser = async (e) => {
     e.preventDefault();
     let fileUrl;
@@ -59,9 +60,8 @@ const EditField = ({ setShowEditField, showEditField }) => {
 
   return (
     <section
-      className={` h-3/5 w-11/12 bg-lightcreme border border-solid border-subtext rounded-lg fixed transition-transform duration-1000  ease-in-out top-30 z-10 ${
-        showEditField ? " translate-x-0 ml-4" : " -translate-x-full "
-      }`}
+      className={` h-3/5 w-11/12 bg-lightcreme border border-solid border-subtext rounded-lg fixed transition-transform duration-1000  ease-in-out top-30 z-10 ${showEditField ? " translate-x-0 ml-4" : " -translate-x-full "
+        }`}
     >
       <form className="flex flex-col items-center gap-5">
         <h2 className="mt-2 text-maintext leading-5 font-semibold">
@@ -92,7 +92,7 @@ const EditField = ({ setShowEditField, showEditField }) => {
                 value={level}
                 className="peer hidden"
                 onChange={() => setLevel("Beginner")}
-                defaultChecked={user.userLevel}
+                defaultChecked={user.userLevel === "Beginner" ? true : false}
               />
               <label
                 htmlFor="beginner"
@@ -110,7 +110,7 @@ const EditField = ({ setShowEditField, showEditField }) => {
                 value={level}
                 className="peer hidden"
                 onChange={() => setLevel("Intermediate")}
-                defaultChecked={user.userLevel}
+                defaultChecked={user.userLevel === "Intermediate" ? true : false}
               />
               <label
                 htmlFor="Intermediate"
@@ -128,7 +128,7 @@ const EditField = ({ setShowEditField, showEditField }) => {
                 value={level}
                 className="peer hidden"
                 onChange={() => setLevel("Expert")}
-                defaultChecked={user.userLevel}
+                defaultChecked={user.userLevel === "Expert" ? true : false}
               />
               <label
                 htmlFor="Expert"

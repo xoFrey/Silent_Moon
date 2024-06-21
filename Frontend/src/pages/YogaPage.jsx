@@ -36,7 +36,7 @@ const YogaPage = () => {
     allYoga();
   }, [category]);
 
-  console.log();
+  console.log(yoga);
 
   return (
     <main>
@@ -77,7 +77,7 @@ const YogaPage = () => {
             <div key={yogaItem._id} className="">
               <CatergoryTiles
                 id={yogaItem._id}
-                imgUrl={`${backendUrl}/${yoga[6].fileUrl?.split("\\")[1]}`}
+                imgUrl={`${backendUrl}/${yogaItem.fileUrl?.split("\\")[1]}`}
                 title={yogaItem.title}
               />
             </div>

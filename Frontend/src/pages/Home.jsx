@@ -14,20 +14,18 @@ const Home = () => {
   const { token, setToken } = useContext(TokenContext);
   const [yogaByLevel, setYogaByLevel] = useState("");
   const [meditationByLevel, setMeditationByLevel] = useState("");
-
   const [inputSearch, setInputSearch] = useState("");
-
   const [dayTime, setDayTime] = useState("");
   const [randomYogaNumber, setRandomYogaNumber] = useState();
   const [randomMeditationNumber, setRandomMeditationNumber] = useState();
 
 
   useEffect(() => {
-    const fetchAllByLevel = async () => {
+
+    const fetchYogaByLevel = async () => {
       {
         const res = await fetch(
           `${backendUrl}/api/v1/yoga/filterLevel/?levelSelection=${user.userLevel}`,
-
           {
             headers: { authorization: `Bearer ${token}` },
           }
@@ -38,10 +36,7 @@ const Home = () => {
         setYogaByLevel(data.result);
       }
     };
-    fetchYogaByLevel();
-  }, []);
 
-  useEffect(() => {
     const fetchMeditationByLevel = async () => {
 
       const res = await fetch(
@@ -55,25 +50,18 @@ const Home = () => {
       if (!data.result) return "Failed to fetch all Meditation by level";
       setMeditationByLevel(data.result);
     };
+    if (inputSearch.length === 0) {
 
-    fetchAllByLevel();
-  }, []);
-
-  useEffect(() => {
-    if (yogaByLevel && meditationByLevel) {
-      const filteredYoga = yogaByLevel.filter((item) =>
-        item.title.toLowerCase().includes(inputSearch.toLowerCase())
-      );
-      console.log("FY", filteredYoga);
-      const filteredMeditation = meditationByLevel.filter((item) =>
-        item.title.toLowerCase().includes(inputSearch.toLowerCase())
-      );
+      fetchYogaByLevel();
+      fetchMeditationByLevel();
+    } else {
+      const filteredYoga = yogaByLevel.filter((item) => item.title.toLowerCase().includes(inputSearch.toLowerCase()));
       setYogaByLevel(filteredYoga);
-      console.log("ybl", yogaByLevel);
+      const filteredMeditation = meditationByLevel.filter((item) => item.title.toLowerCase().includes(inputSearch.toLowerCase())
+      );
       setMeditationByLevel(filteredMeditation);
     }
   }, [inputSearch]);
-
 
 
   const date = new Date(Date.now());
@@ -158,6 +146,7 @@ const Home = () => {
                 />
               </Link>
             ))
+
           ) : (
             <p>Loading...</p>
           )}
@@ -168,13 +157,13 @@ const Home = () => {
         <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
           Recommended Meditation for you
         </h2>
-        {meditationByLevel ? (
-          meditationByLevel.map((item) => (
-            <div
-              key={item._id}
-              className="flex items-center overflow-x-scroll "
-            >
-              <Link to={`/meditation/${item._id}`}>
+        <div
+
+          className="flex items-center overflow-x-scroll "
+        >
+          {meditationByLevel ? (
+            meditationByLevel.map((item) => (
+              <Link key={item._id} to={`/meditation/${item._id}`}>
                 <TileCards
                   name={item.title}
                   level={item.level}
@@ -182,11 +171,11 @@ const Home = () => {
                   imgURL={item.fileUrl}
                 />
               </Link>
-            </div>
-          ))
-        ) : (
-          <p>Loading...</p>
-        )}
+            ))
+          ) : (
+            <p>Loading...</p>
+          )}
+        </div>
       </section>
     </main>
   );

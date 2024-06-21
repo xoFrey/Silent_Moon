@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const CatergoryTiles = ({ id, title, imgUrl }) => {
-  console.log(imgUrl);
+
   return (
     <Link to={`${id}`}>
       <div className="relative break-inside-avoid mb-5">
