@@ -14,29 +14,36 @@ const Home = () => {
   const { token, setToken } = useContext(TokenContext);
   const [yogaByLevel, setYogaByLevel] = useState("");
   const [meditationByLevel, setMeditationByLevel] = useState("");
+
+  const [inputSearch, setInputSearch] = useState("");
+
   const [dayTime, setDayTime] = useState("");
   const [randomYogaNumber, setRandomYogaNumber] = useState();
   const [randomMeditationNumber, setRandomMeditationNumber] = useState();
 
+
   useEffect(() => {
-    const fetchYogaByLevel = async () => {
-      const res = await fetch(
-        `${backendUrl}/api/v1/yoga/filterLevel/?levelSelection=${user.userLevel}`,
+    const fetchAllByLevel = async () => {
+      {
+        const res = await fetch(
+          `${backendUrl}/api/v1/yoga/filterLevel/?levelSelection=${user.userLevel}`,
 
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
-      );
-      const data = await res.json();
+          {
+            headers: { authorization: `Bearer ${token}` },
+          }
+        );
+        const data = await res.json();
 
-      if (!data.result) return "Failed to fetch all Yoga by level";
-      setYogaByLevel(data.result);
+        if (!data.result) return "Failed to fetch all Yoga by level";
+        setYogaByLevel(data.result);
+      }
     };
     fetchYogaByLevel();
   }, []);
 
   useEffect(() => {
     const fetchMeditationByLevel = async () => {
+
       const res = await fetch(
         `${backendUrl}/api/v1/meditation/filterLevel/?levelSelection=${user.userLevel}`,
         {
@@ -48,8 +55,24 @@ const Home = () => {
       if (!data.result) return "Failed to fetch all Meditation by level";
       setMeditationByLevel(data.result);
     };
-    fetchMeditationByLevel();
+
+    fetchAllByLevel();
   }, []);
+
+  useEffect(() => {
+    if (yogaByLevel && meditationByLevel) {
+      const filteredYoga = yogaByLevel.filter((item) =>
+        item.title.toLowerCase().includes(inputSearch.toLowerCase())
+      );
+      console.log("FY", filteredYoga);
+      const filteredMeditation = meditationByLevel.filter((item) =>
+        item.title.toLowerCase().includes(inputSearch.toLowerCase())
+      );
+      setYogaByLevel(filteredYoga);
+      console.log("ybl", yogaByLevel);
+      setMeditationByLevel(filteredMeditation);
+    }
+  }, [inputSearch]);
 
 
 
@@ -79,9 +102,6 @@ const Home = () => {
   const generateRandomNumber = (item) => {
     return Math.floor(Math.random() * item.length);
   };
-
-
-
 
   return (
     <main className="">
@@ -120,7 +140,7 @@ const Home = () => {
           </p>
         </div>
       </div>
-      <Searchbar />
+      <Searchbar inputSearch={inputSearch} setInputSearch={setInputSearch} />
 
       <section className=" mb-10 mt-8">
         <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
