@@ -14,16 +14,24 @@ const MeditationPage = () => {
 
   useEffect(() => {
     const allMeditation = async () => {
-      const res = await fetch(`${backendUrl}/api/v1/meditation/filterCategory/?categorySelection=${category}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
+      const res = await fetch(
+        `${backendUrl}/api/v1/meditation/filterCategory/?categorySelection=${category}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
 
       const data = await res.json();
       if (!data.result)
-        return setErrorMessage(data.message || "No Meditations in this category found"), setMeditations([]);
+        return (
+          setErrorMessage(
+            data.message || "No Meditations in this category found"
+          ),
+          setMeditations([])
+        );
       setMeditations(data.result);
     };
 
@@ -66,12 +74,21 @@ const MeditationPage = () => {
           <img src="/image/PlayVector.png" alt="" />
         </button>
       </div>
-      {meditations.length !== 0 ?
-        meditations.map((meditation) => (
-          <div key={meditation._id} className="mb-20">
-            <CatergoryTiles id={meditation._id} imgUrl={"test"} title={meditation.title} />
-          </div>
-        )) : <p>{errorMessage}</p>}
+      <section className="columns-2 ml-2">
+        {meditations.length !== 0 ? (
+          meditations.map((meditation) => (
+            <div key={meditation._id}>
+              <CatergoryTiles
+                id={meditation._id}
+                imgUrl={"test"}
+                title={meditation.title}
+              />
+            </div>
+          ))
+        ) : (
+          <p>{errorMessage}</p>
+        )}
+      </section>
     </main>
   );
 };
