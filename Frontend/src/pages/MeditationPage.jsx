@@ -1,9 +1,37 @@
+import { useContext, useEffect, useState } from "react";
 import CatergoryTiles from "../components/CategoryTiles";
 import Categorys from "../components/Categorys";
 import Header from "../components/Header";
 import Searchbar from "../components/Searchbar";
+import { backendUrl } from "../api/api";
+import { TokenContext } from "../../context/Context";
 
 const MeditationPage = () => {
+  const [category, setCategory] = useState("All");
+  const [meditations, setMeditations] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
+  const { token } = useContext(TokenContext);
+
+  useEffect(() => {
+    const allMeditation = async () => {
+      const res = await fetch(`${backendUrl}/api/v1/meditation/filterCategory/?categorySelection=${category}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      const data = await res.json();
+      if (!data.result)
+        return setErrorMessage(data.message || "No Meditations in this category found"), setMeditations([]);
+      setMeditations(data.result);
+    };
+
+    allMeditation();
+  }, [category]);
+
+  console.log(meditations, errorMessage);
+
   return (
     <main>
       <Header />
@@ -17,7 +45,7 @@ const MeditationPage = () => {
         </p>
       </div>
       <div className="mb-12">
-        <Categorys />
+        <Categorys category={category} setCategory={setCategory} />
       </div>
       <div className="mb-5">
         <Searchbar />
@@ -38,9 +66,12 @@ const MeditationPage = () => {
           <img src="/image/PlayVector.png" alt="" />
         </button>
       </div>
-      <div className="mb-20">
-        <CatergoryTiles />
-      </div>
+      {meditations.length !== 0 ?
+        meditations.map((meditation) => (
+          <div key={meditation._id} className="mb-20">
+            <CatergoryTiles id={meditation._id} imgUrl={"test"} title={meditation.title} />
+          </div>
+        )) : <p>{errorMessage}</p>}
     </main>
   );
 };

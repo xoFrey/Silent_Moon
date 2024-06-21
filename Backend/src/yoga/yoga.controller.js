@@ -44,8 +44,9 @@ const getYogasByLevelCtrl = async (req, res) => {
 const getYogasByCategoryCtrl = async (req, res) => {
   try {
     const yogaByCategory = req.query.categorySelection;
+    const userId = req.authenticatedUserId;
 
-    const result = await YogaService.getYogasByCategory(yogaByCategory);
+    const result = await YogaService.getYogasByCategory(yogaByCategory, userId);
     res.json({ result });
   } catch (err) {
     console.log(err);
