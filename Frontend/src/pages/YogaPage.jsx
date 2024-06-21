@@ -2,19 +2,47 @@ import CatergoryTiles from "../components/CategoryTiles";
 import Categorys from "../components/Categorys";
 import Header from "../components/Header";
 import Searchbar from "../components/Searchbar";
+import { backendUrl } from "../api/api";
+import { TokenContext } from "../../context/Context";
+import { useContext, useEffect, useState } from "react";
 
 const YogaPage = () => {
+  const [category, setCategory] = useState("All");
+  const [yoga, setYoga] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
+  const { token } = useContext(TokenContext);
+
+  useEffect(() => {
+    const allMeditation = async () => {
+      const res = await fetch(`${backendUrl}/api/v1/yoga/filterCategory/?categorySelection=${category}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      const data = await res.json();
+      if (!data.result)
+        return setErrorMessage(data.message || "No Yogas in this category found"), setYoga([]);
+      setYoga(data.result);
+    };
+
+    allMeditation();
+  }, [category]);
+
   return (
     <main>
       <Header />
-      <h1 className="font-black text-maintext text-4xl leading-10 text-center mt-12 tracking-wide">
-        Yoga
-      </h1>
-      <p className="text-subtext leading-5 text-center mt-7 mb-12 font-semibold">
-        Find your inner zen from anywhere
-      </p>
+      <div className="flex flex-col justify-center items-center">
+        <h1 className="font-black text-maintext text-4xl leading-10 text-center mt-12 tracking-wide">
+          Yoga
+        </h1>
+        <p className="text-subtext leading-5 text-center mt-7 mb-12 font-semibold">
+          Find your inner zen from anywhere
+        </p>
+      </div>
       <div className="mb-12">
-        <Categorys />
+        <Categorys category={category} setCategory={setCategory} />
       </div>
       <div className="mb-5">
         <Searchbar />
@@ -35,9 +63,12 @@ const YogaPage = () => {
           <img src="/image/PlayVector.png" alt="" />
         </button>
       </div>
-      <div className="mb-20">
-        <CatergoryTiles />
-      </div>
+      {yoga.length !== 0 ?
+        yoga.map((yogaItem) => (
+          <div key={yogaItem._id} className="mb-20">
+            <CatergoryTiles id={yogaItem._id} imgUrl={"test"} title={yogaItem.title} />
+          </div>
+        )) : <p>{errorMessage}</p>}
     </main>
   );
 };
