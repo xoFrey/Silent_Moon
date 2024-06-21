@@ -78,8 +78,8 @@ const editUserCtrl = async (req, res) => {
 const addFavoriteCtrl = async (req, res) => {
   try {
     const updateInfo = {
-      userId: req.body.userId,
       id: req.params.id,
+      userId: req.body.userId,
     };
     const result = await UserService.addFavorite(updateInfo);
     res.json({ result });
@@ -94,8 +94,8 @@ const addFavoriteCtrl = async (req, res) => {
 const removeFavoriteCtrl = async (req, res) => {
   try {
     const updateInfo = {
-      userId: req.body.userId,
       id: req.params.id,
+      userId: req.body.userId,
     };
     const result = await UserService.removeFavorite(updateInfo);
     res.json({ result });

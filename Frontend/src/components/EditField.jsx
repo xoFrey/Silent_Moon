@@ -4,10 +4,12 @@ import { TokenContext, UserContext } from "../../context/Context";
 import { backendUrl } from "../api/api";
 
 const EditField = ({ setShowEditField, showEditField }) => {
-  const { user, setUser } = useContext(UserContext);
-  const { token } = useContext(TokenContext);
-  const [usernameInput, setUsernameInput] = useState(user.username);
-  const [upload, setUpload] = useState();
+
+    const { user, setUser } = useContext(UserContext);
+    const { token } = useContext(TokenContext);
+    const [usernameInput, setUsernameInput] = useState(user?.username);
+    const [upload, setUpload] = useState();
+
 
   const editUser = async (e) => {
     e.preventDefault();

@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-const Categorys = () => {
-  const [category, setCategory] = useState("all");
+const Categorys = ({ category, setCategory }) => {
 
+  console.log(category);
   return (
     <section className="flex justify-center">
       <div className="flex gap-4 w-11/12 overflow-auto">
@@ -13,7 +13,7 @@ const Categorys = () => {
             id="all"
             value={category}
             className="peer hidden"
-            onChange={() => setCategory("all")}
+            onChange={() => setCategory("All")}
             defaultChecked
           />
           <label
@@ -37,7 +37,7 @@ const Categorys = () => {
             id="favorites"
             value={category}
             className="peer hidden"
-            onChange={() => setCategory("fevorites")}
+            onChange={() => setCategory("Favorites")}
           />
           <label
             htmlFor="favorites"
@@ -60,7 +60,7 @@ const Categorys = () => {
             id="anxious"
             value={category}
             className="peer hidden"
-            onChange={() => setCategory("anxious")}
+            onChange={() => setCategory("Anxious")}
           />
           <label
             htmlFor="anxious"
@@ -83,7 +83,7 @@ const Categorys = () => {
             id="sleep"
             value={category}
             className="peer hidden"
-            onChange={() => setCategory("sleep")}
+            onChange={() => setCategory("Sleep")}
           />
           <label
             htmlFor="sleep"
@@ -106,7 +106,7 @@ const Categorys = () => {
             id="kids"
             value={category}
             className="peer hidden"
-            onChange={() => setCategory("kids")}
+            onChange={() => setCategory("Kids")}
           />
           <label
             htmlFor="kids"
