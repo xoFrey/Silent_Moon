@@ -13,7 +13,7 @@ const YogaPage = () => {
   const { token } = useContext(TokenContext);
 
   useEffect(() => {
-    const allMeditation = async () => {
+    const allYoga = async () => {
       const res = await fetch(
         `${backendUrl}/api/v1/yoga/filterCategory/?categorySelection=${category}`,
         {
@@ -33,7 +33,7 @@ const YogaPage = () => {
       setYoga(data.result);
     };
 
-    allMeditation();
+    allYoga();
   }, [category]);
 
   return (
