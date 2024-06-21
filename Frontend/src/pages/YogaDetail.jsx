@@ -36,7 +36,7 @@ const YogaDetail = () => {
           <source src="../../clips/Yoga-Ex.mp4" type="video/mp4" />
         </video>
       </div>
-      <ButtonLike />
+      <ButtonLike id={yogaId} />
       <ButtonDownload />
       <div className="  absolute bottom-24">
         <h4 className="font-black text-maintext text-4xl mx-3.5 leading-10  tracking-wide">

@@ -7,32 +7,38 @@ export const removeFavorite = async (updateInfo) => {
     .populate("yogaFavorites");
   if (!user) throw new Error("User not found");
 
-  if (
-    user.yogaFavorites.some((item) => item._id.toString() !== updateInfo.id) &&
-    user.meditationFavorites.some(
-      (item) => item._id.toString() !== updateInfo.id,
-    )
-  )
-    throw "Id not found";
+  // if (user.yogaFavorites.some((item) => item._id.toString() !== updateInfo.id))
+  //   throw new Error("Yoga ID not found");
+  // if (
+  //   user.meditationFavorites.some(
+  //     (item) => item._id.toString() !== updateInfo.id,
+  //   )
+  // )
+  //   throw new Error("Meditation ID not found");
 
-  if (
-    user.yogaFavorites.some((item) => item._id.toString() === updateInfo.id)
-  ) {
+  const isFavYoga = user.yogaFavorites.some(
+    (item) => item._id.toString() === updateInfo.id,
+  );
+  console.log(isFavYoga);
+  if (isFavYoga) {
     const userUpdate = await User.findByIdAndUpdate(
       updateInfo.userId,
       { $pull: { yogaFavorites: updateInfo.id } },
       { new: true },
-    );
-    console.log(userUpdate, "yoga");
+    )
+      .populate("meditationFavorites")
+      .populate("yogaFavorites");
+    console.log("hi i remove yoga");
     return userToView(userUpdate);
   } else {
     const userUpdate = await User.findByIdAndUpdate(
       updateInfo.userId,
       { $pull: { meditationFavorites: updateInfo.id } },
       { new: true },
-    );
+    )
+      .populate("meditationFavorites")
+      .populate("yogaFavorites");
 
-    console.log(userUpdate);
     return userToView(userUpdate);
   }
 };

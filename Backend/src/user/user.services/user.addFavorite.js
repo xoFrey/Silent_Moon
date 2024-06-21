@@ -17,22 +17,34 @@ export const addFavorite = async (updateInfo) => {
   if (!meditation && !yoga) throw new Error("Inserted Id not found");
 
   const isFavoritesInYoga = user.yogaFavorites.some(
-    (item) => item._id === updateInfo.id,
+    (item) => item._id.toString() === updateInfo.id,
   );
 
   const isFavoritesInMeditation = user.meditationFavorites.some(
-    (item) => item._id === updateInfo.id,
+    (item) => item._id.toString() === updateInfo.id,
   );
 
   if (isFavoritesInYoga || isFavoritesInMeditation)
     throw new Error("Is already in Favorites");
 
   if (yoga) {
-    user.yogaFavorites.push(updateInfo.id);
+    const favYoga = await User.findByIdAndUpdate(
+      updateInfo.userId,
+      { $push: { yogaFavorites: updateInfo.id } },
+      { new: true },
+    )
+      .populate("meditationFavorites")
+      .populate("yogaFavorites");
+    console.log(favYoga);
+    return userToView(favYoga);
   } else {
-    user.meditationFavorites.push(updateInfo.id);
+    const favMed = await User.findByIdAndUpdate(
+      updateInfo.userId,
+      { $push: { meditationFavorites: updateInfo.id } },
+      { new: true },
+    )
+      .populate("meditationFavorites")
+      .populate("yogaFavorites");
+    return userToView(favMed);
   }
-  await user.save();
-
-  return userToView(user);
 };

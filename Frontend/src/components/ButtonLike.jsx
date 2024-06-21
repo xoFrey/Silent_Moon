@@ -12,14 +12,16 @@ const ButtonLike = ({ id }) => {
 
   useEffect(() => {
 
-    const isInFav = user.meditationFavorites.some((item) => item._id === id);
+    const isInFav = user.meditationFavorites.some((item) => item._id === id) || user.yogaFavorites.some((item) => item._id === id);
+
     setIsFavorite(isInFav);
 
   }, [refresh]);
 
 
+  console.log(id);
 
-  const addFavorite = async () => {
+  const addFavorite = async (id) => {
     const res = await fetch(`${backendUrl}/api/v1/users/${id}/like`, {
       method: "PATCH",
       headers: {
@@ -36,8 +38,7 @@ const ButtonLike = ({ id }) => {
 
   };
 
-  // 66702bf22378fc8e5cefcb0d
-  const removeFavorite = async () => {
+  const removeFavorite = async (id) => {
     const res = await fetch(`${backendUrl}/api/v1/users/${id}/unlike`, {
       method: "PATCH",
       headers: {
@@ -59,7 +60,7 @@ const ButtonLike = ({ id }) => {
   return (
     <>
       {isFavorite ? (
-        <button onClick={() => { removeFavorite(), setRefresh(!refresh); }}>
+        <button onClick={() => { removeFavorite(id), setRefresh(!refresh); }}>
           <IoMdHeart
             className=' z-10 absolute right-24 top-5 bg-pink/55 rounded-full p-3'
             size={"50px"}
@@ -67,7 +68,7 @@ const ButtonLike = ({ id }) => {
           />
         </button>
       ) : (
-        <button onClick={() => { addFavorite(), setRefresh(!refresh); }}>
+        <button onClick={() => { addFavorite(id), setRefresh(!refresh); }}>
           <IoMdHeartEmpty
             className=' z-10 absolute right-24 top-5 bg-pink/55 rounded-full p-3'
             size={"50px"}

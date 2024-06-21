@@ -22,24 +22,24 @@ const Home = () => {
         <div className=" relative z-0">
           <img src="../../image/RecoveryBigMeditate.png" alt="yoga image" />
           <p className=" absolute text-white left-1 bottom-5 font-light">
-            {user.yogaFavorites[0].duration} MIN
+            {user.yogaFavorites[0]?.duration} MIN
           </p>
           <ButtonStart fill={"#FAF2DA"} typeColor={"#4A503D"} />
           <p className=" absolute text-[#FAF2DA] top-5 left-1 text-xl">
-            {user.yogaFavorites[0].title}
+            {user.yogaFavorites[0]?.title}
           </p>
           <p className=" uppercase absolute text-[#FAF2DA] top-12 left-1 text-xs">
-            {user.yogaFavorites[0].level}
+            {user.yogaFavorites[0]?.level}
           </p>
         </div>
         <div className=" relative z-0 ">
           <img src="../../image/RecoveryBigYoga.png" alt="meditation image" />
           <p className=" absolute text-white left-1 bottom-5 font-light">
-            {user.meditationFavorites[0].duration} MIN
+            {user.meditationFavorites[0]?.duration} MIN
           </p>
           <ButtonStart fill={"#4A503D"} typeColor={"#FAF2DA"} />
           <p className=" absolute text-[#4A503D] top-5 left-1 text-xl">
-            {user.meditationFavorites[0].title}
+            {user.meditationFavorites[0]?.title}
           </p>
         </div>
       </div>
