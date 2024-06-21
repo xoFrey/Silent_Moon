@@ -41,7 +41,7 @@ const Home = () => {
     };
     fetchMeditationByLevel();
   }, []);
-
+  console.log("Hallo");
   return (
     <main className="">
       <Header />
@@ -76,7 +76,6 @@ const Home = () => {
           </p>
         </div>
       </div>
-
       <Searchbar />
 
       <section className=" mb-10 mt-8">
