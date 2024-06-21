@@ -2,7 +2,14 @@ import { YogaService } from "./yoga.services/yoga.index.js";
 
 const createYogaCtrl = async (req, res) => {
   try {
-    const yogaInfo = req.body;
+    const yogaInfo = {
+      fileUrl: req.file ? req.file.path : "",
+      title: req.body.title,
+      description: req.body.description,
+      level: req.body.level,
+      duration: req.body.duration,
+      category: req.body.category,
+    };
 
     const result = await YogaService.createYoga(yogaInfo);
     res.status(201).json({ result });
