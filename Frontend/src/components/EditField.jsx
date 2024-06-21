@@ -6,7 +6,7 @@ import { backendUrl } from "../api/api";
 const EditField = ({ setShowEditField, showEditField }) => {
     const { user, setUser } = useContext(UserContext);
     const { token } = useContext(TokenContext);
-    const [usernameInput, setUsernameInput] = useState(user.username);
+    const [usernameInput, setUsernameInput] = useState(user?.username);
     const [upload, setUpload] = useState();
 
 
@@ -19,7 +19,7 @@ const EditField = ({ setShowEditField, showEditField }) => {
             formData.append("files", upload, upload.name);
             const result = await fetch(`${backendUrl}/api/v1/files/upload`, {
                 method: "POST",
-                headers: { authorization: `Bearer ${token}` },
+                headers: { Authorization: `Bearer ${token}` },
                 body: formData
             });
 

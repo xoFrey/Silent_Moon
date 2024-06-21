@@ -32,7 +32,7 @@ const Registration = () => {
         lastname: lastName,
         email,
         password,
-        level,
+        userLevel: level,
       }),
     });
 
