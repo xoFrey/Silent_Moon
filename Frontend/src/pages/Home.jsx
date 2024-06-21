@@ -83,12 +83,7 @@ const Home = () => {
         </div>
       </div>
       <Searchbar />
-      {/* <h2 className="text-xl font-black w-4/5 mx-3.5 mb-3.5 mt-8 text-maintext ">
-        Recommended Yoga for you
-      </h2>
-      <h2 className="text-xl font-black w-4/5 mx-3.5 mb-3.5 mt-8 text-maintext ">
-        Recommended Meditation for you
-      </h2> */}
+
       <section className=" mb-10 mt-8">
         <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
           Recommended Yoga for you
