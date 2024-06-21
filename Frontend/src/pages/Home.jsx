@@ -7,8 +7,41 @@ import ButtonStart from "../components/ButtonStart.jsx";
 const Home = () => {
   const { user, setUser } = useContext(UserContext);
   const { token, setToken } = useContext(TokenContext);
-  // console.log(user);
+  const [yogaByLevel, setYogaByLevel] = useState("");
+  const [meditationByLevel, setMeditationByLevel] = useState("");
 
+  useEffect(() => {
+    const fetchYogaByLevel = async () => {
+      const res = await fetch(
+        `${backendUrl}/api/v1/yoga/filterLevel/?levelSelection=${user.userLevel}`,
+
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      const data = await res.json();
+
+      if (!data.result) return "Failed to fetch all Yoga by level";
+      setYogaByLevel(data.result);
+    };
+    fetchYogaByLevel();
+  }, []);
+  useEffect(() => {
+    const fetchMeditationByLevel = async () => {
+      const res = await fetch(
+        `${backendUrl}/api/v1/meditation/filterLevel/?levelSelection=${user.userLevel}`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      const data = await res.json();
+
+      if (!data.result) return "Failed to fetch all Meditation by level";
+      setMeditationByLevel(data.result);
+    };
+    fetchMeditationByLevel();
+  }, []);
+  console.log("Hallo");
   return (
     <main className="">
       <Header />
@@ -43,7 +76,6 @@ const Home = () => {
           </p>
         </div>
       </div>
-
       <Searchbar />
 
       <section className=" mb-10 mt-8">
