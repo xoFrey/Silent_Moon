@@ -30,7 +30,7 @@ const getMeditationsByLevelCtrl = async (req, res) => {
     const meditationByLevel = req.query.levelSelection;
 
     const result = await MeditationService.getMeditationsByLevel(
-      meditationByLevel
+      meditationByLevel,
     );
     res.json({ result });
   } catch (err) {
@@ -44,9 +44,11 @@ const getMeditationsByLevelCtrl = async (req, res) => {
 const getMeditationsByCategoryCtrl = async (req, res) => {
   try {
     const meditationByCategory = req.query.categorySelection;
+    const userId = req.authenticatedUserId;
 
     const result = await MeditationService.getMeditationsByCategory(
-      meditationByCategory
+      meditationByCategory,
+      userId,
     );
     res.json({ result });
   } catch (err) {
@@ -60,10 +62,7 @@ const getMeditationsByCategoryCtrl = async (req, res) => {
 
 export const MeditationController = {
   getMeditationDetailCtrl,
-
   createMeditationCtrl,
   getMeditationsByLevelCtrl,
   getMeditationsByCategoryCtrl,
-  // addFavoriteCtrl,
-  // removeFavoriteCtrl,
 };

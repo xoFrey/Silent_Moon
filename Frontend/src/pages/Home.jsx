@@ -1,12 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Navbar from "../components/Navbar";
 import { TokenContext, UserContext } from "../../context/Context.jsx";
 import Header from "../components/Header.jsx";
 import ButtonStart from "../components/ButtonStart.jsx";
-import Searchbar from "../components/Searchbar.jsx";
-import { Link } from "react-router-dom";
-import TileCards from "../components/TileCards.jsx";
-import { backendUrl } from "../api/api";
 
 const Home = () => {
   const { user, setUser } = useContext(UserContext);
@@ -55,34 +51,32 @@ const Home = () => {
       <p className=" text-subtext leading-5  pb-10 mx-3.5  font-semibold">
         We hope you have a good day.
       </p>
-      <div className=" flex gap-3 place-content-around mb-5">
+      <div className=" flex gap-3 place-content-around">
         <div className=" relative z-0">
           <img src="../../image/RecoveryBigMeditate.png" alt="yoga image" />
           <p className=" absolute text-white left-1 bottom-5 font-light">
-            {yogaByLevel[0]?.duration} MIN
+            {user.yogaFavorites[0]?.duration} MIN
           </p>
           <ButtonStart fill={"#FAF2DA"} typeColor={"#4A503D"} />
-          <p className=" absolute text-[#FAF2DA] top-11 left-1 text-xl">
-            {yogaByLevel[0]?.title}
+          <p className=" absolute text-[#FAF2DA] top-5 left-1 text-xl">
+            {user.yogaFavorites[0]?.title}
           </p>
-          <p className=" uppercase absolute text-[#FAF2DA] top-16 left-1 text-xs">
-            {yogaByLevel[0]?.level}
+          <p className=" uppercase absolute text-[#FAF2DA] top-12 left-1 text-xs">
+            {user.yogaFavorites[0]?.level}
           </p>
         </div>
         <div className=" relative z-0 ">
           <img src="../../image/RecoveryBigYoga.png" alt="meditation image" />
           <p className=" absolute text-white left-1 bottom-5 font-light">
-            {meditationByLevel[0]?.duration} MIN
+            {user.meditationFavorites[0]?.duration} MIN
           </p>
           <ButtonStart fill={"#4A503D"} typeColor={"#FAF2DA"} />
-          <p className=" absolute text-[#4A503D] top-11 left-1 text-xl">
-            {meditationByLevel[0]?.title}
-          </p>
-          <p className=" uppercase absolute text-[#4A503D] top-16 left-1 text-xs">
-            {meditationByLevel[0]?.level}
+          <p className=" absolute text-[#4A503D] top-5 left-1 text-xl">
+            {user.meditationFavorites[0]?.title}
           </p>
         </div>
       </div>
+
       <Searchbar />
 
       <section className=" mb-10 mt-8">

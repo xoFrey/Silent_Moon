@@ -1,25 +1,82 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useImperativeHandle, useState } from "react";
 import { IoMdHeart } from "react-icons/io";
 import { IoMdHeartEmpty } from "react-icons/io";
-import { UserContext } from "../../context/Context";
+import { TokenContext, UserContext } from "../../context/Context";
+import { backendUrl } from "../api/api";
+
+const ButtonLike = ({ id }) => {
+  const { user, setUser } = useContext(UserContext);
+  const { token } = useContext(TokenContext);
+  const [isFavorite, setIsFavorite] = useState();
+  const [refresh, setRefresh] = useState(false);
+
+  useEffect(() => {
+
+    const isInFav = user.meditationFavorites.some((item) => item._id === id) || user.yogaFavorites.some((item) => item._id === id);
+
+    setIsFavorite(isInFav);
+
+  }, [refresh]);
 
 
-const ButtonLike = ({ id, }) => {
-  const { user } = useContext(UserContext);
-  const [isFavorite, setIsFavorite] = useState(false);
+  console.log(id);
+
+  const addFavorite = async (id) => {
+    const res = await fetch(`${backendUrl}/api/v1/users/${id}/like`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId: user.id }),
+    });
+    const data = await res.json();
+    setUser((user) => ({ ...user, ...data.result }));
+
+
+    setIsFavorite(true);
+
+  };
+
+  const removeFavorite = async (id) => {
+    const res = await fetch(`${backendUrl}/api/v1/users/${id}/unlike`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId: user.id }),
+    });
+    const data = await res.json();
+    setUser((user) => ({ ...user, ...data.result }));
+    console.log(data.result);
+
+
+    setIsFavorite(false);
+
+
+  };
+
   return (
     <>
-      {isFavorite ? <button>
-        <IoMdHeart className=" z-10 absolute right-24 top-5 bg-pink/55 rounded-full p-3" size={"50px"} fill="#ffffff" />
-      </button> : <button>
-        <IoMdHeartEmpty className=" z-10 absolute right-24 top-5 bg-pink/55 rounded-full p-3" size={"50px"} fill="#ffffff" />
-      </button>
-      }
-
-
+      {isFavorite ? (
+        <button onClick={() => { removeFavorite(id), setRefresh(!refresh); }}>
+          <IoMdHeart
+            className=' z-10 absolute right-24 top-5 bg-pink/55 rounded-full p-3'
+            size={"50px"}
+            fill='#ffffff'
+          />
+        </button>
+      ) : (
+        <button onClick={() => { addFavorite(id), setRefresh(!refresh); }}>
+          <IoMdHeartEmpty
+            className=' z-10 absolute right-24 top-5 bg-pink/55 rounded-full p-3'
+            size={"50px"}
+            fill='#ffffff'
+          />
+        </button>
+      )}
     </>
-
-
   );
 };
 

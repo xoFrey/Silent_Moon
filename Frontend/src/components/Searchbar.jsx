@@ -1,4 +1,7 @@
+import { useState } from "react";
+
 const Searchbar = () => {
+  const [inputSearch, setInputSearch] = useState("");
 
   return (
     <div className="relative flex justify-center bg-subtext bg-opacity-20 mx-4 rounded-full">
@@ -6,6 +9,8 @@ const Searchbar = () => {
         type="search"
         className="relative m-0 block w-11/12  bg-subtext bg-opacity-0  px-3 py-[0.25rem] text-base font-normal leading-8 text-surface outline-none  placeholder:text-maintext  "
         placeholder="Search"
+        value={inputSearch}
+        onChange={(e) => setInputSearch(e.target.value)}
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"

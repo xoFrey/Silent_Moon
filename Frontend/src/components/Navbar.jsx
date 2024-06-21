@@ -15,7 +15,7 @@ const Navbar = () => {
             <p className="">Yoga</p>
           </div>
         </NavLink>
-        <NavLink to="/meditate">
+        <NavLink to="/meditation">
           <div className="flex flex-col justify-center items-center">
             <PiMountainsLight />
             <p>Meditate</p>

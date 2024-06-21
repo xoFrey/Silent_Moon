@@ -13,6 +13,7 @@ const ProfilePage = () => {
     const { user } = useContext(UserContext);
     const [showSidebar, setShowSidebar] = useState(false);
     const [showEditField, setShowEditField] = useState(false);
+    console.log("profile", user);
 
     return (
         <section className=' mb-24'>
@@ -30,7 +31,7 @@ const ProfilePage = () => {
             <div className='flex items-center gap-8 mt-6 mb-8 px-5'>
                 <img
                     className='rounded-full w-16 h-16 object-cover'
-                    src={`${backendUrl}/${user.fileUrl}`}
+                    src={`${backendUrl}/${user?.fileUrl}`}
                     alt='Pic'
                 />
                 <div className='flex items-center justify-center gap-32'>
@@ -49,40 +50,41 @@ const ProfilePage = () => {
                 <h2 className=' text-2xl text-maintext font-bold tracking-wide pl-5 mb-6'>
                     Favorite Yoga Sessions
                 </h2>
-                {user?.yogaFavorites.map((item) => (
-                    <div
-                        key={item._id}
-                        className='flex items-center overflow-x-scroll '>
-                        <Link to={`/yoga/${item._id}`}>
-                            <TileCards
-                                name={item.title}
-                                level={item.level}
-                                duration={item.duration}
-                                imgURL={item.fileUrl}
-                            />
-                        </Link>
-                    </div>
-                ))}
+                <div className='flex flex-row items-center overflow-x-scroll '>
+                    {user?.yogaFavorites.map((item) => (
+                        <div key={item._id}>
+                            <Link to={`/yoga/${item._id}`}>
+                                <TileCards
+                                    name={item.title}
+                                    level={item.level}
+                                    duration={item.duration}
+                                    imgURL={item.fileUrl}
+                                />
+                            </Link>
+                        </div>
+                    ))}
+                </div>
             </section>
 
             <section>
                 <h2 className=' text-2xl text-maintext font-bold tracking-wide pl-5 mb-6'>
                     Favorite Meditation Sessions
                 </h2>
-                {user?.meditationFavorites.map((item) => (
-                    <div
-                        key={item._id}
-                        className='flex items-center overflow-x-scroll '>
-                        <Link to={`/meditation/${item._id}`}>
-                            <TileCards
-                                name={item.title}
-                                level={item.level}
-                                duration={item.duration}
-                                imgURL={item.fileUrl}
-                            />
-                        </Link>
-                    </div>
-                ))}
+                <div className='flex items-baseline overflow-x-scroll '>
+                    {user?.meditationFavorites?.map((item) => (
+                        <div key={item._id}  >
+                            <Link
+                                to={`/meditation/${item._id}`}>
+                                <TileCards
+                                    name={item.title}
+                                    level={item.level}
+                                    duration={item.duration}
+                                    imgURL={item.fileUrl}
+                                />
+                            </Link>
+                        </div>
+                    ))}
+                </div>
             </section>
         </section>
     );
