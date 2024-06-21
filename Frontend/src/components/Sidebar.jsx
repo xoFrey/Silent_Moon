@@ -49,7 +49,9 @@ const Sidebar = ({
           Change Reminder
         </button>
         <button
-          onClick={() => setShowSidebar(false)}
+          onClick={() => {
+            setShowSidebar(false), navigate("/information");
+          }}
           className="hover:bg-pink hover:text-white uppercase w-full text-maintext leading-5 font-semibold p-5 border-b border-subtext"
         >
           Information
