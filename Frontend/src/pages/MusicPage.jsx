@@ -19,7 +19,7 @@ const MusicPage = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ id: "37i9dQZF1DWZqd5JICZI0u" })
+                body: JSON.stringify({ id: "3idpjOhj59WP59HhHJe0nD" })
             });
             const data = await res.json();
             console.log(data);
