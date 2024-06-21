@@ -17,11 +17,12 @@ const Home = () => {
   useEffect(() => {
     const fetchYogaByLevel = async () => {
       const res = await fetch(
-        `${backendUrl}/api/v1/yoga/filterLevel/?levelSelection=${user.userLevel}`
+        `${backendUrl}/api/v1/yoga/filterLevel/?levelSelection=${user.userLevel}`,
+
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
       );
-      // , {
-      //   headers: { authorization: `Bearer ${token}` },
-      // }
       const data = await res.json();
 
       if (!data.result) return "Failed to fetch all Yoga by level";
@@ -32,11 +33,11 @@ const Home = () => {
   useEffect(() => {
     const fetchMeditationByLevel = async () => {
       const res = await fetch(
-        `${backendUrl}/api/v1/meditation/filterLevel/?levelSelection=${user.userLevel}`
+        `${backendUrl}/api/v1/meditation/filterLevel/?levelSelection=${user.userLevel}`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
       );
-      // , {
-      //   headers: { authorization: `Bearer ${token}` },
-      // }
       const data = await res.json();
 
       if (!data.result) return "Failed to fetch all Meditation by level";
