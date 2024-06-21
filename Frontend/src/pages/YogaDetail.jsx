@@ -24,11 +24,11 @@ const YogaDetail = () => {
   }, []);
   return (
     <>
-      <div className=" relative z-0">
+      <div className=" relative h-96 overflow-hidden block">
         <video
-          width="auto"
-          className=" absolute -top-64 object-cover "
-          height="600"
+          width="410"
+          height="384"
+          className=" absolute -top-56"
           autoPlay
           muted
           loop
@@ -38,7 +38,7 @@ const YogaDetail = () => {
       </div>
       <ButtonLike id={yogaId} />
       <ButtonDownload />
-      <div className="  absolute bottom-24">
+      <div className=" absolute bottom-24">
         <h4 className="font-black text-maintext text-4xl mx-3.5 leading-10  tracking-wide">
           {oneYoga.title}
         </h4>

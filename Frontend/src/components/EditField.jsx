@@ -4,12 +4,11 @@ import { TokenContext, UserContext } from "../../context/Context";
 import { backendUrl } from "../api/api";
 
 const EditField = ({ setShowEditField, showEditField }) => {
-
-    const { user, setUser } = useContext(UserContext);
-    const { token } = useContext(TokenContext);
-    const [usernameInput, setUsernameInput] = useState(user?.username);
-    const [upload, setUpload] = useState();
-
+  const { user, setUser } = useContext(UserContext);
+  const { token } = useContext(TokenContext);
+  const [usernameInput, setUsernameInput] = useState(user?.username);
+  const [upload, setUpload] = useState();
+  const [level, setLevel] = useState(user?.userLevel);
 
   const editUser = async (e) => {
     e.preventDefault();
@@ -35,6 +34,7 @@ const EditField = ({ setShowEditField, showEditField }) => {
       userId: user.id,
       username: usernameInput,
       fileUrl: fileUrl,
+      userLevel: level,
     };
     const res = await fetch(`${backendUrl}/api/v1/users`, {
       method: "PATCH",
@@ -59,7 +59,7 @@ const EditField = ({ setShowEditField, showEditField }) => {
 
   return (
     <section
-      className={` h-96 w-11/12 bg-lightcreme border border-solid border-subtext rounded-lg fixed transition-transform duration-1000  ease-in-out top-30 z-10 ${
+      className={` h-3/5 w-11/12 bg-lightcreme border border-solid border-subtext rounded-lg fixed transition-transform duration-1000  ease-in-out top-30 z-10 ${
         showEditField ? " translate-x-0 ml-4" : " -translate-x-full "
       }`}
     >
@@ -78,9 +78,68 @@ const EditField = ({ setShowEditField, showEditField }) => {
 
         <input
           type="file"
-          className="mb-6"
+          className="mb-6 text-subtext"
           onChange={(e) => setUpload(e.target.files[0])}
         />
+
+        <div className="flex items-center flex-col mb-5">
+          <div className="grid grid-cols-3 rounded-full border border-solid border-pink p-2">
+            <div>
+              <input
+                type="radio"
+                name="level"
+                id="beginner"
+                value={level}
+                className="peer hidden"
+                onChange={() => setLevel("Beginner")}
+                defaultChecked={user.userLevel}
+              />
+              <label
+                htmlFor="beginner"
+                className="block select-none rounded-full p-2 text-center peer-checked:bg-pink peer-checked:text-circle"
+              >
+                Beginner
+              </label>
+            </div>
+
+            <div>
+              <input
+                type="radio"
+                name="level"
+                id="Intermediate"
+                value={level}
+                className="peer hidden"
+                onChange={() => setLevel("Intermediate")}
+                defaultChecked={user.userLevel}
+              />
+              <label
+                htmlFor="Intermediate"
+                className="block select-none rounded-full p-2 text-center peer-checked:bg-pink  peer-checked:text-circle"
+              >
+                Intermediate
+              </label>
+            </div>
+
+            <div>
+              <input
+                type="radio"
+                name="level"
+                id="Expert"
+                value={level}
+                className="peer hidden"
+                onChange={() => setLevel("Expert")}
+                defaultChecked={user.userLevel}
+              />
+              <label
+                htmlFor="Expert"
+                className="block select-none rounded-full p-2 text-center peer-checked:bg-pink peer-checked:text-circle"
+              >
+                Expert
+              </label>
+            </div>
+          </div>
+        </div>
+
         <button
           onClick={editUser}
           className="h-10 w-3/4 bg-pink text-circle rounded-full "
