@@ -1,32 +1,30 @@
-const ButtonDownload = () => {
+import { LiaDownloadSolid } from "react-icons/lia";
+
+const ButtonDownload = (downloadLink) => {
+  // const downloadUrl =
+  //   "https://videos.pexels.com/video-files/4535145/4535145-hd_1080_1920_25fps.mp4";
+  const handleDownloadClick = (url) => {
+    const fileName = url.split("/").pop();
+    const aTag = document.createElement("a");
+    aTag.href = url;
+    aTag.setAttribute("download", fileName);
+    document.body.appendChild(aTag);
+    aTag.click();
+  };
+
   return (
     <>
-      <svg
-        className=" z-10 absolute right-5 top-5"
-        width="55"
-        height="55"
-        viewBox="0 0 55 55"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+      <button
+        onClick={() => {
+          handleDownloadClick(downloadLink);
+        }}
       >
-        <rect
-          x="55"
-          y="55"
-          width="55"
-          height="55"
-          rx="27.5"
-          transform="rotate(-180 55 55)"
-          fill="#E28F83"
-          fillOpacity="0.5"
+        <LiaDownloadSolid
+          className=" z-10 absolute right-5 top-5 bg-pink/55 rounded-full p-3"
+          size={"50px"}
+          fill="#ffffff"
         />
-        <path
-          d="M33 24.4396L28 29.9753L23 24.4396M28 28.6467V17.2432M19 31.0824V35.511C19 36.7289 19.9 37.7253 21 37.7253H35C35.5304 37.7253 36.0391 37.492 36.4142 37.0767C36.7893 36.6615 37 36.0983 37 35.511V31.0824H19Z"
-          stroke="#FAF2DA"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+      </button>
     </>
   );
 };
