@@ -43,6 +43,55 @@ const Home = () => {
           </p>
         </div>
       </div>
+
+      <Searchbar />
+
+      <section className=" mb-10 mt-8">
+        <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
+          Recommended Yoga for you
+        </h2>
+        <div className="flex items-center overflow-x-scroll ">
+          {yogaByLevel ? (
+            yogaByLevel.map((item) => (
+              <Link key={item._id} to={`/yoga/${item._id}`}>
+                <TileCards
+                  name={item.title}
+                  level={item.level}
+                  duration={item.duration}
+                  imgURL={item.fileUrl}
+                />
+              </Link>
+            ))
+          ) : (
+            <p>Loading...</p>
+          )}
+        </div>
+      </section>
+
+      <section>
+        <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
+          Recommended Meditation for you
+        </h2>
+        {meditationByLevel ? (
+          meditationByLevel.map((item) => (
+            <div
+              key={item._id}
+              className="flex items-center overflow-x-scroll "
+            >
+              <Link to={`/meditation/${item._id}`}>
+                <TileCards
+                  name={item.title}
+                  level={item.level}
+                  duration={item.duration}
+                  imgURL={item.fileUrl}
+                />
+              </Link>
+            </div>
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
+      </section>
     </main>
   );
 };
