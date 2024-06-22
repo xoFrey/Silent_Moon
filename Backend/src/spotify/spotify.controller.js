@@ -84,7 +84,6 @@ const getPlaylist = async (req, res) => {
   const { id } = req.body;
 
   try {
-    console.log("2");
     const authResponse = await fetch(authOptions.url, {
       method: "POST",
       headers: {
@@ -106,7 +105,6 @@ const getPlaylist = async (req, res) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.log("4");
 
     if (response.ok) {
       const spotifyData = await response.json();
@@ -119,11 +117,8 @@ const getPlaylist = async (req, res) => {
   }
 };
 
-const skipToNext = async (req, res) => {};
-
 export const SpotifyController = {
   spotifyAuth,
   getTrack,
   getPlaylist,
-  skipToNext,
 };
