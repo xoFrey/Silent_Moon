@@ -47,6 +47,7 @@ const YogaPage = () => {
 
   console.log(yoga);
 
+
   return (
     <main>
       <Header />
@@ -63,6 +64,7 @@ const YogaPage = () => {
       </div>
       <div className="mb-5">
         <Searchbar inputSearch={inputSearch} setInputSearch={setInputSearch} />
+
       </div>
       <div
         id="DailyCalmPlayerSub"

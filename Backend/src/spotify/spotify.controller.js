@@ -119,8 +119,11 @@ const getPlaylist = async (req, res) => {
   }
 };
 
+const skipToNext = async (req, res) => {};
+
 export const SpotifyController = {
   spotifyAuth,
   getTrack,
   getPlaylist,
+  skipToNext,
 };

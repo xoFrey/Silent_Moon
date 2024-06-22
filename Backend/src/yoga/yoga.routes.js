@@ -11,4 +11,4 @@ export const yogaRoutes = express
   .get("/filterCategory/", doJwtAuth, YogaController.getYogasByCategoryCtrl) // example fetch: api/v1/yoga/filterCategory/?categorySelection=Sleep
   .get("/detail/:yogaId", YogaController.getYogaDetailCtrl)
   .post("/", upload.single("files"), YogaController.createYogaCtrl)
-  .patch("/:yogaId", upload.single("files"), YogaController.ed);
+  .patch("/:yogaId", upload.single("files"), YogaController.editYogaCtrl);

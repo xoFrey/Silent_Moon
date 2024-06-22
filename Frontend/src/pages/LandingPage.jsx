@@ -1,16 +1,43 @@
 import { useNavigate } from "react-router-dom";
 import HeaderDark from "../components/HeaderDark";
 import ButtonPink from "../components/ButtonPink";
+import { backendUrl } from "../api/api";
+import { useContext } from "react";
+import { TokenContext, UserContext } from "../../context/Context";
 
 const LandingPage = () => {
+  const { setUser } = useContext(UserContext);
+  const { setToken } = useContext(TokenContext);
   const navigate = useNavigate();
 
   const getRouted = () => {
     navigate(`/register`);
   };
 
+  const guestLogin = async (e) => {
+    e.preventDefault();
+
+    const res = await fetch(`${backendUrl}/api/v1/users/login`, {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify({ email: "guest@guest.com", password: "hallo" }),
+      credentials: "include",
+    });
+
+    const data = await res.json();
+
+    if (!data.result) return setErrorMessage(data.message || "Failed login");
+
+    await setUser(data?.result.user);
+    await setToken(data?.result.tokens.accessToken);
+    navigate("/home");
+
+  };
+
+
+
   return (
-    <section className="h-screen ">
+    <section className="h-screen  mb-48">
       <div className="bg-landingImg  bg-top bg-contain bg-no-repeat h-3/4">
         <HeaderDark />
       </div>
@@ -27,12 +54,13 @@ const LandingPage = () => {
         <div className=" mt-16 mb-5">
           <ButtonPink name="Sign Up" funktion={getRouted} />
         </div>
-        <p className="uppercase text-subtext leading-5 text-center pb-24 mt-3.5 mx-3.5 font-semibold">
+        <p className="uppercase text-subtext leading-5 text-center pb-8 mt-3.5 mx-3.5 font-semibold">
           already have an account?
           <a href="/login" className="pl-1 text-pink">
             log in
           </a>
         </p>
+        <ButtonPink name="Login as Guest" funktion={guestLogin} />
       </div>
     </section>
   );
