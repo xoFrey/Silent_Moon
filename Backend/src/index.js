@@ -9,9 +9,17 @@ import { userRoutes } from "./user/user.routes.js";
 import { yogaRoutes } from "./yoga/yoga.routes.js";
 import { meditationRoutes } from "./meditation/meditation.routes.js";
 import { spotifyRouter } from "./spotify/spotify.router.js";
+import cloudinary from "cloudinary";
 
 const app = express();
 const PORT = process.env.PORT;
+
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
+});
 
 const twoWeeksInMs = 14 * 24 * 60 * 60 * 1000;
 const isFrontendLocalhost =

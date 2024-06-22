@@ -11,6 +11,7 @@ const YogaPage = () => {
   const [yoga, setYoga] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const { token } = useContext(TokenContext);
+  const [inputSearch, setInputSearch] = useState("");
 
   useEffect(() => {
     const allYoga = async () => {
@@ -32,20 +33,29 @@ const YogaPage = () => {
         );
       setYoga(data.result);
     };
+    if (inputSearch.length === 0) {
 
-    allYoga();
-  }, [category]);
+      allYoga();
+    } else {
+      const filteredYoga = yoga.filter((item) => item.title.toLowerCase().includes(inputSearch.toLowerCase()));
+      setYoga(filteredYoga);
 
-  console.log();
+    }
+
+
+  }, [category, inputSearch]);
+
+  console.log(yoga);
+
 
   return (
     <main>
       <Header />
       <div className="flex flex-col justify-center items-center">
-        <h1 className="font-black text-maintext text-4xl leading-10 text-center mt-12 tracking-wide">
+        <h1 className="font-black text-maintext text-4xl leading-10 text-center mt-8 tracking-wide">
           Yoga
         </h1>
-        <p className="text-subtext leading-5 text-center mt-7 mb-12 font-semibold">
+        <p className="text-subtext leading-5 text-center mt-4 mb-8 font-semibold">
           Find your inner zen from anywhere
         </p>
       </div>
@@ -53,7 +63,8 @@ const YogaPage = () => {
         <Categorys category={category} setCategory={setCategory} />
       </div>
       <div className="mb-5">
-        <Searchbar />
+        <Searchbar inputSearch={inputSearch} setInputSearch={setInputSearch} />
+
       </div>
       <div
         id="DailyCalmPlayerSub"
@@ -67,7 +78,7 @@ const YogaPage = () => {
             APR 30 · Pause Practice
           </p>
         </div>
-        <button className=" bg-maintext bg-opacity-80 w-10 h-10 rounded-full justify-center items-center flex mr-4">
+        <button className=" bg-maintext bg-opacity-80 w-10 h-10 rounded-full justify-center items-center flex mr-4 cursor-pointer">
           <img src={"/image/PlayVector.png"} alt="" />
         </button>
       </div>
@@ -77,7 +88,7 @@ const YogaPage = () => {
             <div key={yogaItem._id} className="">
               <CatergoryTiles
                 id={yogaItem._id}
-                imgUrl={`${backendUrl}/${yoga[6].fileUrl?.split("\\")[1]}`}
+                imgUrl={`${backendUrl}/${yogaItem.fileUrl?.split("\\")[1]}`}
                 title={yogaItem.title}
               />
             </div>

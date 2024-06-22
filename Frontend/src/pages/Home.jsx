@@ -1,6 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-
-import Navbar from "../components/Navbar";
 import { TokenContext, UserContext } from "../../context/Context.jsx";
 import Header from "../components/Header.jsx";
 import ButtonStart from "../components/ButtonStart.jsx";
@@ -9,25 +7,24 @@ import { Link } from "react-router-dom";
 import TileCards from "../components/TileCards.jsx";
 import { backendUrl } from "../api/api";
 
+
 const Home = () => {
   const { user, setUser } = useContext(UserContext);
   const { token, setToken } = useContext(TokenContext);
   const [yogaByLevel, setYogaByLevel] = useState("");
   const [meditationByLevel, setMeditationByLevel] = useState("");
-
   const [inputSearch, setInputSearch] = useState("");
-
   const [dayTime, setDayTime] = useState("");
-  const [randomYogaNumber, setRandomYogaNumber] = useState();
-  const [randomMeditationNumber, setRandomMeditationNumber] = useState();
+  const [randomYoga, setRandomYoga] = useState();
+  const [randomMeditation, setRandomMeditation] = useState();
 
 
   useEffect(() => {
-    const fetchAllByLevel = async () => {
+
+    const fetchYogaByLevel = async () => {
       {
         const res = await fetch(
           `${backendUrl}/api/v1/yoga/filterLevel/?levelSelection=${user.userLevel}`,
-
           {
             headers: { authorization: `Bearer ${token}` },
           }
@@ -38,10 +35,7 @@ const Home = () => {
         setYogaByLevel(data.result);
       }
     };
-    fetchYogaByLevel();
-  }, []);
 
-  useEffect(() => {
     const fetchMeditationByLevel = async () => {
 
       const res = await fetch(
@@ -55,53 +49,46 @@ const Home = () => {
       if (!data.result) return "Failed to fetch all Meditation by level";
       setMeditationByLevel(data.result);
     };
+    if (inputSearch.length === 0) {
 
-    fetchAllByLevel();
-  }, []);
-
-  useEffect(() => {
-    if (yogaByLevel && meditationByLevel) {
-      const filteredYoga = yogaByLevel.filter((item) =>
-        item.title.toLowerCase().includes(inputSearch.toLowerCase())
-      );
-      console.log("FY", filteredYoga);
-      const filteredMeditation = meditationByLevel.filter((item) =>
-        item.title.toLowerCase().includes(inputSearch.toLowerCase())
-      );
+      fetchYogaByLevel();
+      fetchMeditationByLevel();
+    } else {
+      const filteredYoga = yogaByLevel.filter((item) => item.title.toLowerCase().includes(inputSearch.toLowerCase()));
       setYogaByLevel(filteredYoga);
-      console.log("ybl", yogaByLevel);
+      const filteredMeditation = meditationByLevel.filter((item) => item.title.toLowerCase().includes(inputSearch.toLowerCase())
+      );
       setMeditationByLevel(filteredMeditation);
     }
   }, [inputSearch]);
 
 
+  const generateRandomNumber = (array) => Math.floor(Math.random() * array.length);
+
+  const updateRandomActivities = () => {
+    const randomYogaNumber = generateRandomNumber(yogaByLevel);
+    const randomMeditationNumber = generateRandomNumber(meditationByLevel);
+    setRandomYoga(yogaByLevel[randomYogaNumber]);
+    setRandomMeditation(meditationByLevel[randomMeditationNumber]);
+  };
 
   const date = new Date(Date.now());
-  const time = Number(date.toLocaleTimeString({ hour: '2-digit' }).split(":")[0]);
-
+  const time = Number(date.toLocaleTimeString([], { hour: '2-digit' }).split(":")[0]);
   useEffect(() => {
+
 
     if (time <= 13) {
       setDayTime("Morning");
-      setRandomYogaNumber(generateRandomNumber(yogaByLevel));
-      setRandomMeditationNumber(generateRandomNumber(meditationByLevel));
-
     } else if (time <= 17) {
       setDayTime("Afternoon");
-      setRandomYogaNumber(generateRandomNumber(yogaByLevel));
-      setRandomMeditationNumber(generateRandomNumber(meditationByLevel));
     } else {
       setDayTime("Evening");
-      setRandomYogaNumber(generateRandomNumber(yogaByLevel));
-      setRandomMeditationNumber(generateRandomNumber(meditationByLevel));
     }
+    updateRandomActivities();
 
-  }, [time, date]);
+  }, [date, time]);
 
 
-  const generateRandomNumber = (item) => {
-    return Math.floor(Math.random() * item.length);
-  };
 
   return (
     <main className="">
@@ -113,32 +100,35 @@ const Home = () => {
         We hope you have a good day.
       </p>
       <div className=" flex gap-3 place-content-around mb-5">
-        <div className=" relative z-0">
-          <img src="../../image/RecoveryBigMeditate.png" alt="yoga image" />
-          <p className=" absolute text-white left-1 bottom-5 font-light">
-            {yogaByLevel[randomYogaNumber]?.duration} MIN
-          </p>
-          <ButtonStart fill={"#FAF2DA"} typeColor={"#4A503D"} />
-          <p className=" absolute text-[#FAF2DA] top-11 left-1 text-xl">
-            {yogaByLevel[randomYogaNumber]?.title}
-          </p>
-          <p className=" uppercase absolute text-[#FAF2DA] top-16 left-1 text-xs">
-            {yogaByLevel[randomYogaNumber]?.level}
-          </p>
-        </div>
-        <div className=" relative z-0 ">
-          <img src="../../image/RecoveryBigYoga.png" alt="meditation image" />
-          <p className=" absolute text-white left-1 bottom-5 font-light">
-            {meditationByLevel[randomMeditationNumber]?.duration} MIN
-          </p>
-          <ButtonStart fill={"#4A503D"} typeColor={"#FAF2DA"} />
-          <p className=" absolute text-[#4A503D] top-11 left-1 text-xl">
-            {meditationByLevel[randomMeditationNumber]?.title}
-          </p>
-          <p className=" uppercase absolute text-[#4A503D] top-16 left-1 text-xs">
-            {meditationByLevel[randomMeditationNumber]?.level}
-          </p>
-        </div>
+        <Link to={`/yoga/${randomYoga?._id}`}>
+          <div className=" relative z-0">
+            <img src="../../image/RecoveryBigMeditate.png" alt="yoga image" />
+            <p className=" absolute text-white left-1 bottom-5 font-light">
+              {randomYoga?.duration} MIN
+            </p>
+            <ButtonStart fill={"#FAF2DA"} typeColor={"#4A503D"} />
+            <p className=" absolute text-[#FAF2DA] top-11 left-1 text-xl">
+              {randomYoga?.title}
+            </p>
+            <p className=" uppercase absolute text-[#FAF2DA] top-16 left-1 text-xs">
+              {randomYoga?.level}
+            </p>
+          </div>
+        </Link>
+        <Link to={`/yoga/${randomMeditation?._id}`}>
+          <div className=" relative z-0 ">
+            <img src="../../image/RecoveryBigYoga.png" alt="meditation image" />
+            <p className=" absolute text-white left-1 bottom-5 font-light">
+              {randomMeditation?.duration} MIN
+            </p>
+            <ButtonStart fill={"#4A503D"} typeColor={"#FAF2DA"} />
+            <p className=" absolute text-[#4A503D] top-11 left-1 text-xl">
+              {randomMeditation?.title}
+            </p>
+            <p className=" uppercase absolute text-[#4A503D] top-16 left-1 text-xs">
+              {randomMeditation?.level}
+            </p>
+          </div></Link>
       </div>
       <Searchbar inputSearch={inputSearch} setInputSearch={setInputSearch} />
 
@@ -158,6 +148,7 @@ const Home = () => {
                 />
               </Link>
             ))
+
           ) : (
             <p>Loading...</p>
           )}
@@ -168,13 +159,13 @@ const Home = () => {
         <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
           Recommended Meditation for you
         </h2>
-        {meditationByLevel ? (
-          meditationByLevel.map((item) => (
-            <div
-              key={item._id}
-              className="flex items-center overflow-x-scroll "
-            >
-              <Link to={`/meditation/${item._id}`}>
+        <div
+
+          className="flex items-center overflow-x-scroll "
+        >
+          {meditationByLevel ? (
+            meditationByLevel.map((item) => (
+              <Link key={item._id} to={`/meditation/${item._id}`}>
                 <TileCards
                   name={item.title}
                   level={item.level}
@@ -182,11 +173,11 @@ const Home = () => {
                   imgURL={item.fileUrl}
                 />
               </Link>
-            </div>
-          ))
-        ) : (
-          <p>Loading...</p>
-        )}
+            ))
+          ) : (
+            <p>Loading...</p>
+          )}
+        </div>
       </section>
     </main>
   );

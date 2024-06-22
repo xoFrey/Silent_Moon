@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
     fileUrl: { type: String, required: false }, // ! Default Image
     password: { type: String, required: true, trim: true },
     isVerified: { type: Boolean, default: false },
+    isGuest: { type: Boolean, default: false },
     sixDigitCode: { type: String, required: true },
     alertTime: { type: String, default: "10:00" },
     alertWeekdays: [{ type: String, required: false }],

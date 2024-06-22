@@ -3,7 +3,7 @@ import { YogaService } from "./yoga.services/yoga.index.js";
 const createYogaCtrl = async (req, res) => {
   try {
     const yogaInfo = {
-      fileUrl: req.file ? req.file.path : "",
+      videoUrl: req.file ? req.file.path : "",
       title: req.body.title,
       description: req.body.description,
       level: req.body.level,
@@ -18,6 +18,27 @@ const createYogaCtrl = async (req, res) => {
     res
       .status(500)
       .json({ err, message: err.message || "Could not create yoga" });
+  }
+};
+
+const editYogaCtrl = async (req, res) => {
+  try {
+    const updateInfo = {
+      fileUrl: req.file ? req.file.path : "",
+      title: req.body.title,
+      description: req.body.description,
+      level: req.body.level,
+      duration: req.body.duration,
+      category: req.body.category,
+    };
+    const yogaId = req.params.yogaId;
+    const result = await YogaService.editYoga(yogaId, updateInfo);
+    res.status(201).json({ result });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ err, message: err.message || "Could not edit yoga" });
   }
 };
 
@@ -69,6 +90,5 @@ export const YogaController = {
   createYogaCtrl,
   getYogasByLevelCtrl,
   getYogasByCategoryCtrl,
-  // addFavoriteCtrl,
-  // removeFavoriteCtrl,
+  editYogaCtrl,
 };

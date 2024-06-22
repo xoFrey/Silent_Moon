@@ -12,12 +12,13 @@ const MusicPage = () => {
 
   useEffect(() => {
     const fetchPlaylist = async () => {
+
       const res = await fetch(`${backendUrl}/api/v1/spotify/playlist`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id: "37i9dQZF1DWZqd5JICZI0u" }),
+        body: JSON.stringify({ id: "3idpjOhj59WP59HhHJe0nD" })
       });
       const data = await res.json();
       console.log(data);
