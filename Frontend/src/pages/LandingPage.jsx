@@ -4,7 +4,7 @@ import HeaderDark from "../components/HeaderDark";
 import { backendUrl } from "../api/api";
 import { useContext } from "react";
 import { TokenContext, UserContext } from "../../context/Context";
-import ButtonPink from "../components/ButtonPink";
+import PinkButton from "../components/PinkButton";
 
 const LandingPage = () => {
   const { setUser } = useContext(UserContext);
@@ -53,7 +53,7 @@ const LandingPage = () => {
       </div>
       <div>
         <div className=" mt-16 mb-5">
-          <ButtonPink name="Sign Up" funktion={getRouted} />
+          <PinkButton name="Sign Up" funktion={getRouted} />
         </div>
         <p className="uppercase text-subtext leading-5 text-center pb-8 mt-3.5 mx-3.5 font-semibold">
           already have an account?
@@ -61,7 +61,7 @@ const LandingPage = () => {
             log in
           </a>
         </p>
-        <ButtonPink name="Login as Guest" funktion={guestLogin} />
+        <PinkButton name="Login as Guest" funktion={guestLogin} />
       </div>
     </section>
   );
