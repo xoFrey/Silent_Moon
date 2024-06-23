@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import HeaderDark from "../components/HeaderDark";
-import ButtonPink from "../components/ButtonPink";
+
 import { backendUrl } from "../api/api";
 import { useContext } from "react";
 import { TokenContext, UserContext } from "../../context/Context";
+import ButtonPink from "../components/ButtonPink";
 
 const LandingPage = () => {
   const { setUser } = useContext(UserContext);
