@@ -3,8 +3,8 @@ import { TokenContext, UserContext } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
 import { backendUrl } from "../api/api";
 import GoBackButton from "../components/GoBackButton";
-import ButtonPink from "../components/ButtonPink";
 import Header from "../components/Header";
+import PinkButton from "../components/PinkButton";
 
 const Registration = () => {
   const [userName, setUserName] = useState("");
@@ -170,7 +170,7 @@ const Registration = () => {
             />
           </div>
         </div>
-        <ButtonPink name="REGISTER" funktion={registerUser} />
+        <PinkButton name="REGISTER" funktion={registerUser} />
         <p className=" text-center">{errorMessage}</p>
       </form>
       <p className="uppercase text-subtext leading-5 text-center pb-16 mt-3.5 mx-3.5 font-semibold">

@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import ButtonPink from "../components/ButtonPink";
 import { Link, useNavigate } from "react-router-dom";
 import { backendUrl } from "../api/api.js";
 import { TokenContext, UserContext } from "../../context/Context.jsx";
 import GoBackButton from "../components/GoBackButton.jsx";
 import Header from "../components/Header.jsx";
+import PinkButton from "../components/PinkButton.jsx";
 
 const Login = () => {
   const [email, setEmail] = useState("izel.acxr@gmail.com");
@@ -67,7 +67,7 @@ const Login = () => {
           </div>
         </div>
 
-        <ButtonPink name="LOGIN" funktion={loginUser} />
+        <PinkButton name="LOGIN" funktion={loginUser} />
         <p className=" text-center">{errorMessage}</p>
       </form>
       <p className="uppercase text-subtext leading-5 text-center pb-24 mt-3.5 mx-3.5 font-semibold">
