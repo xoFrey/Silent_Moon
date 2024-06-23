@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import ButtonPink from "../components/ButtonPink";
+import PinkButton from "../components/PinkButton";
 
 const GetStarted = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const GetStarted = () => {
         </div>
       </div>
       <div className="-mt-28 ">
-        <ButtonPink name="GET STARTED" funktion={getRouted} />
+        <PinkButton name="GET STARTED" funktion={getRouted} />
       </div>
     </section>
   );

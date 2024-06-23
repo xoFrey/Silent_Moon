@@ -4,6 +4,9 @@ import {
   doJwtAuth,
   validateRefreshTokenInCookieSession,
 } from "../middlewares/doJwtAuth.js";
+import multer from "multer";
+
+const upload = multer({ storage: multer.memoryStorage() });
 
 export const userRoutes = express
   .Router()
@@ -18,4 +21,4 @@ export const userRoutes = express
   .patch("/:id/like", UserController.addFavoriteCtrl)
   .patch("/:id/unlike", UserController.removeFavoriteCtrl)
   .post("/logout", UserController.logoutUserCtrl)
-  .patch("/", UserController.editUserCtrl);
+  .patch("/", upload.single("fileUrl"), UserController.editUserCtrl);

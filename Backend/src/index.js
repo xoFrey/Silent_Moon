@@ -37,10 +37,6 @@ const cookieSessionOptions = {
   secure: isFrontendLocalhost ? false : true,
 };
 app.use(cookieSession(cookieSessionOptions));
-const upload = multer({ dest: "./uploads" });
-app.post("/api/v1/files/upload", upload.single("files"), (req, res) => {
-  res.json({ fileUrl: req.file.filename });
-});
 
 app.use(morgan("dev"));
 app.use(express.json());

@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import ButtonPink from "./ButtonPink";
 import { TokenContext, UserContext } from "../../context/Context";
 import { backendUrl } from "../api/api";
 
@@ -9,41 +8,25 @@ const EditField = ({ setShowEditField, showEditField }) => {
   const [usernameInput, setUsernameInput] = useState(user?.username);
   const [upload, setUpload] = useState();
   const [level, setLevel] = useState(user?.userLevel);
+  console.log(user);
 
   console.log(level);
   const editUser = async (e) => {
     e.preventDefault();
-    let fileUrl;
+    const formData = new FormData();
+    formData.append("username", usernameInput);
+    formData.append("userLevel", level);
+    formData.append("userId", user.id);
     if (upload) {
-      const formData = new FormData();
-      formData.append("files", upload, upload.name);
-      const result = await fetch(`${backendUrl}/api/v1/files/upload`, {
-        method: "POST",
-        headers: { authorization: `Bearer ${token}` },
-        body: formData,
-      });
-
-      const fileData = await result.json();
-      console.log(fileData);
-      fileUrl = fileData.fileUrl;
-      setUser({ ...user, fileUrl: fileUrl });
-    } else {
-      fileUrl = user.fileUrl;
+      formData.append("fileUrl", upload, upload.name);
     }
-    console.log(user);
-    const updateInfo = {
-      userId: user.id,
-      username: usernameInput,
-      fileUrl: fileUrl,
-      userLevel: level,
-    };
+
     const res = await fetch(`${backendUrl}/api/v1/users`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
       },
-      body: JSON.stringify(updateInfo),
+      body: formData
     });
 
     const data = await res.json();

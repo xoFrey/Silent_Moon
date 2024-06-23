@@ -9,6 +9,7 @@ const MusikDetail = () => {
     const [isPlaying, setIsPlaying] = useState(true);
     const { playlist } = useContext(PlaylistContext);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [isDisabled, setIsDisabled] = useState(false);
     const audioRef = useRef(null);
 
     const { trackId } = useParams();
@@ -58,9 +59,10 @@ const MusikDetail = () => {
         setCurrentIndex(prevIndex);
         const prevTrackId = playlist.tracks.items[prevIndex].track.id;
 
-        if (playlist.tracks.items[0].track.id === prevTrackId) {
+        if (playlist?.tracks.items[0].track.id === prevTrackId) {
             console.log("no");
-            document.getElementById("prevTrack");
+            const prevButton = document.getElementById("prevTrack");
+            prevButton.disabled = true;
 
         }
         const res = await fetch(`${backendUrl}/api/v1/spotify/track/${prevTrackId}`, {
