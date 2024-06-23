@@ -1,13 +1,17 @@
 import cloudinary from "cloudinary";
 
-export const uploadImage = async (byteArrayBuffer) => {
+export async function uploadImage(buffer, cloudinaryPath) {
   const uploadResult = await new Promise((resolve) => {
     cloudinary.v2.uploader
-      .upload_stream((error, uploadResult) => {
-        return resolve(uploadResult);
-      })
-      .end(byteArrayBuffer);
+      .upload_stream(
+        { folder: `Silent_Moon/${cloudinaryPath}` },
+        (error, uploadResult) => {
+          console.log({ uploadImageError: error });
+          console.log({ uploadImageResult: uploadResult });
+          return resolve(uploadResult);
+        },
+      )
+      .end(buffer);
   });
-
   return uploadResult;
-};
+}
