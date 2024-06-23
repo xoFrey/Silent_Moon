@@ -5,16 +5,14 @@ export const getRandomMeditation = async (userId) => {
   const user = await User.findById(userId);
   if (!user) throw new Error("No user with this ID found");
   const userLevel = user.userLevel;
-  const meditationsByLevel = Meditation.find({ level: userLevel });
+  const meditationsByLevel = await Meditation.find({ level: userLevel });
   if (!meditationsByLevel) throw new Error("No meditation by this level found");
-  console.log("MEDIT", meditationsByLevel);
 
   const generateRandomMeditation = (meditationsByLevel) =>
     Math.floor(Math.random() * meditationsByLevel.length);
-  console.log(
-    "generateRandomMeditation",
-    generateRandomMeditation(meditationsByLevel)
-  );
+  const randomMeditation =
+    meditationsByLevel[generateRandomMeditation(meditationsByLevel)];
+  console.log("RANMED", randomMeditation);
 
-  // return randomMeditation;
+  return randomMeditation;
 };
