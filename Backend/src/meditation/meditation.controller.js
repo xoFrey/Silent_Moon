@@ -30,7 +30,7 @@ const getMeditationsByLevelCtrl = async (req, res) => {
     const meditationByLevel = req.query.levelSelection;
 
     const result = await MeditationService.getMeditationsByLevel(
-      meditationByLevel,
+      meditationByLevel
     );
     res.json({ result });
   } catch (err) {
@@ -48,7 +48,7 @@ const getMeditationsByCategoryCtrl = async (req, res) => {
 
     const result = await MeditationService.getMeditationsByCategory(
       meditationByCategory,
-      userId,
+      userId
     );
     res.json({ result });
   } catch (err) {
@@ -59,10 +59,25 @@ const getMeditationsByCategoryCtrl = async (req, res) => {
     });
   }
 };
+const getRandomMeditationCtrl = async (req, res) => {
+  try {
+    const userId = req.authenticatedUserId;
+
+    const result = await MeditationService.getRandomMeditation(userId);
+    res.json({ result });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      err,
+      message: err.message || "Could not get random meditation",
+    });
+  }
+};
 
 export const MeditationController = {
   getMeditationDetailCtrl,
   createMeditationCtrl,
   getMeditationsByLevelCtrl,
   getMeditationsByCategoryCtrl,
+  getRandomMeditationCtrl,
 };
