@@ -9,6 +9,7 @@ const meditationSchema = new mongoose.Schema(
     duration: { type: String, require: true },
     category: { type: String, enum: ["Anxious", "Sleep", "Kids"] },
     playlistId: { type: String, require: true },
+    randomExerciseDate: { type: String },
   },
   { collection: "meditations", timestamps: true }
 );
