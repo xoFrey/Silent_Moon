@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { backendUrl } from "../api/api";
-import { IoCloseOutline, IoPlaySkipForwardCircleOutline, IoPause, IoPlay } from "react-icons/io5";
+import { IoCloseOutline, IoPlaySkipForwardCircleOutline, IoPlaySkipBackCircleOutline, IoPause, IoPlay } from "react-icons/io5";
 import { PlaylistContext } from "../../context/Context";
 
 const MusikDetail = () => {
@@ -32,7 +32,7 @@ const MusikDetail = () => {
 
     useEffect(() => {
         if (trackInfo && audioRef.current) {
-            audioRef.current.src = trackInfo.preview_url; // Assuming preview_url contains the audio URL
+            audioRef.current.src = trackInfo.preview_url;
             audioRef.current.play();
         }
     }, [trackInfo]);
@@ -50,6 +50,28 @@ const MusikDetail = () => {
         });
         const data = await res.json();
         setTrackInfo(data);
+    };
+
+
+    const fetchPrevTrack = async () => {
+        const prevIndex = (currentIndex - 1) % playlist.tracks.items.length;
+        setCurrentIndex(prevIndex);
+        const prevTrackId = playlist.tracks.items[prevIndex].track.id;
+
+        if (playlist.tracks.items[0].track.id === prevTrackId) {
+            console.log("no");
+            document.getElementById("prevTrack");
+
+        }
+        const res = await fetch(`${backendUrl}/api/v1/spotify/track/${prevTrackId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const data = await res.json();
+        setTrackInfo(data);
+
     };
 
     const togglePausePlay = () => {
@@ -77,6 +99,9 @@ const MusikDetail = () => {
                     {trackInfo?.album?.artists[0].name}
                 </p>
                 <div className="flex items-center">
+                    <button id="prevTrack" onClick={() => { fetchPrevTrack(), setIsPlaying(true); }}>
+                        <IoPlaySkipBackCircleOutline size={"50px"} className="cursor-pointer" />
+                    </button>
                     {isPlaying ? (
                         <div className='border-8 border-subtext rounded-full bg-green cursor-pointer p-3'>
                             <IoPause
@@ -96,9 +121,10 @@ const MusikDetail = () => {
                             />
                         </div>
                     )}
-                    <div onClick={fetchNextTrack}>
+                    <div onClick={() => { fetchNextTrack(), setIsPlaying(true); }}>
                         <IoPlaySkipForwardCircleOutline size={"50px"} className="cursor-pointer" />
                     </div>
+
                 </div>
 
                 {trackInfo ? (
