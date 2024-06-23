@@ -48,7 +48,7 @@ const ProfilePage = () => {
         <div>
           <img
             className="rounded-full w-16 h-16 object-cover"
-            src={`${backendUrl}/${user.fileUrl}`}
+            src={`${user.fileUrl}`}
             alt="Pic"
           />
         </div>
