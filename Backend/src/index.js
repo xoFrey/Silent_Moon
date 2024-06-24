@@ -21,6 +21,8 @@ cloudinary.v2.config({
   secure: true,
 });
 
+console.log(process.env.NODE_ENV);
+
 const twoWeeksInMs = 14 * 24 * 60 * 60 * 1000;
 const isFrontendLocalhost =
   process.env.FRONTEND_URL.startsWith("http://localhost");

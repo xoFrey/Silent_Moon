@@ -132,7 +132,7 @@ const MusikDetail = () => {
                 </div>
 
                 {trackInfo ? (
-                    <audio autoPlay ref={audioRef} id="player" volume="0.1" controls />
+                    <audio autoPlay ref={audioRef} id="player" volume="0.1" controls className="hidden" />
                 ) : (
                     <p>Loading</p>
                 )}
