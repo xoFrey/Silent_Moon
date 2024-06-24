@@ -79,7 +79,7 @@ const MeditationPage = () => {
   }, []);
 
   return (
-    <main>
+    <main className="mb-24">
       <Header />
       <div className="flex flex-col justify-center items-center">
         <h1 className="font-black text-maintext text-4xl leading-10 text-center mt-8 tracking-wide">
