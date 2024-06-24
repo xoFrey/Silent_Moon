@@ -13,6 +13,5 @@ export const createMeditation = async (meditationInfo) => {
   }
 
   const createdMeditation = await Meditation.create(meditationInfo);
-  console.log(createdMeditation);
   return createdMeditation;
 };

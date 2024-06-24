@@ -18,6 +18,9 @@ img {
 .react-ios-time-picker {
   margin-bottom: 400px !important;
 }
+
 html {
-  width: 410px;
+  display: flex;
+  justify-content: center;
+ 
 }

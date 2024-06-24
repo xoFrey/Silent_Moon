@@ -3,7 +3,8 @@ import { YogaService } from "./yoga.services/yoga.index.js";
 const createYogaCtrl = async (req, res) => {
   try {
     const yogaInfo = {
-      videoUrl: req.file ? req.file.path : "",
+      fileUrl: req.file ? req.file : "",
+      videoUrl: req.body.videoUrl,
       title: req.body.title,
       description: req.body.description,
       level: req.body.level,

@@ -115,7 +115,7 @@ const YogaPage = () => {
             <div key={yogaItem._id} className="">
               <CatergoryTiles
                 id={yogaItem._id}
-                imgUrl={`${backendUrl}/${yogaItem.fileUrl?.split("\\")[1]}`}
+                imgUrl={yogaItem.fileUrl}
                 title={yogaItem.title}
               />
             </div>

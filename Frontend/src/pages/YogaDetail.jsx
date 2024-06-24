@@ -13,7 +13,7 @@ const YogaDetail = () => {
   const { token } = useContext(TokenContext);
   const { user } = useContext(UserContext);
 
-  console.log(user);
+  console.log(oneYoga.videoUrl);
 
   useEffect(() => {
     const fetchYoga = async () => {
@@ -29,16 +29,14 @@ const YogaDetail = () => {
   }, []);
   return (
     <main className="h-screen">
-      <div className=" relative h-3/4 overflow-hidden">
-        <video
-          className=" absolute -top-44 object-cover rounded-b-lg"
-          autoPlay
-          muted
-          loop
-        >
-          <source src="../../clips/Yoga-Ex.mp4" type="video/mp4" />
-        </video>
-      </div>
+
+      <video
+        src={oneYoga.videoUrl}
+        autoPlay
+        muted
+        loop
+      />
+
       <GoBackButtonDetails />
       <ButtonLike id={yogaId} isDisabled={user.isGuest} />
       <ButtonDownload isDisabled={user.isGuest} />
