@@ -9,6 +9,7 @@ import { PlaylistContext, UserContext } from "../../context/Context";
 import PinkButton from "../components/PinkButton";
 import GuestMessage from "../components/GuestMessage";
 import Navbar from "../components/Navbar";
+import { FaPlay } from "react-icons/fa";
 
 const MusicPage = () => {
   const { playlist, setPlaylist } = useContext(PlaylistContext);
@@ -49,11 +50,14 @@ const MusicPage = () => {
           {playlist?.tracks.items.slice(0, 10).map((item) => (
             <Link to={`/musicdetails/${item.track.id}`} key={item.track.id}>
               <div className="flex items-center gap-2 border-b border-subtext/20 pb-4 cursor-pointer">
-                <IoPlayCircleOutline
-                  size={"50px"}
-                  fill="#A1A4B2"
-                  stroke="#A1A4B2"
-                />
+                <div className="w-10 h-10  border border-solid border-subtext rounded-full flex items-center justify-center">
+                  <FaPlay
+                    size={"15px"}
+                    color="#A1A4B2"
+                    stroke="#A1A4B2"
+                    className=" ml-0.5"
+                  />
+                </div>
                 <div>
                   <p className=" text-base font-semibold text-maintext ">
                     {item.track.name}
