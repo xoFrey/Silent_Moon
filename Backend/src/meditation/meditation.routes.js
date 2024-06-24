@@ -1,19 +1,26 @@
 import express from "express";
 import { MeditationController } from "./meditation.controller.js";
 import { doJwtAuth } from "../middlewares/doJwtAuth.js";
+import multer from "multer";
+
+const upload = multer({ storage: multer.memoryStorage() });
 
 export const meditationRoutes = express
   .Router()
-  .get("/filterLevel/", MeditationController.getMeditationsByLevelCtrl) // example fetch: api/v1/meditation/filterLevel/?levelSelection=Beginner
+  .get("/filterLevel/", MeditationController.getMeditationsByLevelCtrl)
   .get(
     "/filterCategory/",
     doJwtAuth,
-    MeditationController.getMeditationsByCategoryCtrl
-  ) // example fetch: api/v1/meditation/filterCategory/?categorySelection=Kids
+    MeditationController.getMeditationsByCategoryCtrl,
+  )
   .get(
     "/getRandomMeditation/",
     doJwtAuth,
-    MeditationController.getRandomMeditationCtrl
+    MeditationController.getRandomMeditationCtrl,
   )
   .get("/detail/:meditationId", MeditationController.getMeditationDetailCtrl)
-  .post("/", MeditationController.createMeditationCtrl);
+  .post(
+    "/",
+    upload.single("fileUrl"),
+    MeditationController.createMeditationCtrl,
+  );

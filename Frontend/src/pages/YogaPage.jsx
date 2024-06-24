@@ -5,6 +5,7 @@ import Searchbar from "../components/Searchbar";
 import { backendUrl } from "../api/api";
 import { TokenContext } from "../../context/Context";
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import VerficationPopUp from "../components/VerificationPopUp";
 import Navbar from "../components/Navbar";
 
@@ -14,6 +15,16 @@ const YogaPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const { token } = useContext(TokenContext);
   const [inputSearch, setInputSearch] = useState("");
+  const [randomYoga, setRandomYoga] = useState();
+
+  const currentDate = new Date();
+  const formatDateToMMMDD = (date) => {
+    const options = { month: "short", day: "2-digit" };
+    const localeString = date.toLocaleString("en-US", options);
+    const [month, day] = localeString.split(" ");
+    return `${month.toUpperCase()}/${day.padStart(2, "0")}`;
+  };
+  const today = formatDateToMMMDD(currentDate);
 
   useEffect(() => {
     const allYoga = async () => {
@@ -41,10 +52,26 @@ const YogaPage = () => {
       const filteredYoga = yoga.filter((item) =>
         item.title.toLowerCase().includes(inputSearch.toLowerCase())
       );
+
       setYoga(filteredYoga);
     }
   }, [category, inputSearch]);
 
+  useEffect(() => {
+    const fetchRandomYoga = async () => {
+      const res = await fetch(`${backendUrl}/api/v1/yoga/getRandomYoga`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      if (!data.result)
+        return (
+          setErrorMessage(data.message || "No random yoga found"),
+          setRandomYoga([])
+        );
+      setRandomYoga(data.result);
+    };
+    fetchRandomYoga();
+  }, []);
   console.log(yoga);
 
   return (
@@ -68,14 +95,16 @@ const YogaPage = () => {
         id="DailyCalmPlayerSub"
         className="flex justify-between h-24 w-11/12 bg-gradient-to-br from-green to-circle rounded-2xl items-center pl-7 ml-4 mb-5"
       >
-        <div>
-          <h1 className="text-maintext leading-5 font-semibold mb-2">
-            Daily Calm
-          </h1>
-          <p className="text-subtext leading-5 font-semibold">
-            APR 30 · Pause Practice
-          </p>
-        </div>
+        <Link to={`${randomYoga?._id}`}>
+          <div>
+            <h1 className="text-maintext leading-5 font-semibold mb-2">
+              {randomYoga?.title}
+            </h1>
+            <p className="text-subtext leading-5 font-semibold">
+              {today} · {randomYoga?.category}
+            </p>
+          </div>
+        </Link>
         <button className=" bg-maintext bg-opacity-80 w-10 h-10 rounded-full justify-center items-center flex mr-4 cursor-pointer">
           <img src={"/image/PlayVector.png"} alt="" />
         </button>
