@@ -21,14 +21,15 @@ cloudinary.v2.config({
   secure: true,
 });
 
-console.log(process.env.NODE_ENV);
-
 const twoWeeksInMs = 14 * 24 * 60 * 60 * 1000;
 const isFrontendLocalhost =
   process.env.FRONTEND_URL.startsWith("http://localhost");
 const cookieSessionSecret = process.env.COOKIE_SESSION_SECRET;
 
 app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+
+console.log(process.env.FRONTEND_URL);
+
 app.set("trust proxy", 1);
 const cookieSessionOptions = {
   name: "session",
