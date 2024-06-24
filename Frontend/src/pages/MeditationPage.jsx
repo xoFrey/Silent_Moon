@@ -50,7 +50,7 @@ const MeditationPage = () => {
 
 
   return (
-    <main>
+    <main className="mb-24">
       <Header />
       <div className="flex flex-col justify-center items-center">
         <h1 className="font-black text-maintext text-4xl leading-10 text-center mt-8 tracking-wide">
@@ -97,15 +97,15 @@ const MeditationPage = () => {
         ) : (
           <p>{errorMessage}</p>
         )}
-        <div className="flex flex-col items-center">
-          <button
-            onClick={() => setShowMore(showMore + 4)}
-            className="h-16 w-11/12 bg-pink text-circle rounded-full"
-          >
-            Show More
-          </button>
-        </div>
       </section>
+      <div className="flex flex-col items-center">
+        <button
+          onClick={() => setShowMore(showMore + 4)}
+          className="h-10 w-1/4 bg-pink text-circle rounded-full"
+        >
+          Show More
+        </button>
+      </div>
     </main>
   );
 };
