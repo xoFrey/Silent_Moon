@@ -7,6 +7,7 @@ export const userToView = (user) => {
     fileUrl: user.fileUrl,
     isVerified: user.isVerified,
     userLevel: user.userLevel,
+    isGuest: user.isGuest,
     alertTime: user.alertTime,
     alertWeekdays: user.alertWeekdays,
     yogaFavorites: user.yogaFavorites,

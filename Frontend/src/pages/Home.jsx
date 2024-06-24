@@ -79,6 +79,7 @@ const Home = () => {
     const data = await res.json();
     if (!data.result) return "Failed to fetch a random meditation";
     setRandomMeditation(data.result);
+
   };
 
   const date = new Date(Date.now());
@@ -86,6 +87,7 @@ const Home = () => {
     date.toLocaleTimeString([], { hour: "2-digit" }).split(":")[0]
   );
   useEffect(() => {
+
     if (5 >= time <= 13) {
       setDayTime("Morning");
     } else if (time <= 17) {
@@ -94,9 +96,11 @@ const Home = () => {
       setDayTime("Evening");
     }
 
+
     fetchRandomYoga();
     fetchRandomMeditation();
   }, [dayTime]);
+
 
   return (
     <main className="">
@@ -167,7 +171,9 @@ const Home = () => {
         <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
           Recommended Meditation for you
         </h2>
+
         <div className="flex items-center overflow-x-scroll ">
+
           {meditationByLevel ? (
             meditationByLevel.map((item) => (
               <Link key={item._id} to={`/meditation/${item._id}`}>
