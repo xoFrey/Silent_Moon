@@ -21,7 +21,7 @@ const LandingPage = () => {
     const res = await fetch(`${backendUrl}/api/v1/users/login`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
-      body: JSON.stringify({ email: "guest@guest.com", password: "hallo" }),
+      body: JSON.stringify({ email: "guest@guest.com", password: import.meta.env.VITE_GUEST_PASSWORD }),
       credentials: "include",
     });
 

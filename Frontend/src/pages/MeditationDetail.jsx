@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import ButtonLike from "../components/ButtonLike";
 import { useContext, useEffect, useState } from "react";
 import { backendUrl } from "../api/api";
-import { TokenContext } from "../../context/Context";
+import { TokenContext, UserContext } from "../../context/Context";
 import ButtonDownload from "../components/ButtonDownload";
 import GoBackButtonDetails from "../components/GoBackButtonDetails";
 import { FaHeart } from "react-icons/fa";
@@ -17,6 +17,7 @@ const MeditationDetail = () => {
   const [oneMeditation, setOneMeditation] = useState({});
   const { token } = useContext(TokenContext);
   const [playlistInfo, setPlaylistInfo] = useState();
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     const fetchMeditation = async () => {
@@ -60,8 +61,8 @@ const MeditationDetail = () => {
         />
       </div>
       <GoBackButtonDetails />
-      <ButtonLike id={meditationId} />
-      <ButtonDownload />
+      <ButtonLike id={meditationId} isDisabled={user.isGuest} />
+      <ButtonDownload isDisabled={user.isGuest} />
       <div className=" ">
         <h4 className="font-black text-maintext text-4xl mx-3.5 leading-10  tracking-wide">
           {oneMeditation.title}

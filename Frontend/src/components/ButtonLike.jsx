@@ -4,7 +4,7 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import { TokenContext, UserContext } from "../../context/Context";
 import { backendUrl } from "../api/api";
 
-const ButtonLike = ({ id }) => {
+const ButtonLike = ({ id, isDisabled }) => {
   const { user, setUser } = useContext(UserContext);
   const { token } = useContext(TokenContext);
   const [isFavorite, setIsFavorite] = useState();
@@ -50,29 +50,29 @@ const ButtonLike = ({ id }) => {
     const data = await res.json();
     setUser((user) => ({ ...user, ...data.result }));
     console.log(data.result);
-
-
     setIsFavorite(false);
-
-
   };
+
+  console.log(isDisabled);
 
   return (
     <>
       {isFavorite ? (
-        <button onClick={() => { removeFavorite(id), setRefresh(!refresh); }}>
+        <button disabled={isDisabled} onClick={() => { removeFavorite(id), setRefresh(!refresh); }}>
           <IoMdHeart
             className=' z-10 absolute right-24 top-5 bg-pink/55 rounded-full p-3'
             size={"50px"}
             fill='#ffffff'
+
           />
         </button>
       ) : (
-        <button onClick={() => { addFavorite(id), setRefresh(!refresh); }}>
+        <button disabled={isDisabled} onClick={() => { addFavorite(id), setRefresh(!refresh); }}>
           <IoMdHeartEmpty
             className=' z-10 absolute right-24 top-5 bg-pink/55 rounded-full p-3'
             size={"50px"}
             fill='#ffffff'
+
           />
         </button>
       )}

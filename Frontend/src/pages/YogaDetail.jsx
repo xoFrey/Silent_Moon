@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import ButtonLike from "../components/ButtonLike";
 import { useContext, useEffect, useState } from "react";
 import { backendUrl } from "../api/api";
-import { TokenContext } from "../../context/Context";
+import { TokenContext, UserContext } from "../../context/Context";
 import ButtonDownload from "../components/ButtonDownload";
 import GoBackButtonDetails from "../components/GoBackButtonDetails";
 
@@ -10,6 +10,9 @@ const YogaDetail = () => {
   const { yogaId } = useParams();
   const [oneYoga, setOneYoga] = useState({});
   const { token } = useContext(TokenContext);
+  const { user } = useContext(UserContext);
+
+  console.log(user);
 
   useEffect(() => {
     const fetchYoga = async () => {
@@ -36,8 +39,8 @@ const YogaDetail = () => {
         </video>
       </div>
       <GoBackButtonDetails />
-      <ButtonLike id={yogaId} />
-      <ButtonDownload />
+      <ButtonLike id={yogaId} isDisabled={user.isGuest} />
+      <ButtonDownload isDisabled={user.isGuest} />
       <div className=" -mt-16">
         <h4 className="font-black text-maintext text-4xl mx-3.5 leading-10  tracking-wide">
           {oneYoga.title}

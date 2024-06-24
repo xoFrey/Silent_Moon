@@ -5,9 +5,10 @@ import Searchbar from "../components/Searchbar";
 import TileCards from "../components/TileCards";
 import { IoSettingsOutline } from "react-icons/io5";
 import Sidebar from "../components/Sidebar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import EditField from "../components/EditField";
-import { backendUrl } from "../api/api";
+import GuestMessage from "../components/GuestMessage";
+
 
 const ProfilePage = () => {
   const { user } = useContext(UserContext);
@@ -57,50 +58,57 @@ const ProfilePage = () => {
             {user?.username}
           </h1>
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center ">
           <IoSettingsOutline
             size={"30px"}
             className="mr-5 cursor-pointer"
-            onClick={() => setShowSidebar(!showSidebar)}
+            onClick={() => user.isGuest ? null : setShowSidebar(!showSidebar)}
+            disabled={user.isGuest}
           />
         </div>
       </div>
       <Searchbar inputSearch={inputSearch} setInputSearch={setInputSearch} />
-      <section className=" mb-10 mt-8">
-        <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
-          Favorite Yoga Sessions
-        </h2>
-        <div className="flex flex-row items-center overflow-x-scroll ">
-          {filteredYoga.map((item) => (
-            <Link key={item._id} to={`/yoga/${item._id}`}>
-              <TileCards
-                name={item.title}
-                level={item.level}
-                duration={item.duration}
-                imgURL={item.fileUrl}
-              />
-            </Link>
-          ))}
-        </div>
-      </section>
+      {user.isGuest ?
+        <GuestMessage /> :
+        <>
+          <section className=" mb-10 mt-8">
+            <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
+              Favorite Yoga Sessions
+            </h2>
+            <div className="flex flex-row items-center overflow-x-scroll ">
+              {filteredYoga.map((item) => (
+                <Link key={item._id} to={`/yoga/${item._id}`}>
+                  <TileCards
+                    name={item.title}
+                    level={item.level}
+                    duration={item.duration}
+                    imgURL={item.fileUrl}
+                  />
+                </Link>
+              ))}
+            </div>
+          </section>
 
-      <section>
-        <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
-          Favorite Meditation Sessions
-        </h2>
-        <div className="flex items-baseline overflow-x-scroll ">
-          {filteredMeditation.map((item) => (
-            <Link key={item._id} to={`/meditation/${item._id}`}>
-              <TileCards
-                name={item.title}
-                level={item.level}
-                duration={item.duration}
-                imgURL={item.fileUrl}
-              />
-            </Link>
-          ))}
-        </div>
-      </section>
+          <section>
+            <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
+              Favorite Meditation Sessions
+            </h2>
+            <div className="flex items-baseline overflow-x-scroll ">
+              {filteredMeditation.map((item) => (
+                <Link key={item._id} to={`/meditation/${item._id}`}>
+                  <TileCards
+                    name={item.title}
+                    level={item.level}
+                    duration={item.duration}
+                    imgURL={item.fileUrl}
+                  />
+                </Link>
+              ))}
+            </div>
+          </section>
+        </>
+      }
+
     </section>
   );
 
