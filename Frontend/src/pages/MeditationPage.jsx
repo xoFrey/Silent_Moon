@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Searchbar from "../components/Searchbar";
 import { backendUrl } from "../api/api";
 import { TokenContext } from "../../context/Context";
+import Navbar from "../components/Navbar";
 
 const MeditationPage = () => {
   const [category, setCategory] = useState("All");
@@ -38,11 +39,11 @@ const MeditationPage = () => {
     if (inputSearch.length === 0) {
       allMeditation();
     } else {
-      const filteredMeditation = meditations.filter((item) => item.title.toLowerCase().includes(inputSearch.toLowerCase()));
+      const filteredMeditation = meditations.filter((item) =>
+        item.title.toLowerCase().includes(inputSearch.toLowerCase())
+      );
       setMeditations(filteredMeditation);
-
     }
-
   }, [category, inputSearch]);
 
   console.log(meditations, errorMessage);
@@ -96,6 +97,7 @@ const MeditationPage = () => {
           <p>{errorMessage}</p>
         )}
       </section>
+      <Navbar />
     </main>
   );
 };

@@ -5,6 +5,8 @@ import Searchbar from "../components/Searchbar";
 import { backendUrl } from "../api/api";
 import { TokenContext } from "../../context/Context";
 import { useContext, useEffect, useState } from "react";
+import VerficationPopUp from "../components/VerificationPopUp";
+import Navbar from "../components/Navbar";
 
 const YogaPage = () => {
   const [category, setCategory] = useState("All");
@@ -34,19 +36,16 @@ const YogaPage = () => {
       setYoga(data.result);
     };
     if (inputSearch.length === 0) {
-
       allYoga();
     } else {
-      const filteredYoga = yoga.filter((item) => item.title.toLowerCase().includes(inputSearch.toLowerCase()));
+      const filteredYoga = yoga.filter((item) =>
+        item.title.toLowerCase().includes(inputSearch.toLowerCase())
+      );
       setYoga(filteredYoga);
-
     }
-
-
   }, [category, inputSearch]);
 
   console.log(yoga);
-
 
   return (
     <main>
@@ -64,7 +63,6 @@ const YogaPage = () => {
       </div>
       <div className="mb-5">
         <Searchbar inputSearch={inputSearch} setInputSearch={setInputSearch} />
-
       </div>
       <div
         id="DailyCalmPlayerSub"
@@ -82,7 +80,7 @@ const YogaPage = () => {
           <img src={"/image/PlayVector.png"} alt="" />
         </button>
       </div>
-      <section className="columns-2 ml-2">
+      <section className="columns-2 ml-2 mb-12">
         {yoga.length !== 0 ? (
           yoga.map((yogaItem) => (
             <div key={yogaItem._id} className="">
@@ -97,6 +95,7 @@ const YogaPage = () => {
           <p>{errorMessage}</p>
         )}
       </section>
+      <Navbar />
     </main>
   );
 };
