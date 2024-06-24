@@ -7,6 +7,7 @@ import { backendUrl } from "../api/api";
 import { TokenContext } from "../../context/Context";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { GoDotFill } from "react-icons/go";
 
 const MeditationPage = () => {
   const [category, setCategory] = useState("All");
@@ -42,8 +43,7 @@ const MeditationPage = () => {
       if (!data.result)
         return (
           setErrorMessage(
-            data.message || "No Meditations in this category found"
-          ),
+            data.message || "No Meditations in this category found"),
           setMeditations([])
         );
       setMeditations(data.result);
@@ -128,15 +128,17 @@ const MeditationPage = () => {
         ) : (
           <p>{errorMessage}</p>
         )}
-        <div className="flex flex-col items-center">
-          <button
-            onClick={() => setShowMore(showMore + 4)}
-            className="h-16 w-11/12 bg-pink text-circle rounded-full"
-          >
-            Show More
-          </button>
-        </div>
       </section>
+      <div className="flex flex-col items-center mt-2">
+        <button
+          onClick={() => setShowMore(showMore + 4)}
+          className=" px-5 h-6 bg-subtext/50 text-circle rounded-full flex items-center"
+        >
+          <GoDotFill size={15} fill="#8E9775" />
+          <GoDotFill size={15} fill="#8E9775" />
+          <GoDotFill size={15} fill="#8E9775" />
+        </button>
+      </div>
       <Navbar />
     </main>
   );
