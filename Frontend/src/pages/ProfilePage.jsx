@@ -8,14 +8,16 @@ import Sidebar from "../components/Sidebar";
 import { Link, useNavigate } from "react-router-dom";
 import EditField from "../components/EditField";
 import GuestMessage from "../components/GuestMessage";
-
+import Navbar from "../components/Navbar";
 
 const ProfilePage = () => {
   const { user } = useContext(UserContext);
   const [showSidebar, setShowSidebar] = useState(false);
   const [showEditField, setShowEditField] = useState(false);
   const [inputSearch, setInputSearch] = useState("");
-  const [filteredMeditation, setFilteredMeditation] = useState(user.meditationFavorites);
+  const [filteredMeditation, setFilteredMeditation] = useState(
+    user.meditationFavorites
+  );
   const [filteredYoga, setFilteredYoga] = useState(user.yogaFavorites);
 
   useEffect(() => {
@@ -23,12 +25,15 @@ const ProfilePage = () => {
       setFilteredMeditation(user.meditationFavorites);
       setFilteredYoga(user.yogaFavorites);
     } else {
-      const filteredMeditation = user.meditationFavorites.filter((item) => item.title.toLowerCase().includes(inputSearch.toLowerCase()));
+      const filteredMeditation = user.meditationFavorites.filter((item) =>
+        item.title.toLowerCase().includes(inputSearch.toLowerCase())
+      );
       setFilteredMeditation(filteredMeditation);
-      const filteredYoga = user.yogaFavorites.filter((item) => item.title.toLowerCase().includes(inputSearch.toLowerCase()));
+      const filteredYoga = user.yogaFavorites.filter((item) =>
+        item.title.toLowerCase().includes(inputSearch.toLowerCase())
+      );
       setFilteredYoga(filteredYoga);
     }
-
   }, [inputSearch]);
   console.log(filteredMeditation);
   console.log(filteredYoga);
@@ -62,14 +67,15 @@ const ProfilePage = () => {
           <IoSettingsOutline
             size={"30px"}
             className="mr-5 cursor-pointer"
-            onClick={() => user.isGuest ? null : setShowSidebar(!showSidebar)}
+            onClick={() => (user.isGuest ? null : setShowSidebar(!showSidebar))}
             disabled={user.isGuest}
           />
         </div>
       </div>
       <Searchbar inputSearch={inputSearch} setInputSearch={setInputSearch} />
-      {user.isGuest ?
-        <GuestMessage /> :
+      {user.isGuest ? (
+        <GuestMessage />
+      ) : (
         <>
           <section className=" mb-10 mt-8">
             <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
@@ -107,12 +113,10 @@ const ProfilePage = () => {
             </div>
           </section>
         </>
-      }
-
+      )}
+      <Navbar />
     </section>
   );
-
-
 };
 
 export default ProfilePage;

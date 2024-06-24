@@ -5,6 +5,7 @@ import { backendUrl } from "../api/api";
 import { TokenContext, UserContext } from "../../context/Context";
 import ButtonDownload from "../components/ButtonDownload";
 import GoBackButtonDetails from "../components/GoBackButtonDetails";
+import Navbar from "../components/Navbar";
 
 const YogaDetail = () => {
   const { yogaId } = useParams();
@@ -52,6 +53,7 @@ const YogaDetail = () => {
           {oneYoga.description}
         </p>
       </div>
+      <Navbar />
     </main>
   );
 };

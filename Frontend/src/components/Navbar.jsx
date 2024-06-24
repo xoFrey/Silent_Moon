@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
   return (
     <section>
-      <nav className="text-subtext flex gap-7 fixed bottom-0 w-full justify-center pb-4 pt-4 bg-white">
+      <nav className="text-subtext flex gap-7 fixed bottom-0 w-full justify-center pb-4 pt-4 bg-white shadow-topshadow">
         <NavLink to="/yoga">
           <div className="flex flex-col justify-center items-center">
             <LuMoon />

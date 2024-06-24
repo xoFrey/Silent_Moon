@@ -11,6 +11,7 @@ import { convertMStoMinSek } from "../../helperfunctions/helpers";
 import { Link } from "react-router-dom";
 
 import { FaPlay } from "react-icons/fa";
+import Navbar from "../components/Navbar";
 
 const MeditationDetail = () => {
   const { meditationId } = useParams();
@@ -118,6 +119,7 @@ const MeditationDetail = () => {
           ))}
         </section>
       </div>
+      <Navbar />
     </main>
   );
 };

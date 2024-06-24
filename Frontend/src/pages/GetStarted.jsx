@@ -3,7 +3,6 @@ import PinkButton from "../components/PinkButton";
 
 const GetStarted = () => {
   const navigate = useNavigate();
-
   const getRouted = () => {
     navigate(`/notification`);
   };

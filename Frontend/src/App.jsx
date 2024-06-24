@@ -12,9 +12,13 @@ import YogaPage from "./pages/YogaPage";
 import MeditationPage from "./pages/MeditationPage";
 import MusicPage from "./pages/MusicPage";
 import ProfilePage from "./pages/ProfilePage";
-import Navbar from "./components/Navbar";
 import { useEffect, useState } from "react";
-import { TokenContext, RefreshContext, UserContext, PlaylistContext } from "../context/Context";
+import {
+  TokenContext,
+  RefreshContext,
+  UserContext,
+  PlaylistContext,
+} from "../context/Context";
 import MusikDetail from "./pages/MusicDetail";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -30,13 +34,12 @@ function App() {
 
   useEffect(() => {
     const fetchPlaylist = async () => {
-
       const res = await fetch(`${backendUrl}/api/v1/spotify/playlist`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id: "3idpjOhj59WP59HhHJe0nD" })
+        body: JSON.stringify({ id: "3idpjOhj59WP59HhHJe0nD" }),
       });
       const data = await res.json();
       console.log(data);
@@ -44,9 +47,6 @@ function App() {
     };
     fetchPlaylist();
   }, []);
-
-
-
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -136,7 +136,6 @@ function App() {
                     }
                   />
                 </Routes>
-                <Navbar />
               </BrowserRouter>
             </UserContext.Provider>
           </TokenContext.Provider>

@@ -5,6 +5,7 @@ import { backendUrl } from "../api/api";
 import GoBackButton from "../components/GoBackButton";
 import Header from "../components/Header";
 import PinkButton from "../components/PinkButton";
+import VerficationPopUp from "../components/VerificationPopUp";
 
 const Registration = () => {
   const [userName, setUserName] = useState("");
@@ -49,7 +50,7 @@ const Registration = () => {
   };
 
   return (
-    <main>
+    <main className=" ">
       <GoBackButton />
       <div className="flex justify-center -mt-11">
         <Header />
@@ -179,6 +180,7 @@ const Registration = () => {
           log in
         </a>
       </p>
+      <VerficationPopUp />
     </main>
   );
 };
