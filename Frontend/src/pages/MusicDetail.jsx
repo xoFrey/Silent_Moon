@@ -9,7 +9,8 @@ const MusikDetail = () => {
     const [isPlaying, setIsPlaying] = useState(true);
     const { playlist } = useContext(PlaylistContext);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [isDisabled, setIsDisabled] = useState(false);
+    const [isPrevDisabled, setIsPrevDisabled] = useState(false);
+    const [isNextDisabled, setIsNextDisabled] = useState(false);
     const audioRef = useRef(null);
 
     const { trackId } = useParams();
@@ -38,42 +39,44 @@ const MusikDetail = () => {
         }
     }, [trackInfo]);
 
-    const fetchNextTrack = async () => {
-        const nextIndex = (currentIndex + 1) % playlist.tracks.items.length;
-        setCurrentIndex(nextIndex);
-        const nextTrackId = playlist.tracks.items[nextIndex].track.id;
+    useEffect(() => {
 
-        const res = await fetch(`${backendUrl}/api/v1/spotify/track/${nextTrackId}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        const data = await res.json();
-        setTrackInfo(data);
+        setIsPrevDisabled(currentIndex === 0);
+        setIsNextDisabled(currentIndex === playlist.tracks.items.length - 1);
+    }, [currentIndex, playlist.tracks.items.length]);
+
+    const fetchNextTrack = async () => {
+        if (currentIndex < playlist.tracks.items.length - 1) {
+            const nextIndex = currentIndex + 1;
+            setCurrentIndex(nextIndex);
+            const nextTrackId = playlist.tracks.items[nextIndex].track.id;
+
+            const res = await fetch(`${backendUrl}/api/v1/spotify/track/${nextTrackId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const data = await res.json();
+            setTrackInfo(data);
+        }
     };
 
-
     const fetchPrevTrack = async () => {
-        const prevIndex = (currentIndex - 1) % playlist.tracks.items.length;
-        setCurrentIndex(prevIndex);
-        const prevTrackId = playlist.tracks.items[prevIndex].track.id;
+        if (currentIndex > 0) {
+            const prevIndex = currentIndex - 1;
+            setCurrentIndex(prevIndex);
+            const prevTrackId = playlist.tracks.items[prevIndex].track.id;
 
-        if (playlist?.tracks.items[0].track.id === prevTrackId) {
-            console.log("no");
-            const prevButton = document.getElementById("prevTrack");
-            prevButton.disabled = true;
-
+            const res = await fetch(`${backendUrl}/api/v1/spotify/track/${prevTrackId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const data = await res.json();
+            setTrackInfo(data);
         }
-        const res = await fetch(`${backendUrl}/api/v1/spotify/track/${prevTrackId}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        const data = await res.json();
-        setTrackInfo(data);
-
     };
 
     const togglePausePlay = () => {
@@ -101,8 +104,8 @@ const MusikDetail = () => {
                     {trackInfo?.album?.artists[0].name}
                 </p>
                 <div className="flex items-center">
-                    <button id="prevTrack" onClick={() => { fetchPrevTrack(), setIsPlaying(true); }}>
-                        <IoPlaySkipBackCircleOutline size={"50px"} className="cursor-pointer" />
+                    <button id="prevTrack" onClick={() => { fetchPrevTrack(); setIsPlaying(true); }} disabled={isPrevDisabled}>
+                        <IoPlaySkipBackCircleOutline size={"50px"} className={`cursor-pointer ${isPrevDisabled ? 'opacity-50 cursor-not-allowed' : ''}`} />
                     </button>
                     {isPlaying ? (
                         <div className='border-8 border-subtext rounded-full bg-green cursor-pointer p-3'>
@@ -123,10 +126,9 @@ const MusikDetail = () => {
                             />
                         </div>
                     )}
-                    <div onClick={() => { fetchNextTrack(), setIsPlaying(true); }}>
-                        <IoPlaySkipForwardCircleOutline size={"50px"} className="cursor-pointer" />
-                    </div>
-
+                    <button id="nextTrack" onClick={() => { fetchNextTrack(); setIsPlaying(true); }} disabled={isNextDisabled}>
+                        <IoPlaySkipForwardCircleOutline size={"50px"} className={`cursor-pointer ${isNextDisabled ? 'opacity-50 cursor-not-allowed' : ''}`} />
+                    </button>
                 </div>
 
                 {trackInfo ? (
