@@ -18,11 +18,8 @@ const MusicPage = () => {
     <>
       <Header />
       <div className="flex flex-col items-center justify-center gap-5 mt-10">
-<<<<<<< HEAD
-        <h1 className="text-4xl font-bold text-maintext w-3/4 text-center">{playlistInfo?.name}</h1>
-=======
+
         <h1 className="text-4xl font-bold text-maintext w-3/4 text-center">{playlist?.name}</h1>
->>>>>>> 4affaf1ab30e7eb3174b2ff858a3a3f61c478702
         <p className="text-sm font-semibold text-subtext">PLAYLIST</p>
         <p className="text-sm font-semibold text-subtext tracking-wider mb-10 ">
           {playlist?.description}
