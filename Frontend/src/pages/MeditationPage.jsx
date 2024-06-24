@@ -13,6 +13,7 @@ const MeditationPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const { token } = useContext(TokenContext);
   const [inputSearch, setInputSearch] = useState("");
+  const [showMore, setShowMore] = useState(4);
   const [randomMeditation, setRandomMeditation] = useState();
 
   const currentDate = new Date();
@@ -23,6 +24,10 @@ const MeditationPage = () => {
     return `${month.toUpperCase()}/${day.padStart(2, "0")}`;
   };
   const today = formatDateToMMMDD(currentDate);
+
+
+
+
 
   useEffect(() => {
     const allMeditation = async () => {
@@ -57,6 +62,7 @@ const MeditationPage = () => {
     }
   }, [category, inputSearch]);
 
+
   useEffect(() => {
     const fetchRandomMeditation = async () => {
       const res = await fetch(
@@ -75,6 +81,7 @@ const MeditationPage = () => {
     };
     fetchRandomMeditation();
   }, []);
+
 
   return (
     <main>
@@ -114,11 +121,11 @@ const MeditationPage = () => {
       </div>
       <section className="columns-2 ml-2">
         {meditations.length !== 0 ? (
-          meditations.map((meditation) => (
+          meditations.slice(0, showMore).map((meditation) => (
             <div key={meditation._id}>
               <CatergoryTiles
                 id={meditation._id}
-                imgUrl={"test"}
+                imgUrl={meditation.fileUrl}
                 title={meditation.title}
               />
             </div>
@@ -126,6 +133,14 @@ const MeditationPage = () => {
         ) : (
           <p>{errorMessage}</p>
         )}
+        <div className="flex flex-col items-center">
+          <button
+            onClick={() => setShowMore(showMore + 4)}
+            className="h-16 w-11/12 bg-pink text-circle rounded-full"
+          >
+            Show More
+          </button>
+        </div>
       </section>
     </main>
   );

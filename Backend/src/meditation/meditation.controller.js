@@ -2,7 +2,14 @@ import { MeditationService } from "./meditation.services/meditation.index.js";
 
 const createMeditationCtrl = async (req, res) => {
   try {
-    const meditationInfo = req.body;
+    const meditationInfo = {
+      fileUrl: req.file ? req.file : null,
+      title: req.body.title,
+      description: req.body.description,
+      level: req.body.level,
+      duration: req.body.duration,
+      category: req.body.category,
+    };
     const result = await MeditationService.createMeditation(meditationInfo);
     res.status(201).json({ result });
   } catch (err) {
@@ -30,7 +37,7 @@ const getMeditationsByLevelCtrl = async (req, res) => {
     const meditationByLevel = req.query.levelSelection;
 
     const result = await MeditationService.getMeditationsByLevel(
-      meditationByLevel
+      meditationByLevel,
     );
     res.json({ result });
   } catch (err) {
@@ -48,7 +55,7 @@ const getMeditationsByCategoryCtrl = async (req, res) => {
 
     const result = await MeditationService.getMeditationsByCategory(
       meditationByCategory,
-      userId
+      userId,
     );
     res.json({ result });
   } catch (err) {
