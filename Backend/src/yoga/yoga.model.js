@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const yogaSchema = new mongoose.Schema(
   {
-    fileUrl: { type: String, required: false, default: "http://test" },
+    fileUrl: { type: String, required: false, default: "test" },
     videoUrl: { type: String, required: false },
     title: { type: String, required: true, trim: true },
     description: { type: String, required: true, trim: true },

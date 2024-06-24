@@ -86,7 +86,7 @@ const Home = () => {
     }
     updateRandomActivities();
 
-  }, [date, time]);
+  }, [time]);
 
 
 

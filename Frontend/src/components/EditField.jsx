@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import ButtonPink from "./ButtonPink";
 import { TokenContext, UserContext } from "../../context/Context";
 import { backendUrl } from "../api/api";
 

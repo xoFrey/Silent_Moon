@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
 import { backendUrl } from "../api/api";
 import { FaHeart } from "react-icons/fa";
@@ -6,57 +6,45 @@ import { IoHeadset } from "react-icons/io5";
 import { convertMStoMinSek } from "../../helperfunctions/helpers";
 import { IoPlayCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { PlaylistContext } from "../../context/Context";
 
 const MusicPage = () => {
-  const [playlistInfo, setPlaylistInfo] = useState();
+  const { playlist, setPlaylist } = useContext(PlaylistContext);
 
-  useEffect(() => {
-    const fetchPlaylist = async () => {
 
-      const res = await fetch(`${backendUrl}/api/v1/spotify/playlist`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id: "3idpjOhj59WP59HhHJe0nD" })
-      });
-      const data = await res.json();
-      console.log(data);
-      setPlaylistInfo(data);
-    };
-    fetchPlaylist();
-  }, []);
 
-  console.log(playlistInfo);
 
   return (
     <>
       <Header />
       <div className="flex flex-col items-center justify-center gap-5 mt-10">
+<<<<<<< HEAD
         <h1 className="text-4xl font-bold text-maintext w-3/4 text-center">{playlistInfo?.name}</h1>
+=======
+        <h1 className="text-4xl font-bold text-maintext w-3/4 text-center">{playlist?.name}</h1>
+>>>>>>> 4affaf1ab30e7eb3174b2ff858a3a3f61c478702
         <p className="text-sm font-semibold text-subtext">PLAYLIST</p>
         <p className="text-sm font-semibold text-subtext tracking-wider mb-10 ">
-          {playlistInfo?.description}
+          {playlist?.description}
         </p>
       </div>
       <div className="flex items-center justify-evenly mb-12">
         <div className="flex items-center gap-2">
           <FaHeart fill="#E28F83" />
           <p className="text-sm text-subtext">
-            {playlistInfo?.followers.total} Favorites
+            {playlist?.followers.total} Favorites
           </p>
         </div>
         <div className="flex items-center gap-2">
           <IoHeadset fill="#3F414E" />
           <p className="text-sm text-subtext">
-            {playlistInfo?.followers.total + 304345} Listening
+            {playlist?.followers.total + 304345} Listening
           </p>
         </div>
       </div>
       <section className="flex flex-col gap-5 px-5">
-        {playlistInfo?.tracks.items.slice(0, 10).map((item, index) => (
+        {playlist?.tracks.items.slice(0, 10).map((item, index) => (
           <Link to={`/musicdetails/${item.track.id}`} key={item.track.id}>
-            <p>{index}</p>
             <div className="flex items-center gap-2 border-b border-subtext/20 pb-4 cursor-pointer">
               <IoPlayCircleOutline
                 size={"50px"}

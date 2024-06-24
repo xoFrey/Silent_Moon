@@ -8,7 +8,12 @@ export const meditationRoutes = express
   .get(
     "/filterCategory/",
     doJwtAuth,
-    MeditationController.getMeditationsByCategoryCtrl,
+    MeditationController.getMeditationsByCategoryCtrl
   ) // example fetch: api/v1/meditation/filterCategory/?categorySelection=Kids
+  .get(
+    "/getRandomMeditation/",
+    doJwtAuth,
+    MeditationController.getRandomMeditationCtrl
+  )
   .get("/detail/:meditationId", MeditationController.getMeditationDetailCtrl)
   .post("/", MeditationController.createMeditationCtrl);

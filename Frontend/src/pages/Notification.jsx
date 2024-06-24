@@ -3,10 +3,10 @@ import Header from "../components/Header";
 import { MultiSectionDigitalClock } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { convertDateAndTime } from "../../helperfunctions/helpers";
-import ButtonPink from "../components/ButtonPink";
 import { Link, useNavigate } from "react-router-dom";
 import { backendUrl } from "../api/api";
 import { TokenContext, UserContext } from "../../context/Context";
+import PinkButton from "../components/PinkButton";
 
 
 const Notification = () => {
@@ -92,7 +92,7 @@ const Notification = () => {
                 </div>
             </section>
             <div className="mb-24">
-                <ButtonPink name={"SAVE"} funktion={(updateUserInfo)} />
+                <PinkButton name={"SAVE"} funktion={(updateUserInfo)} />
                 <Link to="/home" className="text-center">
                     <p className="mt-5 text-pink font-semibold">NO THANKS</p>
                 </Link>

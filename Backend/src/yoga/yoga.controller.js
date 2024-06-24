@@ -85,10 +85,26 @@ const getYogasByCategoryCtrl = async (req, res) => {
   }
 };
 
+const getRandomYogaCtrl = async (req, res) => {
+  try {
+    const userId = req.authenticatedUserId;
+
+    const result = await YogaService.getRandomYoga(userId);
+    res.json({ result });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      err,
+      message: err.message || "Could not get random yoga",
+    });
+  }
+};
+
 export const YogaController = {
   getYogaDetailCtrl,
   createYogaCtrl,
   getYogasByLevelCtrl,
   getYogasByCategoryCtrl,
   editYogaCtrl,
+  getRandomYogaCtrl,
 };

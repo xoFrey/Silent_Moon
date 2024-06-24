@@ -1,5 +1,6 @@
-import { createContext } from "react"
+import { createContext } from "react";
 
-export const RefreshContext = createContext()
-export const UserContext = createContext()
-export const TokenContext = createContext()
+export const RefreshContext = createContext();
+export const UserContext = createContext();
+export const TokenContext = createContext();
+export const PlaylistContext = createContext();
