@@ -42,7 +42,6 @@ function App() {
         body: JSON.stringify({ id: "3idpjOhj59WP59HhHJe0nD" }),
       });
       const data = await res.json();
-      console.log(data);
       setPlaylist(data);
     };
     fetchPlaylist();
