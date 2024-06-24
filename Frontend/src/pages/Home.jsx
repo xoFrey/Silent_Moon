@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import TileCards from "../components/TileCards.jsx";
 import { backendUrl } from "../api/api";
 
-
 const Home = () => {
   const { user, setUser } = useContext(UserContext);
   const { token, setToken } = useContext(TokenContext);
@@ -18,9 +17,7 @@ const Home = () => {
   const [randomYoga, setRandomYoga] = useState();
   const [randomMeditation, setRandomMeditation] = useState();
 
-
   useEffect(() => {
-
     const fetchYogaByLevel = async () => {
       {
         const res = await fetch(
@@ -37,7 +34,6 @@ const Home = () => {
     };
 
     const fetchMeditationByLevel = async () => {
-
       const res = await fetch(
         `${backendUrl}/api/v1/meditation/filterLevel/?levelSelection=${user.userLevel}`,
         {
@@ -50,44 +46,60 @@ const Home = () => {
       setMeditationByLevel(data.result);
     };
     if (inputSearch.length === 0) {
-
       fetchYogaByLevel();
       fetchMeditationByLevel();
     } else {
-      const filteredYoga = yogaByLevel.filter((item) => item.title.toLowerCase().includes(inputSearch.toLowerCase()));
+      const filteredYoga = yogaByLevel.filter((item) =>
+        item.title.toLowerCase().includes(inputSearch.toLowerCase())
+      );
       setYogaByLevel(filteredYoga);
-      const filteredMeditation = meditationByLevel.filter((item) => item.title.toLowerCase().includes(inputSearch.toLowerCase())
+      const filteredMeditation = meditationByLevel.filter((item) =>
+        item.title.toLowerCase().includes(inputSearch.toLowerCase())
       );
       setMeditationByLevel(filteredMeditation);
     }
   }, [inputSearch]);
 
+  const fetchRandomYoga = async () => {
+    const res = await fetch(`${backendUrl}/api/v1/yoga/getRandomYoga`, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+    const data = await res.json();
+    if (!data.result) return "Failed to fetch a random yoga";
+    setRandomYoga(data.result);
+  };
 
-  const generateRandomNumber = (array) => Math.floor(Math.random() * array.length);
+  const fetchRandomMeditation = async () => {
+    const res = await fetch(
+      `${backendUrl}/api/v1/meditation/getRandomMeditation`,
+      {
+        headers: { authorization: `Bearer ${token}` },
+      }
+    );
+    const data = await res.json();
+    if (!data.result) return "Failed to fetch a random meditation";
+    setRandomMeditation(data.result);
 
-  const updateRandomActivities = () => {
-    const randomYogaNumber = generateRandomNumber(yogaByLevel);
-    const randomMeditationNumber = generateRandomNumber(meditationByLevel);
-    setRandomYoga(yogaByLevel[randomYogaNumber]);
-    setRandomMeditation(meditationByLevel[randomMeditationNumber]);
   };
 
   const date = new Date(Date.now());
-  const time = Number(date.toLocaleTimeString([], { hour: '2-digit' }).split(":")[0]);
+  const time = Number(
+    date.toLocaleTimeString([], { hour: "2-digit" }).split(":")[0]
+  );
   useEffect(() => {
 
-
-    if (time <= 13) {
+    if (5 >= time <= 13) {
       setDayTime("Morning");
     } else if (time <= 17) {
       setDayTime("Afternoon");
     } else {
       setDayTime("Evening");
     }
-    updateRandomActivities();
 
-  }, [time]);
 
+    fetchRandomYoga();
+    fetchRandomMeditation();
+  }, [dayTime]);
 
 
   return (
@@ -104,7 +116,7 @@ const Home = () => {
           <div className=" relative z-0">
             <img src="../../image/RecoveryBigMeditate.png" alt="yoga image" />
             <p className=" absolute text-white left-1 bottom-5 font-light">
-              {randomYoga?.duration} MIN
+              {randomYoga?.duration}
             </p>
             <ButtonStart fill={"#FAF2DA"} typeColor={"#4A503D"} />
             <p className=" absolute text-[#FAF2DA] top-11 left-1 text-xl">
@@ -119,7 +131,7 @@ const Home = () => {
           <div className=" relative z-0 ">
             <img src="../../image/RecoveryBigYoga.png" alt="meditation image" />
             <p className=" absolute text-white left-1 bottom-5 font-light">
-              {randomMeditation?.duration} MIN
+              {randomMeditation?.duration}
             </p>
             <ButtonStart fill={"#4A503D"} typeColor={"#FAF2DA"} />
             <p className=" absolute text-[#4A503D] top-11 left-1 text-xl">
@@ -128,7 +140,8 @@ const Home = () => {
             <p className=" uppercase absolute text-[#4A503D] top-16 left-1 text-xs">
               {randomMeditation?.level}
             </p>
-          </div></Link>
+          </div>
+        </Link>
       </div>
       <Searchbar inputSearch={inputSearch} setInputSearch={setInputSearch} />
 
@@ -148,7 +161,6 @@ const Home = () => {
                 />
               </Link>
             ))
-
           ) : (
             <p>Loading...</p>
           )}
@@ -159,10 +171,9 @@ const Home = () => {
         <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
           Recommended Meditation for you
         </h2>
-        <div
 
-          className="flex items-center overflow-x-scroll "
-        >
+        <div className="flex items-center overflow-x-scroll ">
+
           {meditationByLevel ? (
             meditationByLevel.map((item) => (
               <Link key={item._id} to={`/meditation/${item._id}`}>
