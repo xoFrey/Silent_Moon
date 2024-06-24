@@ -3,6 +3,8 @@ import { MeditationController } from "./meditation.controller.js";
 import { doJwtAuth } from "../middlewares/doJwtAuth.js";
 import multer from "multer";
 
+const upload = multer({ storage: multer.memoryStorage() });
+
 export const meditationRoutes = express
   .Router()
   .get("/filterLevel/", MeditationController.getMeditationsByLevelCtrl)
@@ -16,13 +18,9 @@ export const meditationRoutes = express
     doJwtAuth,
     MeditationController.getRandomMeditationCtrl,
   )
-  .get("/detail/:meditationId", MeditationController.getMeditationDetailCtrl);
-
-if (process.env.NODE_ENV === "development") {
-  const upload = multer({ dest: "./uploads" });
-  meditationRoutes.post(
+  .get("/detail/:meditationId", MeditationController.getMeditationDetailCtrl)
+  .post(
     "/",
     upload.single("fileUrl"),
     MeditationController.createMeditationCtrl,
   );
-}

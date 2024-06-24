@@ -3,7 +3,7 @@ import { MeditationService } from "./meditation.services/meditation.index.js";
 const createMeditationCtrl = async (req, res) => {
   try {
     const meditationInfo = {
-      fileUrl: req.file ? req.file.path : "",
+      fileUrl: req.file ? req.file : null,
       title: req.body.title,
       description: req.body.description,
       level: req.body.level,

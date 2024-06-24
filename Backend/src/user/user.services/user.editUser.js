@@ -16,7 +16,7 @@ export const editUser = async (updateInfo, fileUrl) => {
   } else {
     fileUrl = user.fileUrl;
   }
-  console.log(fileUrl);
+
   const userInfo = {
     updateInfo,
     fileUrl: fileUrl,

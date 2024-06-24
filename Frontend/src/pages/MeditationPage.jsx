@@ -89,7 +89,7 @@ const MeditationPage = () => {
             <div key={meditation._id}>
               <CatergoryTiles
                 id={meditation._id}
-                imgUrl={`${backendUrl}/${meditation?.fileUrl?.split("\\")[1]}`}
+                imgUrl={meditation.fileUrl}
                 title={meditation.title}
               />
             </div>
