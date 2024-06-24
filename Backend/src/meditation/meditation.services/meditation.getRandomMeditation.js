@@ -12,7 +12,6 @@ export const getRandomMeditation = async (userId) => {
     Math.floor(Math.random() * meditationsByLevel.length);
   const randomMeditation =
     meditationsByLevel[generateRandomMeditation(meditationsByLevel)];
-  console.log("RANMED", randomMeditation);
 
   return randomMeditation;
 };
