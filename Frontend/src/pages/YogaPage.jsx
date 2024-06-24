@@ -6,8 +6,8 @@ import { backendUrl } from "../api/api";
 import { TokenContext } from "../../context/Context";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import VerficationPopUp from "../components/VerificationPopUp";
 import Navbar from "../components/Navbar";
+import { GoDotFill } from "react-icons/go";
 
 const YogaPage = () => {
   const [category, setCategory] = useState("All");
@@ -16,6 +16,7 @@ const YogaPage = () => {
   const { token } = useContext(TokenContext);
   const [inputSearch, setInputSearch] = useState("");
   const [randomYoga, setRandomYoga] = useState();
+  const [showMore, setShowMore] = useState(4);
 
   const currentDate = new Date();
   const formatDateToMMMDD = (date) => {
@@ -46,6 +47,7 @@ const YogaPage = () => {
         );
       setYoga(data.result);
     };
+
     if (inputSearch.length === 0) {
       allYoga();
     } else {
@@ -72,10 +74,9 @@ const YogaPage = () => {
     };
     fetchRandomYoga();
   }, []);
-  console.log(yoga);
 
   return (
-    <main>
+    <main className="mb-24">
       <Header />
       <div className="flex flex-col justify-center items-center">
         <h1 className="font-black text-maintext text-4xl leading-10 text-center mt-8 tracking-wide">
@@ -109,10 +110,10 @@ const YogaPage = () => {
           <img src={"/image/PlayVector.png"} alt="" />
         </button>
       </div>
-      <section className="columns-2 ml-2 mb-12">
+      <section className="columns-2 ml-2 ">
         {yoga.length !== 0 ? (
-          yoga.map((yogaItem) => (
-            <div key={yogaItem._id} className="">
+          yoga.slice(0, showMore).map((yogaItem) => (
+            <div key={yogaItem._id}>
               <CatergoryTiles
                 id={yogaItem._id}
                 imgUrl={yogaItem.fileUrl}
@@ -124,6 +125,16 @@ const YogaPage = () => {
           <p>{errorMessage}</p>
         )}
       </section>
+      <div className="flex flex-col items-center mt-2">
+        <button
+          onClick={() => setShowMore(showMore + 4)}
+          className=" px-5 h-6 bg-subtext/50 text-circle rounded-full flex items-center"
+        >
+          <GoDotFill size={15} fill="#8E9775" />
+          <GoDotFill size={15} fill="#8E9775" />
+          <GoDotFill size={15} fill="#8E9775" />
+        </button>
+      </div>
       <Navbar />
     </main>
   );
