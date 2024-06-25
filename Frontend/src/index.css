@@ -26,20 +26,6 @@ img {
   font-family: sourceSans !important;
 }
 
-.active {
-  background-color: pink;
-  border-radius: 10px;
-  padding: 4px;
-}
-
-.active svg {
-  fill: white;
-}
-
-.active p {
-  color: white;
-}
-
 .yoda {
   animation: MoveUpDown 2s ease-in-out infinite;
   /* position: absolute; */
@@ -56,3 +42,20 @@ img {
     transform: translateY(-20px);
   }
 }
+
+
+
+.active svg{
+  background-color: #E28F83;
+    border-radius: 10px;
+    padding: 5px;
+    stroke:white;
+    fill: white;
+    width: 35px;
+    height: 35px;
+}
+
+.active p{
+  color: #E28F83;
+}
+
