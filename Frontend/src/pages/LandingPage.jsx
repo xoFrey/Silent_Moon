@@ -1,15 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import HeaderDark from "../components/HeaderDark";
-
 import { backendUrl } from "../api/api";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { TokenContext, UserContext } from "../../context/Context";
 import PinkButton from "../components/PinkButton";
-
 const LandingPage = () => {
   const { setUser } = useContext(UserContext);
   const { setToken } = useContext(TokenContext);
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState();
 
   const getRouted = () => {
     navigate(`/register`);
@@ -21,7 +20,10 @@ const LandingPage = () => {
     const res = await fetch(`${backendUrl}/api/v1/users/login`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
-      body: JSON.stringify({ email: "guest@guest.com", password: import.meta.env.VITE_GUEST_PASSWORD }),
+      body: JSON.stringify({
+        email: "guest@guest.com",
+        password: import.meta.env.VITE_GUEST_PASSWORD,
+      }),
       credentials: "include",
     });
 
@@ -32,14 +34,13 @@ const LandingPage = () => {
     await setUser(data?.result.user);
     await setToken(data?.result.tokens.accessToken);
     navigate("/home");
-
   };
 
-
-
   return (
+
     <section className="h-screen w-screen">
       <div className="bg-landingImg bg-top bg-contain bg-no-repeat sm:bg-cover sm:h-full h-3/4 lg:bg-contain  md:bg-contain">
+
         <HeaderDark />
       </div>
       <div className="flex flex-col pb-12 -mt-24 sm:-mt-10 lg:mt-24">
