@@ -1,8 +1,7 @@
 import { LiaDownloadSolid } from "react-icons/lia";
 
-const ButtonDownload = ({ downloadLink, isDisabled }) => {
-  // const downloadUrl =
-  //   "https://videos.pexels.com/video-files/4535145/4535145-hd_1080_1920_25fps.mp4";
+const ButtonDownload = ({ downloadLink }) => {
+  const downloadUrl = { downloadLink };
   const handleDownloadClick = (url) => {
     const fileName = url.split("/").pop();
     const aTag = document.createElement("a");
@@ -15,7 +14,7 @@ const ButtonDownload = ({ downloadLink, isDisabled }) => {
   return (
     <>
       <button
-        disabled={isDisabled}
+
         onClick={() => {
           handleDownloadClick(downloadLink);
         }}

@@ -49,7 +49,7 @@ const ProfilePage = () => {
         showEditField={showEditField}
         setShowEditField={setShowEditField}
       />
-      <section className="lg:w-3/4 lg:ml-56">
+      <section className="lg:w-3/4 m-auto">
         <div className="flex justify-between items-center mx-4 mt-6 mb-8">
           <div>
             <img
@@ -67,9 +67,7 @@ const ProfilePage = () => {
             <IoSettingsOutline
               size={"30px"}
               className="mr-5 cursor-pointer"
-              onClick={() =>
-                user.isGuest ? null : setShowSidebar(!showSidebar)
-              }
+              onClick={() => setShowSidebar(!showSidebar)}
               disabled={user.isGuest}
             />
           </div>
@@ -89,7 +87,7 @@ const ProfilePage = () => {
                 Favorite Yoga Sessions
               </h2>
               <div className="flex items-baseline gap-5 overflow-x-scroll no-scrollbar px-4 pb-2">
-                {filteredYoga.map((item) => (
+                {filteredYoga.length === 0 ? <p className="text-subtext leading-5  mx-4  font-semibold">You dont have any favorites yet!</p> : filteredYoga.map((item) => (
                   <Link key={item._id} to={`/yoga/${item._id}`}>
                     <TileCards
                       name={item.title}
@@ -107,7 +105,7 @@ const ProfilePage = () => {
                 Favorite Meditation Sessions
               </h2>
               <div className="flex items-baseline gap-5 overflow-x-scroll no-scrollbar px-4 pb-2" >
-                {filteredMeditation.map((item) => (
+                {filteredMeditation.length === 0 ? <p className="text-subtext leading-5  mx-4  font-semibold">You dont have any favorites yet!</p> : filteredMeditation.map((item) => (
                   <Link key={item._id} to={`/meditation/${item._id}`}>
                     <TileCards
                       name={item.title}

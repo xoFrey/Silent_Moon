@@ -8,13 +8,13 @@ const InformationPage = () => {
         <GoBackButton />
       </div>
       <Header />
-      <h4 className="font-black text-maintext text-4xl mt-10 mx-3.5 leading-10 text-center  tracking-wide">
+      <h4 className="font-black text-maintext text-4xl mt-10 mx-4 leading-10 text-center  tracking-wide">
         SILENT MOON 2.0
       </h4>
-      <p className=" text-subtext leading-5 pb-20 text-center mt-3  mx-3.5  font-semibold">
+      <p className=" text-subtext leading-5 pb-12 text-center mt-3  mx-4 font-semibold">
         is comming up on december 2024
       </p>
-      <div className=" ml-3 mr-3">
+      <div className=" px-5">
         <p className=" mb-5 font-normal text-maintext text-lg">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis ullam
           mollitia vero nemo quasi nostrum est unde voluptatem porro eius.

@@ -56,28 +56,28 @@ const MeditationDetail = () => {
       <div>
         <img
           className=" rounded-b-lg"
-          height={289}
-          src="../../image/medit.avif"
+
+          src={oneMeditation.fileUrl}
           alt="meditationpicture"
         />
       </div>
       <GoBackButtonDetails />
-      <ButtonLike id={meditationId} isDisabled={user.isGuest} />
-      <ButtonDownload isDisabled={user.isGuest} />
+      {user.isGuest ? null : <ButtonLike id={meditationId} />}
+      {user.isGuest ? null : <ButtonDownload downloadLink={oneMeditation.fileUrl} />}
       <div className=" ">
-        <h4 className="font-black text-maintext text-4xl mx-3.5 leading-10  tracking-wide">
+        <h4 className="font-black text-maintext text-4xl mx-4 leading-10  tracking-wide">
           {oneMeditation.title}
         </h4>
-        <p className="uppercase text-subtext leading-5 pb-14  mt-4 mx-3.5 font-semibold">
+        <p className="uppercase text-subtext leading-5 pb-6  mt-4 mx-4 font-semibold">
           {oneMeditation.level}
         </p>
-        <p className=" text-subtext leading-5  mx-3.5  font-semibold">
+        <p className=" text-subtext leading-5  mx-4  font-semibold">
           {oneMeditation.description}
         </p>
       </div>
       {/* Playlist down here */}
       <div>
-        <div className="flex gap-9 ml-5 mb-12 mt-10">
+        <div className="flex gap-9 ml-5 mb-6 mt-6">
           <div className="flex  gap-2">
             <FaHeart fill="#E28F83" />
             <p className="text-sm text-subtext">
@@ -94,8 +94,8 @@ const MeditationDetail = () => {
         <p className="text-2xl text-maintext font-bold tracking-wide pl-5 mb-6 ">
           Playlist
         </p>
-        <section className="flex flex-col gap-5 px-5">
-          {playlistInfo?.tracks.items.slice(0, 5).map((item) => (
+        <section className="flex flex-col gap-5 px-5 mb-24">
+          {playlistInfo?.tracks.items.slice(0, 4).map((item) => (
             <Link to={`/musicdetails/${item.track.id}`} key={item.track.id}>
               <div className="flex items-center gap-2 border-b border-subtext/20 pb-4 cursor-pointer">
                 <div className="w-10 h-10  border border-solid border-subtext rounded-full flex items-center justify-center">
