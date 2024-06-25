@@ -64,7 +64,7 @@ const Notification = () => {
         </div>
         <div className=" mb-10">
           <MultiSectionDigitalClock
-            className="justify-center bg-circle text-maintext "
+            className="justify-center bg-lightcreme text-maintext "
             value={timeValue}
             onChange={(timeValue) => setTimeValue(timeValue)}
           />
@@ -79,11 +79,10 @@ const Notification = () => {
           {weekdays.map((day) => (
             <button
               onClick={() => selectWeekdays(day)}
-              className={`${
-                selectedDays.includes(day)
+              className={`${selectedDays.includes(day)
                   ? `bg-green border-green text-white`
                   : `bg-white border-circle`
-              } border-2 border-solid rounded-full w-10 h-10`}
+                } border-2 border-solid rounded-full w-10 h-10`}
             >
               {day}
             </button>

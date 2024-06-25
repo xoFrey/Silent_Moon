@@ -101,15 +101,15 @@ const Home = () => {
   }, [dayTime]);
 
   return (
-    <main className="lg:px-60">
+    <main className="lg:px-60 ">
       <Header />
-      <h2 className="text-2xl font-black w-4/5 mx-3.5 mb-2 mt-5 text-maintext ">
+      <h2 className="text-2xl font-black w-4/5 mx-4 mb-2 mt-5 text-maintext  ">
         Good {dayTime} {user.username}
       </h2>
-      <p className=" text-subtext leading-5 pb-10 mx-3.5  font-semibold">
+      <p className=" text-subtext leading-5 pb-10 mx-4 font-semibold ">
         We hope you have a good day.
       </p>
-      <div className=" flex gap-4 justify-center mb-6">
+      <div className=" flex gap-4 justify-center mb-6 px-4">
         <Link to={`/yoga/${randomYoga?._id}`}>
           <div className=" relative z-0">
             <img src="../../image/RecoveryBigMeditate.png" alt="yoga image" />
@@ -147,11 +147,11 @@ const Home = () => {
       </div>
       <Searchbar inputSearch={inputSearch} setInputSearch={setInputSearch} />
 
-      <section className=" mb-10 mt-8">
+      <section className="mb-10 mt-8">
         <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
           Recommended Yoga for you
         </h2>
-        <div className="flex items-center overflow-x-scroll no-scrollbar ">
+        <div className="flex items-baseline gap-5 overflow-x-scroll no-scrollbar px-4 pb-2">
           {yogaByLevel ? (
             yogaByLevel.map((item) => (
               <Link key={item._id} to={`/yoga/${item._id}`}>
@@ -169,12 +169,12 @@ const Home = () => {
         </div>
       </section>
 
-      <section className=" mb-16">
+      <section className=" mb-32">
         <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
           Recommended Meditation for you
         </h2>
 
-        <div className="flex items-center overflow-x-scroll ">
+        <div className="flex items-baseline gap-5 overflow-x-scroll no-scrollbar px-4 pb-2">
           {meditationByLevel ? (
             meditationByLevel.map((item) => (
               <Link key={item._id} to={`/meditation/${item._id}`}>
