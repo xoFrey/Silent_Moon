@@ -82,9 +82,11 @@ const MusikDetail = () => {
     const togglePausePlay = () => {
         if (!isPlaying) {
             audioRef.current.play();
+
             setIsPlaying(true);
         } else {
             audioRef.current.pause();
+
             setIsPlaying(false);
         }
     };

@@ -35,44 +35,49 @@ const Login = () => {
     navigate("/home");
   };
   return (
-    <main>
+    <main >
       <GoBackButton />
-      <div className="flex justify-center ">
+      <div className='flex justify-center '>
         <Header />
       </div>
-      <h4 className="font-black text-maintext text-4xl leading-10 text-center mt-12 mb-20 tracking-wide">
+      <h4 className='font-black text-maintext text-4xl leading-10 text-center mt-12 mb-20 tracking-wide'>
         Welcome Back!
       </h4>
       <form>
         <div>
-          <div className="flex flex-col items-center">
+          <div className='flex flex-col items-center '>
             <input
-              className="mb-5 h-16 w-11/12 border-solid border border-pink text-subtext rounded-full text-center text-base font-semibold leading-5 tracking-wider"
-              id="email"
-              type="email"
-              placeholder="E-Mail"
+              className='mb-5 h-16 lg:w-1/2 w-10/12 border-solid border border-pink text-subtext rounded-full text-center text-base font-semibold leading-5 tracking-wider'
+              id='email'
+              type='email'
+              placeholder='E-Mail'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="flex flex-col items-center">
+          <div className='flex flex-col items-center'>
             <input
-              className="mb-5 h-16 w-11/12 border-solid border border-pink text-subtext rounded-full text-center text-base font-semibold leading-5 tracking-wider"
-              id="password"
-              type="password"
-              placeholder="Password"
+              className='mb-5 h-16 lg:w-1/2 w-10/12 border-solid border border-pink text-subtext rounded-full text-center text-base font-semibold leading-5 tracking-wider'
+              id='password'
+              type='password'
+              placeholder='Password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
         </div>
 
-        <PinkButton name="LOGIN" funktion={loginUser} />
-        <p className=" text-center">{errorMessage}</p>
+        <PinkButton
+          name='LOGIN'
+          funktion={loginUser}
+        />
+        <p className=' text-center'>{errorMessage}</p>
       </form>
-      <p className="uppercase text-subtext leading-5 text-center pb-24 mt-3.5 mx-3.5 font-semibold">
+      <p className='uppercase text-subtext leading-5 text-center pb-24 mt-3.5 mx-3.5 font-semibold'>
         don't have an account yet?
-        <a href="/register" className="pl-1 text-pink">
+        <a
+          href='/register'
+          className='pl-1 text-pink'>
           sign up
         </a>
       </p>
