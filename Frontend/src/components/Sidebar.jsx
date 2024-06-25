@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { backendUrl } from "../api/api";
 import { useContext } from "react";
-import { TokenContext } from "../../context/Context";
+import { TokenContext, UserContext } from "../../context/Context";
 
 const Sidebar = ({
   setShowSidebar,
@@ -10,6 +10,7 @@ const Sidebar = ({
   setShowEditField,
 }) => {
   const { setToken } = useContext(TokenContext);
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   const logoutUser = async (e) => {
@@ -21,7 +22,7 @@ const Sidebar = ({
 
     const data = await res.json();
     if (!data.result) return alert("Could not log out");
-    console.log(data.result);
+
     setToken("");
     navigate("/");
   };
@@ -33,6 +34,7 @@ const Sidebar = ({
     >
       <div className="h-2/4 flex flex-col items-start  ">
         <button
+          disabled={user.isGuest}
           onClick={() => {
             setShowSidebar(false), setShowEditField(true);
           }}
@@ -41,6 +43,7 @@ const Sidebar = ({
           Edit Profile
         </button>
         <button
+          disabled={user.isGuest}
           onClick={() => {
             setShowSidebar(false), navigate("/notification");
           }}

@@ -8,9 +8,7 @@ const EditField = ({ setShowEditField, showEditField }) => {
   const [usernameInput, setUsernameInput] = useState(user?.username);
   const [upload, setUpload] = useState();
   const [level, setLevel] = useState(user?.userLevel);
-  console.log(user);
 
-  console.log(level);
   const editUser = async (e) => {
     e.preventDefault();
     const formData = new FormData();
