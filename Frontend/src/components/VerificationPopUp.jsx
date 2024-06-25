@@ -42,7 +42,7 @@ const VerficationPopUp = ({ setShowVerification, showVerification }) => {
               Hi {user?.firstname}, Please type in the 6-Digit Code we've sent
               you to:{" "}
               <span className="font-bold text-maintext">
-                askjdfhaskdjf@gmail.com{" "}
+                {user?.email}
               </span>
             </p>
           </div>

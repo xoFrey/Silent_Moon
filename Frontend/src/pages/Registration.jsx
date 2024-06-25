@@ -16,7 +16,7 @@ const Registration = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [level, setLevel] = useState("Beginner");
-  const [showVerification, setShowVerification] = useState(true);
+  const [showVerification, setShowVerification] = useState(false);
 
   const { user, setUser } = useContext(UserContext);
   const { token, setToken } = useContext(TokenContext);
@@ -180,6 +180,7 @@ const Registration = () => {
         />
         <p className=' text-center'>{errorMessage}</p>
       </form>
+      <p onClick={() => setShowVerification(true)} className=" cursor-pointer uppercase text-subtext leading-5 text-center mt-3.5 mx-3.5 font-semibold">I want to verify</p>
       <p className='uppercase text-subtext leading-5 text-center pb-16 mt-3.5 mx-3.5 font-semibold'>
         already have an account?
         <a
