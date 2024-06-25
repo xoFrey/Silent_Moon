@@ -125,7 +125,7 @@ const Home = () => {
             </p>
           </div>
         </Link>
-        <Link to={`/yoga/${randomMeditation?._id}`}>
+        <Link to={`/meditation/${randomMeditation?._id}`}>
           <div className=" relative z-0 ">
             <img src="../../image/RecoveryBigYoga.png" alt="meditation image" />
             <p className=" absolute text-white left-1 bottom-5 font-light">
