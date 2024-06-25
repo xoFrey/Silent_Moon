@@ -80,14 +80,13 @@ const ProfilePage = () => {
             size={"30px"}
             className="mr-5 cursor-pointer"
             onClick={() => setShowSidebar(!showSidebar)}
-         
-
-        <div className="">
-          <Searchbar
-            inputSearch={inputSearch}
-            setInputSearch={setInputSearch}
-
           />
+          <div>
+            <Searchbar
+              inputSearch={inputSearch}
+              setInputSearch={setInputSearch}
+            />
+          </div>
         </div>
         {user.isGuest ? (
           <GuestMessage />
