@@ -17,9 +17,12 @@ export default {
         getStartedImg: "url('/image/getStartedImg.png')",
         SilentMoonLogo: "url('/image/SilentMoonLogo.png')",
       },
-      boxShadow:{
-        topshadow: '0px 1px 10px rgba(153,153,153)',
-      }
+      boxShadow: {
+        topshadow: "0px 1px 10px rgba(153,153,153)",
+      },
+      width: {
+        410: "410px",
+      },
     },
   },
   plugins: [],
