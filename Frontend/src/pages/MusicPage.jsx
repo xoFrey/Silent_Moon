@@ -20,7 +20,7 @@ const MusicPage = () => {
   console.log(playlist);
 
   return (
-    <>
+    <main className="">
       <Header />
       <div className="flex flex-col items-center justify-center gap-5 mt-10">
         <h1 className="text-4xl font-bold text-maintext w-3/4 text-center">
@@ -48,7 +48,7 @@ const MusicPage = () => {
       {user.isGuest ? (
         <GuestMessage />
       ) : (
-        <section className="flex flex-col mb-20 gap-5 px-5 lg:mx-24 lg:border lg:border-subtext/50 lg:rounded-lg lg:border-solid lg:py-6">
+        <section className="flex flex-col mb-20 gap-5 px-5 lg:mx-24 lg:bg-circle/40 lg:border lg:border-subtext/50 lg:rounded-lg lg:border-solid lg:py-6">
           {playlist?.tracks.items.slice(0, 10).map((item) => (
             <Link to={`/musicdetails/${item.track.id}`} key={item.track.id}>
               <div className="flex items-center gap-2 border-b border-subtext/20 pb-4 cursor-pointer">
@@ -74,7 +74,7 @@ const MusicPage = () => {
         </section>
       )}
       <Navbar />
-    </>
+    </main>
   );
 };
 
