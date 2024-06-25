@@ -75,7 +75,7 @@ const MeditationDetail = () => {
           {oneMeditation.description}
         </p>
       </div>
-      {/* Playlist down here */}
+
       <div>
         <div className="flex gap-9 ml-5 mb-6 mt-6">
           <div className="flex  gap-2">
