@@ -35,8 +35,7 @@ const ProfilePage = () => {
       setFilteredYoga(filteredYoga);
     }
   }, [inputSearch]);
-  console.log(filteredMeditation);
-  console.log(filteredYoga);
+
   return (
     <section className="mb-24">
       <Header />
@@ -75,10 +74,19 @@ const ProfilePage = () => {
             />
           </div>
         </div>
+
+        <div className="flex items-center justify-center ">
+          <IoSettingsOutline
+            size={"30px"}
+            className="mr-5 cursor-pointer"
+            onClick={() => setShowSidebar(!showSidebar)}
+         
+
         <div className="">
           <Searchbar
             inputSearch={inputSearch}
             setInputSearch={setInputSearch}
+
           />
         </div>
         {user.isGuest ? (

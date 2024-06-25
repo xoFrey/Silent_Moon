@@ -35,6 +35,7 @@ const InformationPage = () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus,
             dolorum.
           </p>
+          <li>Achievements for successfully completed Exercises</li>
         </ul>
       </div>
     </>
