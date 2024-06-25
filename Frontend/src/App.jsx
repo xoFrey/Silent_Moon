@@ -3,7 +3,6 @@ import Home from "./pages/Home";
 import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
-import GetStarted from "./pages/GetStarted";
 import Notification from "./pages/Notification";
 import YogaDetail from "./pages/YogaDetail";
 import MeditationDetail from "./pages/MeditationDetail";
@@ -53,13 +52,10 @@ function App() {
           <TokenContext.Provider value={{ token, setToken }}>
             <UserContext.Provider value={{ user, setUser }}>
               <BrowserRouter>
-
                 <Routes>
                   <Route path="/" element={<LandingPage />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Registration />} />
-                  <Route path="/get-started" element={<GetStarted />} />
-
                   <Route path="/notification" element={<Notification />} />
 
                   <Route
@@ -135,14 +131,12 @@ function App() {
                     }
                   />
                 </Routes>
-
               </BrowserRouter>
             </UserContext.Provider>
           </TokenContext.Provider>
         </RefreshContext.Provider>
       </PlaylistContext.Provider>
     </LocalizationProvider>
-
   );
 }
 
