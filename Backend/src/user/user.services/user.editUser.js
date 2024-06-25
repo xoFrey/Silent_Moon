@@ -2,33 +2,28 @@ import { uploadImage } from "../../utils/uploads.js";
 import { userToView } from "../user.helpers.js";
 import { User } from "../user.model.js";
 
-export const editUser = async (updateInfo, fileUrl) => {
-  console.log(updateInfo);
+export const editUser = async (updateInfo) => {
   const user = await User.findById(updateInfo.userId)
     .populate("meditationFavorites")
     .populate("yogaFavorites");
 
   if (!user) throw new Error("User not found");
 
-  if (fileUrl) {
-    const uploadResult = await uploadImage(fileUrl.buffer, "files");
-    fileUrl = uploadResult.secure_url;
+  if (updateInfo.fileUrl) {
+    console.log("fileurl exists");
+    const uploadResult = await uploadImage(updateInfo.fileUrl.buffer, "files");
+    updateInfo.fileUrl = uploadResult.secure_url;
   } else {
-    fileUrl = user.fileUrl;
+    updateInfo.fileUrl = user.fileUrl;
   }
-
-  const userInfo = {
-    updateInfo,
-    fileUrl: fileUrl,
-  };
 
   const updatedUser = await User.findByIdAndUpdate(
     updateInfo.userId,
-    { $set: userInfo },
+    { $set: updateInfo },
     { new: true },
   )
     .populate("meditationFavorites")
     .populate("yogaFavorites");
-  console.log(userToView(updatedUser));
+
   return userToView(updatedUser);
 };

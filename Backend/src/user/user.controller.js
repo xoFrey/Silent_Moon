@@ -20,7 +20,7 @@ async function loginUserCtrl(req, res) {
     };
     const result = await UserService.loginUser(userInfo);
     if (result.tokens.refreshToken) {
-      req.session.refreshToken = result.tokens.refreshToken; // refresh token in http only cookie session speichern
+      req.session.refreshToken = result.tokens.refreshToken;
     }
     res.json({ result });
   } catch (err) {
@@ -63,9 +63,16 @@ const refreshTokenCtrl = async (req, res) => {
 
 const editUserCtrl = async (req, res) => {
   try {
-    const updateInfo = req.body;
-    const fileUrl = req.file ? req.file : null;
-    const result = await UserService.editUser(updateInfo, fileUrl);
+    const updateInfo = {
+      userId: req.body.userId,
+      username: req.body.username,
+      alertWeekdays: req.body.alertWeekdays,
+      alertTime: req.body.alertTime,
+      userLevel: req.body.userLevel,
+      fileUrl: req.file ? req.file : null,
+    };
+
+    const result = await UserService.editUser(updateInfo);
     res.json({ result });
   } catch (err) {
     console.log(err);
