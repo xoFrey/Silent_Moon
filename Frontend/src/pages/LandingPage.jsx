@@ -38,11 +38,11 @@ const LandingPage = () => {
 
 
   return (
-    <section className="h-screen  mb-48">
-      <div className="bg-landingImg  bg-top bg-contain bg-no-repeat h-3/4">
+    <section className="h-screen mb-32 w-screen">
+      <div className="bg-landingImg  bg-top bg-contain bg-no-repeat h-3/4  ">
         <HeaderDark />
       </div>
-      <div className="flex flex-col -mt-16">
+      <div className="flex flex-col ">
         <h4 className="font-bold text-maintext text-3xl leading-10 text-center">
           We are what we do
         </h4>
@@ -50,18 +50,19 @@ const LandingPage = () => {
           Thousand of people are using silent moon for meditation and yoga
           classes.
         </p>
-      </div>
-      <div>
-        <div className=" mt-16 mb-5">
-          <PinkButton name="Sign Up" funktion={getRouted} />
+
+        <div>
+          <div className=" mt-8 mb-5">
+            <PinkButton name="Sign Up" funktion={getRouted} />
+          </div>
+          <p className="uppercase text-subtext leading-5 text-center mb-3.5 mt-3.5 mx-3.5 font-semibold">
+            already have an account?
+            <a href="/login" className="pl-1 text-pink">
+              log in
+            </a>
+          </p>
+          <PinkButton name="Login as Guest" funktion={guestLogin} />
         </div>
-        <p className="uppercase text-subtext leading-5 text-center pb-8 mt-3.5 mx-3.5 font-semibold">
-          already have an account?
-          <a href="/login" className="pl-1 text-pink">
-            log in
-          </a>
-        </p>
-        <PinkButton name="Login as Guest" funktion={guestLogin} />
       </div>
     </section>
   );

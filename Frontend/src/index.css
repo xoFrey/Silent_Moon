@@ -20,7 +20,5 @@ img {
 }
 
 html {
-  display: flex;
-  justify-content: center;
- 
+ max-width: 500px;
 }

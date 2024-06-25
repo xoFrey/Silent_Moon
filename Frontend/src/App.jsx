@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
 import Home from "./pages/Home";
 import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
@@ -42,7 +41,6 @@ function App() {
         body: JSON.stringify({ id: "3idpjOhj59WP59HhHJe0nD" }),
       });
       const data = await res.json();
-      console.log(data);
       setPlaylist(data);
     };
     fetchPlaylist();
@@ -55,6 +53,7 @@ function App() {
           <TokenContext.Provider value={{ token, setToken }}>
             <UserContext.Provider value={{ user, setUser }}>
               <BrowserRouter>
+
                 <Routes>
                   <Route path="/" element={<LandingPage />} />
                   <Route path="/login" element={<Login />} />
@@ -136,12 +135,14 @@ function App() {
                     }
                   />
                 </Routes>
+
               </BrowserRouter>
             </UserContext.Provider>
           </TokenContext.Provider>
         </RefreshContext.Provider>
       </PlaylistContext.Provider>
     </LocalizationProvider>
+
   );
 }
 
