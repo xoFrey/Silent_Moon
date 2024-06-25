@@ -5,7 +5,7 @@ import Searchbar from "../components/Searchbar";
 import { backendUrl } from "../api/api";
 import { TokenContext } from "../../context/Context";
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { GoDotFill } from "react-icons/go";
 
@@ -76,7 +76,7 @@ const YogaPage = () => {
   }, []);
 
   return (
-    <main className="mb-24">
+    <main className="mb-24 ">
       <Header />
       <div className="flex flex-col justify-center items-center">
         <h1 className="font-black text-maintext text-4xl leading-10 text-center mt-8 tracking-wide">
@@ -101,16 +101,18 @@ const YogaPage = () => {
             <h1 className="text-maintext leading-5 font-semibold mb-2">
               {randomYoga?.title}
             </h1>
-            <p className="text-subtext leading-5 font-semibold">
+            <p className="text-circle leading-5 font-semibold">
               {today} · {randomYoga?.category}
             </p>
           </div>
         </Link>
-        <button className=" bg-maintext bg-opacity-80 w-10 h-10 rounded-full justify-center items-center flex mr-4 cursor-pointer">
-          <img src={"/image/PlayVector.png"} alt="" />
-        </button>
+        <NavLink to={`${randomYoga?._id}`}>
+          <button className=" bg-maintext bg-opacity-80 w-10 h-10 rounded-full justify-center items-center flex mr-4 cursor-pointer">
+            <img src={"/image/PlayVector.png"} alt="" />
+          </button>
+        </NavLink>
       </div>
-      <section className="columns-2 ml-2 ">
+      <section className="columns-2 mx-2 ">
         {yoga.length !== 0 ? (
           yoga.slice(0, showMore).map((yogaItem) => (
             <div key={yogaItem._id}>

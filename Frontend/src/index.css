@@ -7,6 +7,17 @@
   src: url(/fonts/SourceSans3-VariableFont_wght.ttf);
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
 img {
   max-width: 100%;
 }
@@ -20,5 +31,12 @@ img {
 }
 
 html {
- max-width: 500px;
+  max-width: 410px;
+}
+@media only screen and (min-width: 420px) {
+  html {
+    margin-top: 2vh;
+    border: 2px solid #faf2da;
+    border-radius: 25px;
+  }
 }
