@@ -16,6 +16,7 @@ export default {
         landingImg: "url('/image/FrameLanding.png')",
         getStartedImg: "url('/image/getStartedImg.png')",
         SilentMoonLogo: "url('/image/SilentMoonLogo.png')",
+        PlayerBackground: "url('/image/PlayerBackground.jpg')",
       },
       boxShadow: {
         topshadow: "0px 1px 10px rgba(153,153,153)",
