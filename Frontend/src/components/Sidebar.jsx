@@ -33,24 +33,29 @@ const Sidebar = ({
       }`}
     >
       <div className="h-2/4 flex flex-col items-start  ">
-        <button
-          disabled={user.isGuest}
-          onClick={() => {
-            setShowSidebar(false), setShowEditField(true);
-          }}
-          className="hover:bg-pink hover:text-white uppercase w-full text-maintext leading-5 font-semibold p-5 border-b border-subtext rounded-tr-lg"
-        >
-          Edit Profile
-        </button>
-        <button
-          disabled={user.isGuest}
-          onClick={() => {
-            setShowSidebar(false), navigate("/notification");
-          }}
-          className="hover:bg-pink hover:text-white uppercase w-full text-maintext leading-5 font-semibold p-5 border-b border-subtext"
-        >
-          Change Reminder
-        </button>
+        {user.isGuest ? null : (
+          <button
+            disabled={user.isGuest}
+            onClick={() => {
+              setShowSidebar(false), setShowEditField(true);
+            }}
+            className="hover:bg-pink hover:text-white uppercase w-full text-maintext leading-5 font-semibold p-5 border-b border-subtext rounded-tr-lg"
+          >
+            Edit Profile
+          </button>
+        )}
+        {user.isGuest ? null : (
+          <button
+            disabled={user.isGuest}
+            onClick={() => {
+              setShowSidebar(false), navigate("/notification");
+            }}
+            className="hover:bg-pink hover:text-white uppercase w-full text-maintext leading-5 font-semibold p-5 border-b border-subtext"
+          >
+            Change Reminder
+          </button>
+        )}
+
         <button
           onClick={() => {
             setShowSidebar(false), navigate("/information");

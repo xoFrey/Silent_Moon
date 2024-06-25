@@ -86,7 +86,7 @@ const AuthRequired = ({ children }) => {
     <>
       {!loading && children}
       {loadingAnimationVisible && (
-        <div className="h-screen flex items-center justify-center bg-slate-200 absolute top-0 left-0 bg-white">
+        <div className="h-screen w-screen flex items-center justify-center bg-slate-200 absolute top-0 left-0 bg-white">
           <LoadingAnimation />
         </div>
       )}
