@@ -37,7 +37,7 @@ const ProfilePage = () => {
   }, [inputSearch]);
 
   return (
-    <section className=" mb-24">
+    <section className="mb-24">
       <Header />
       <Sidebar
         setShowSidebar={setShowSidebar}
@@ -49,70 +49,88 @@ const ProfilePage = () => {
         showEditField={showEditField}
         setShowEditField={setShowEditField}
       />
-      <div className="flex justify-between w-11/12 ml-4 mt-6 mb-8 ">
-        <div>
-          <img
-            className="rounded-full w-16 h-16 object-cover"
-            src={`${user.fileUrl}`}
-            alt="Pic"
-          />
+      <section className="lg:w-3/4 lg:ml-56">
+        <div className="flex justify-between ml-4 mt-6 mb-8">
+          <div>
+            <img
+              className="rounded-full w-16 h-16 object-cover"
+              src={`${user.fileUrl}`}
+              alt="Pic"
+            />
+          </div>
+          <div className="flex items-center justify-center">
+            <h1 className="text-maintext text-4xl font-bold ">
+              {user?.username}
+            </h1>
+          </div>
+          <div className="flex items-center justify-center ">
+            <IoSettingsOutline
+              size={"30px"}
+              className="mr-5 cursor-pointer"
+              onClick={() =>
+                user.isGuest ? null : setShowSidebar(!showSidebar)
+              }
+              disabled={user.isGuest}
+            />
+          </div>
         </div>
-        <div className="flex items-center justify-center">
-          <h1 className="text-maintext text-4xl font-bold ">
-            {user?.username}
-          </h1>
-        </div>
+
         <div className="flex items-center justify-center ">
           <IoSettingsOutline
             size={"30px"}
             className="mr-5 cursor-pointer"
             onClick={() => setShowSidebar(!showSidebar)}
-            // disabled={user.isGuest}
+         
+
+        <div className="">
+          <Searchbar
+            inputSearch={inputSearch}
+            setInputSearch={setInputSearch}
+
           />
         </div>
-      </div>
-      <Searchbar inputSearch={inputSearch} setInputSearch={setInputSearch} />
-      {user.isGuest ? (
-        <GuestMessage />
-      ) : (
-        <>
-          <section className=" mb-10 mt-8">
-            <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
-              Favorite Yoga Sessions
-            </h2>
-            <div className="flex flex-row items-center overflow-x-scroll ">
-              {filteredYoga.map((item) => (
-                <Link key={item._id} to={`/yoga/${item._id}`}>
-                  <TileCards
-                    name={item.title}
-                    level={item.level}
-                    duration={item.duration}
-                    imgURL={item.fileUrl}
-                  />
-                </Link>
-              ))}
-            </div>
-          </section>
+        {user.isGuest ? (
+          <GuestMessage />
+        ) : (
+          <>
+            <section className=" mb-10 mt-8">
+              <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
+                Favorite Yoga Sessions
+              </h2>
+              <div className="flex flex-row items-center overflow-x-scroll no-scrollbar">
+                {filteredYoga.map((item) => (
+                  <Link key={item._id} to={`/yoga/${item._id}`}>
+                    <TileCards
+                      name={item.title}
+                      level={item.level}
+                      duration={item.duration}
+                      imgURL={item.fileUrl}
+                    />
+                  </Link>
+                ))}
+              </div>
+            </section>
 
-          <section>
-            <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
-              Favorite Meditation Sessions
-            </h2>
-            <div className="flex items-baseline overflow-x-scroll ">
-              {filteredMeditation.map((item) => (
-                <Link key={item._id} to={`/meditation/${item._id}`}>
-                  <TileCards
-                    name={item.title}
-                    level={item.level}
-                    duration={item.duration}
-                    imgURL={item.fileUrl}
-                  />
-                </Link>
-              ))}
-            </div>
-          </section>
-        </>
-      )}
+            <section>
+              <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
+                Favorite Meditation Sessions
+              </h2>
+              <div className="flex items-baseline overflow-x-scroll no-scrollbar">
+                {filteredMeditation.map((item) => (
+                  <Link key={item._id} to={`/meditation/${item._id}`}>
+                    <TileCards
+                      name={item.title}
+                      level={item.level}
+                      duration={item.duration}
+                      imgURL={item.fileUrl}
+                    />
+                  </Link>
+                ))}
+              </div>
+            </section>
+          </>
+        )}
+      </section>
       <Navbar />
     </section>
   );

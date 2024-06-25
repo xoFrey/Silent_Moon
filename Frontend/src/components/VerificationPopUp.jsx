@@ -3,7 +3,7 @@ import { UserContext } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
 import { backendUrl } from "../api/api.js";
 
-const VerficationPopUp = ({ setShowVerification }) => {
+const VerficationPopUp = ({ setShowVerification, showVerification }) => {
   const { user, setUser } = useContext(UserContext);
   const [sixDigitCode, setSixDigitCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -29,9 +29,9 @@ const VerficationPopUp = ({ setShowVerification }) => {
     navigate("/notification");
   };
 
-  <section className=" ">
-    <div className=" h-full absolute bg-maintext/85 top-0 z-10 ">
-      <div className="bg-white rounded-lg w-5/6 sticky top-20 left-8">
+  return <section className="w-screen">
+    <div className=" h-full fixed bg-maintext/85 top-0 w-screen z-10 md:px-24 lg:px-48 px-6   ">
+      <div className="bg-white rounded-lg sticky top-20 ">
         <section className="flex flex-col">
           <div className=" bg-circle h-2 rounded-t-lg mb-4"></div>
           <div>
@@ -39,10 +39,10 @@ const VerficationPopUp = ({ setShowVerification }) => {
               Verifiy your email
             </h1>
             <p className="text-subtext text-lg  text-center font-semibold mx-4">
-              Hi {user.firstname}, Please type in the 6-Digit Code we've sent
+              Hi {user?.firstname}, Please type in the 6-Digit Code we've sent
               you to:{" "}
               <span className="font-bold text-maintext">
-                askjdfhaskdjf@gmail.com{" "}
+                {user?.email}
               </span>
             </p>
           </div>
@@ -62,9 +62,13 @@ const VerficationPopUp = ({ setShowVerification }) => {
               Verify
             </button>
           </div>
-          <p className="text-subtext leading-5 text-xs text-center mb-6">
+          <p className="text-subtext leading-5 text-xs text-center ">
             Questions? Email us as soons as our Support goes Online 😉
           </p>
+          <button onClick={() => setShowVerification(false)} className="text-subtext leading-5 text-xs text-center mb-6 font-bold cursor-pointer ">
+            I will verify later
+          </button>
+
         </section>
       </div>
     </div>

@@ -38,12 +38,12 @@ const LandingPage = () => {
 
   return (
 
-    <section className="h-screen w-screen">
-      <div className="bg-landingImg bg-top bg-contain bg-no-repeat sm:bg-cover sm:h-full h-3/4 lg:bg-contain  md:bg-contain">
+    <section className="h-screen w-screen ">
+      <div className="bg-landingImg bg-top bg-contain bg-no-repeat sm:bg-cover sm:h-full h-3/4 lg:bg-contain  md:bg-contain  ">
 
         <HeaderDark />
       </div>
-      <div className="flex flex-col pb-12 -mt-24 sm:-mt-10 lg:mt-24">
+      <div className="flex flex-col pb-12 -mt-24 sm:-mt-10 lg:mt-24 ">
         <h4 className="font-bold text-maintext text-3xl leading-10 text-center">
           We are what we do
         </h4>

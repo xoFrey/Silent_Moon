@@ -22,6 +22,7 @@ export default {
       },
       width: {
         410: "410px",
+        357: "357px",
       },
     },
   },
