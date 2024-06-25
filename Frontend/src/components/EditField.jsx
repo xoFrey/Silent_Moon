@@ -43,8 +43,8 @@ const EditField = ({ setShowEditField, showEditField }) => {
 
   return (
     <section
-      className={` h-3/5 w-96 bg-lightcreme border border-solid border-subtext rounded-lg fixed transition-transform duration-1000  ease-in-out top-30 z-10 ${
-        showEditField ? " translate-x-0 mx-2" : " -translate-x-full "
+      className={` h-3/5 w-357 bg-lightcreme border border-solid border-subtext rounded-lg fixed transition-transform duration-1000  ease-in-out top-30 z-10 ${
+        showEditField ? " translate-x-0 ml-4 sm:ml-6" : " -translate-x-full "
       }`}
     >
       <form className="flex flex-col items-center gap-5">
