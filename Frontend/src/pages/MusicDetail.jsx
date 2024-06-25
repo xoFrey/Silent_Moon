@@ -9,6 +9,7 @@ import {
   IoPlay,
 } from "react-icons/io5";
 import { PlaylistContext } from "../../context/Context";
+import HeaderDark from "../components/HeaderDark";
 
 const MusikDetail = () => {
   const [trackInfo, setTrackInfo] = useState(null);
@@ -92,7 +93,6 @@ const MusikDetail = () => {
     }
   };
 
-
   const togglePausePlay = () => {
     if (!isPlaying) {
       audioRef.current.play();
@@ -102,22 +102,28 @@ const MusikDetail = () => {
       setIsPlaying(false);
     }
   };
+  console.log(trackInfo);
 
   return (
-    <section className="bg-circle ">
-      <button
-        onClick={() => navigate(-1)}
-        className="mt-8 mx-5 border rounded-full border-white bg-white p-2 inline-block"
-      >
-        <IoCloseOutline size={"30px"} />
-      </button>
+    <section className="bg-PlayerBackground bg-cover bg-no-repeat overflow-hidden h-screen">
+      <div>
+        <button
+          onClick={() => navigate(-1)}
+          className="my-8 mx-5 border rounded-full border-white bg-white p-2 "
+        >
+          <IoCloseOutline size={"30px"} />
+        </button>
+      </div>
 
-      <div className="h-screen flex flex-col items-center justify-center">
-        <img src="" alt="" />
+      <div className="h-screen flex flex-col items-center">
+        <img
+          src={playlist?.images[0].url}
+          className="w-52 h-52 rounded-full mb-52"
+        />
         <h1 className=" text-4xl text-maintext font-bold mb-2">
           {trackInfo?.name}
         </h1>
-        <p className=" text-sm text-subtext uppercase tracking-wider mb-16">
+        <p className=" text-sm text-white font-semibold uppercase tracking-wider mb-16">
           {trackInfo?.album?.artists[0].name}
         </p>
         <div className="flex items-center">
