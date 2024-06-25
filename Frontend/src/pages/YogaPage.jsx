@@ -96,7 +96,7 @@ const YogaPage = () => {
         id="DailyCalmPlayerSub"
         className="flex justify-between h-24 w-11/12 bg-gradient-to-br from-green to-circle rounded-2xl items-center pl-7 ml-4 mb-5"
       >
-        <Link to={`${randomYoga?._id}`}>
+        <Link to={`/yoga/${randomYoga?._id}`}>
           <div>
             <h1 className="text-maintext leading-5 font-semibold mb-2">
               {randomYoga?.title}

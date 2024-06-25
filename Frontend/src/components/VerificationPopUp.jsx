@@ -6,6 +6,7 @@ import { backendUrl } from "../api/api.js";
 const VerficationPopUp = ({ setShowVerification }) => {
   const { user, setUser } = useContext(UserContext);
   const [sixDigitCode, setSixDigitCode] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -22,12 +23,12 @@ const VerficationPopUp = ({ setShowVerification }) => {
 
     const data = await res.json();
 
-    if (!data.result) return "Failed to verify email";
+    if (!data.result)
+      return setErrorMessage("Six Digit Code is wrong - try again");
     setShowVerification(false);
     navigate("/notification");
   };
 
-  return (
     <section className=" ">
       <div className=" h-full absolute bg-maintext/85 top-0 z-10 ">
         <div className="bg-white rounded-lg w-5/6 sticky top-20 left-8">
@@ -38,7 +39,8 @@ const VerficationPopUp = ({ setShowVerification }) => {
                 Verifiy your email
               </h1>
               <p className="text-subtext text-lg  text-center font-semibold mx-4">
-                Hi Yzel, Please type in the 6-Digit Code we've sent you to:{" "}
+                Hi {user.firstname}, Please type in the 6-Digit Code we've sent
+                you to:{" "}
                 <span className="font-bold text-maintext">
                   askjdfhaskdjf@gmail.com{" "}
                 </span>
@@ -47,7 +49,7 @@ const VerficationPopUp = ({ setShowVerification }) => {
             <div className="flex flex-col items-center mt-4 mb-2">
               <input
                 type="number"
-                maxlength="6"
+                maxLength="6"
                 min="6"
                 max="6"
                 onChange={(e) => setSixDigitCode(e.target.value)}

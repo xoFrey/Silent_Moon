@@ -37,7 +37,7 @@ export async function registerUser({
   const accessToken = createToken(user, "access");
   const refreshToken = createToken(user, "refresh");
   console.log(user);
-  // await sendEmailVerification(user);
+  await sendEmailVerification(user);
   return {
     user: userToView(user),
     tokens: { accessToken, refreshToken },

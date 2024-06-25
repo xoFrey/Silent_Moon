@@ -23,7 +23,7 @@ const Sidebar = ({
     if (!data.result) return alert("Could not log out");
     console.log(data.result);
     setToken("");
-    navigate("/login");
+    navigate("/");
   };
   return (
     <section
