@@ -50,7 +50,7 @@ const ProfilePage = () => {
         setShowEditField={setShowEditField}
       />
       <section className="lg:w-3/4 lg:ml-56">
-        <div className="flex justify-between ml-4 mt-6 mb-8">
+        <div className="flex justify-between items-center mx-4 mt-6 mb-8">
           <div>
             <img
               className="rounded-full w-16 h-16 object-cover"
@@ -58,11 +58,11 @@ const ProfilePage = () => {
               alt="Pic"
             />
           </div>
-          <div className="flex items-center justify-center">
-            <h1 className="text-maintext text-4xl font-bold ">
-              {user?.username}
-            </h1>
-          </div>
+
+          <h1 className="text-maintext text-4xl font-bold ">
+            {user?.username}
+          </h1>
+
           <div className="flex items-center justify-center ">
             <IoSettingsOutline
               size={"30px"}
@@ -74,19 +74,11 @@ const ProfilePage = () => {
             />
           </div>
         </div>
-
-        <div className="flex items-center justify-center ">
-          <IoSettingsOutline
-            size={"30px"}
-            className="mr-5 cursor-pointer"
-            onClick={() => setShowSidebar(!showSidebar)}
+        <div>
+          <Searchbar
+            inputSearch={inputSearch}
+            setInputSearch={setInputSearch}
           />
-          <div>
-            <Searchbar
-              inputSearch={inputSearch}
-              setInputSearch={setInputSearch}
-            />
-          </div>
         </div>
         {user.isGuest ? (
           <GuestMessage />
