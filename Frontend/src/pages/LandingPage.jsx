@@ -22,7 +22,7 @@ const LandingPage = () => {
       method: "POST",
       body: JSON.stringify({
         email: "guest@guest.com",
-        password: import.meta.env.VITE_GUEST_PASSWORD,
+        password: "guest",
       }),
       credentials: "include",
     });
