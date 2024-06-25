@@ -40,7 +40,6 @@ const LandingPage = () => {
 
     <section className="h-screen w-screen ">
       <div className="bg-landingImg bg-top bg-contain bg-no-repeat sm:bg-cover sm:h-full h-3/4 lg:bg-contain  md:bg-contain  ">
-
         <HeaderDark />
       </div>
       <div className="flex flex-col pb-12 -mt-24 sm:-mt-10 lg:mt-24 ">
