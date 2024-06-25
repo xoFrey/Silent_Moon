@@ -26,16 +26,18 @@ img {
   font-family: sourceSans !important;
 }
 
-.active{
-  background-color: pink;
-  border-radius: 10px;
-  padding: 4px;
-}
+
 
 .active svg{
-  fill: white;
+  background-color: #E28F83;
+    border-radius: 10px;
+    padding: 5px;
+    stroke:white;
+    fill: white;
+    width: 35px;
+    height: 35px;
 }
 
 .active p{
-  color: white;
+  color: #E28F83;
 }
