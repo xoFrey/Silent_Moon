@@ -1,7 +1,32 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../context/Context";
+import { useNavigate } from "react-router-dom";
+import { backendUrl } from "../api/api.js";
 
-const VerficationPopUp = () => {
+const VerficationPopUp = ({ setShowVerification }) => {
+  const { user, setUser } = useContext(UserContext);
+  const [sixDigitCode, setSixDigitCode] = useState("");
+
+  const navigate = useNavigate();
+
+  const verificateEmail = async (e) => {
+    e.preventDefault();
+
+    const userId = user.id;
+    const res = await fetch(`${backendUrl}/api/v1/users/verify`, {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify({ userId, sixDigitCode }),
+      credentials: "include",
+    });
+
+    const data = await res.json();
+
+    if (!data.result) return "Failed to verify email";
+    setShowVerification(false);
+    navigate("/notification");
+  };
+
   return (
     <section className=" ">
       <div className=" h-full absolute bg-maintext/85 top-0 z-10 ">
@@ -25,9 +50,13 @@ const VerficationPopUp = () => {
                 maxlength="6"
                 min="6"
                 max="6"
+                onChange={(e) => setSixDigitCode(e.target.value)}
                 className="h-10 w-10/12 border-solid border border-pink text-subtext rounded-lg text-center font-semibold leading-5 tracking-wider mb-2"
               />
-              <button className="h-10 w-10/12 bg-pink text-circle rounded-lg">
+              <button
+                className="h-10 w-10/12 bg-pink text-circle rounded-lg"
+                onClick={verificateEmail}
+              >
                 Verify
               </button>
             </div>

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import TileCards from "../components/TileCards.jsx";
 import { backendUrl } from "../api/api";
 import Navbar from "../components/Navbar.jsx";
+import LoadingAnimation from "../components/LoadingAnimation.jsx";
 
 const Home = () => {
   const { user, setUser } = useContext(UserContext);
@@ -159,7 +160,7 @@ const Home = () => {
               </Link>
             ))
           ) : (
-            <p>Loading...</p>
+            <p></p>
           )}
         </div>
       </section>
@@ -182,7 +183,7 @@ const Home = () => {
               </Link>
             ))
           ) : (
-            <p>Loading...</p>
+            <p></p>
           )}
         </div>
       </section>

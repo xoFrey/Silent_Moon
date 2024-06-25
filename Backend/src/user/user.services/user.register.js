@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
-
 import { userToView } from "../user.helpers.js";
 import { User } from "../user.model.js";
 import { generateRandomSixDigitCode } from "../../utils/sixDigitCode.js";
 import { createToken } from "../../utils/createToken.js";
+import { sendEmail } from "../../utils/sendEmail.js";
 
 export async function registerUser({
   username,
@@ -34,8 +34,8 @@ export async function registerUser({
     sixDigitCode,
     userLevel,
   });
-  const accessToken = createToken(user, "access"); // header.payload.signature
-  const refreshToken = createToken(user, "refresh"); // header.payload.signature
+  const accessToken = createToken(user, "access");
+  const refreshToken = createToken(user, "refresh");
   console.log(user);
   // await sendEmailVerification(user);
   return {
