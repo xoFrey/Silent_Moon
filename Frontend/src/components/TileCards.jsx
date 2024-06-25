@@ -4,19 +4,19 @@ import { Link } from "react-router-dom";
 const TileCards = ({ name, imgURL, level, duration, id }) => {
   const [categoryData, setCategoryData] = useState();
   return (
-    <section className="flex flex-row gap-5 pl-5 mb-1 ">
-      <div className="w-40">
+    <section>
+      <div className="w-40 flex flex-col gap-1">
         <img
           src={imgURL || "/image/Fatburner.png"}
           id="imageCategory"
-          className="h-28 w-40"
+          className="h-28 w-40 rounded-xl overflow-hidden object-cover"
         />
-        <label htmlFor="imageCategory">
-          <h3 className="leading-5 font-black text-lg text-maintext mt-2 mb-1">
+        <label htmlFor="imageCategory" className="">
+          <h3 className="leading-5 font-black text-lg text-maintext  cursor-pointer">
             {name}
           </h3>
         </label>
-        <div className="flex place-content-between text-subtext font-semibold text-xs leading-3">
+        <div className="flex justify-between text-subtext font-semibold text-xs leading-3">
           <p>{level}</p>
           <p>{duration}</p>
         </div>

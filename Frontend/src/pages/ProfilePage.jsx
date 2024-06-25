@@ -88,7 +88,7 @@ const ProfilePage = () => {
               <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
                 Favorite Yoga Sessions
               </h2>
-              <div className="flex flex-row items-center overflow-x-scroll no-scrollbar">
+              <div className="flex items-baseline gap-5 overflow-x-scroll no-scrollbar px-4 pb-2">
                 {filteredYoga.map((item) => (
                   <Link key={item._id} to={`/yoga/${item._id}`}>
                     <TileCards
@@ -106,7 +106,7 @@ const ProfilePage = () => {
               <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
                 Favorite Meditation Sessions
               </h2>
-              <div className="flex items-baseline overflow-x-scroll no-scrollbar">
+              <div className="flex items-baseline gap-5 overflow-x-scroll no-scrollbar px-4 pb-2" >
                 {filteredMeditation.map((item) => (
                   <Link key={item._id} to={`/meditation/${item._id}`}>
                     <TileCards
