@@ -14,6 +14,7 @@ const Registration = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [level, setLevel] = useState("Beginner");
+  const [showVerification, setShowVerification] = useState(false);
 
   const { user, setUser } = useContext(UserContext);
   const { token, setToken } = useContext(TokenContext);
@@ -46,7 +47,8 @@ const Registration = () => {
 
     setToken(data.result.tokens.accessToken);
     setUser(data.result.user);
-    navigate(`/get-started`);
+    // navigate(`/get-started`);
+    setShowVerification(true);
   };
 
   return (
@@ -180,7 +182,9 @@ const Registration = () => {
           log in
         </a>
       </p>
-      <VerficationPopUp />
+      {showVerification ? (
+        <VerficationPopUp setShowVerification={setShowVerification} />
+      ) : null}
     </main>
   );
 };

@@ -1,17 +1,19 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { backendUrl } from "../api/api";
-// import Logo from "./Logo";
+
 import { TokenContext, UserContext } from "../../context/Context";
+import LoadingAnimation from "./LoadingAnimation";
 
 const AuthRequired = ({ children }) => {
-
   const timeoutRef = useRef(null);
   const { token, setToken } = useContext(TokenContext);
   const { user, setUser } = useContext(UserContext);
   const [loading, setLoading] = useState(token ? false : true);
+  const [loadingAnimationVisible, setLoadingAnimationVisible] = useState(
+    token ? false : true
+  );
   const navigate = useNavigate();
-
 
   useEffect(() => {
     if (token) return doSilentRefresh(token);
@@ -71,18 +73,26 @@ const AuthRequired = ({ children }) => {
       return nextFetchAfter * 1000;
     }
 
-
     return () => clearTimeout(timeoutRef.current);
   }, []);
-
-  if (loading)
-    return (
-      <div className="h-screen flex items-center justify-center bg-slate-200">
-        <div className="animate-bounce">LOADING...</div>
-      </div>
-    );
-  else return <>{children}</>;
+  useEffect(() => {
+    if (loading === false) {
+      setTimeout(() => {
+        setLoadingAnimationVisible(false);
+      }, 1500);
+    }
+  }, [loading]);
+  return (
+    <>
+      {!loading && children}
+      {loadingAnimationVisible && (
+        <div className="h-screen flex items-center justify-center bg-slate-200 absolute top-0 left-0 bg-white">
+          <LoadingAnimation />
+        </div>
+      )}
+    </>
+  );
+  // else return <>{children}</>;
 };
 
 export default AuthRequired;
-
