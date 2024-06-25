@@ -27,7 +27,7 @@ const Sidebar = ({
   };
   return (
     <section
-      className={`fixed w-1/2 bg-lightcreme rounded-r-lg border border-solid border-subtext transition-transform duration-1000 ease-in-out z-20 ${
+      className={`fixed w-52 bg-lightcreme rounded-r-lg border border-solid border-subtext transition-transform duration-1000 ease-in-out z-20 ${
         showSidebar ? "translate-x-0" : "-translate-x-full"
       }`}
     >

@@ -1,10 +1,9 @@
 import { useState } from "react";
 
 const Categorys = ({ category, setCategory }) => {
-
   return (
     <section className="flex justify-center">
-      <div className="flex gap-4 w-11/12 overflow-auto pb-1">
+      <div className="flex gap-4 w-11/12 overflow-auto pb-1 no-scrollbar">
         <div className="flex flex-col items-center">
           <input
             type="radio"

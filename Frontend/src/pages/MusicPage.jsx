@@ -17,6 +17,8 @@ const MusicPage = () => {
 
   const navigate = useNavigate();
 
+  console.log(playlist);
+
   return (
     <>
       <Header />
