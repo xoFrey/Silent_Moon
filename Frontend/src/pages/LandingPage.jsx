@@ -4,7 +4,6 @@ import { backendUrl } from "../api/api";
 import { useContext, useState } from "react";
 import { TokenContext, UserContext } from "../../context/Context";
 import PinkButton from "../components/PinkButton";
-
 const LandingPage = () => {
   const { setUser } = useContext(UserContext);
   const { setToken } = useContext(TokenContext);
@@ -38,11 +37,13 @@ const LandingPage = () => {
   };
 
   return (
-    <section className="h-screen mb-32 w-screen">
-      <div className="bg-landingImg bg-top bg-contain bg-no-repeat h-3/4  ">
+
+    <section className="h-screen w-screen">
+      <div className="bg-landingImg bg-top bg-contain bg-no-repeat sm:bg-cover sm:h-full h-3/4 lg:bg-contain  md:bg-contain">
+
         <HeaderDark />
       </div>
-      <div className="flex flex-col ">
+      <div className="flex flex-col pb-12 -mt-24 sm:-mt-10 lg:mt-24">
         <h4 className="font-bold text-maintext text-3xl leading-10 text-center">
           We are what we do
         </h4>

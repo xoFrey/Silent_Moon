@@ -31,12 +31,15 @@ img {
 }
 
 html {
+
   max-width: 410px;
 }
+
 @media only screen and (min-width: 420px) {
   html {
     margin-top: 2vh;
     border: 2px solid #faf2da;
     border-radius: 25px;
   }
+
 }
