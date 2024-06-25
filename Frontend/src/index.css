@@ -26,3 +26,16 @@ img {
   font-family: sourceSans !important;
 }
 
+.active{
+  background-color: pink;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.active svg{
+  fill: white;
+}
+
+.active p{
+  color: white;
+}

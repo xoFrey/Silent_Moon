@@ -1,7 +1,7 @@
 const Header = () => {
   return (
     <>
-      <div className="flex justify-center mt-2">
+      <div className="flex justify-center ">
         <img src="/image/SilentMoonLogo.png" className=" h-32" />
       </div>
     </>

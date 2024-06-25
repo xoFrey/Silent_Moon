@@ -76,69 +76,76 @@ const YogaPage = () => {
   }, []);
 
   return (
-    <main className="mb-24 ">
-      <Header />
-      <div className="flex flex-col justify-center items-center">
-        <h1 className="font-black text-maintext text-4xl leading-10 text-center mt-8 tracking-wide">
-          Yoga
-        </h1>
-        <p className="text-subtext leading-5 text-center mt-4 mb-8 font-semibold">
-          Find your inner zen from anywhere
-        </p>
-      </div>
-      <div className="mb-12">
-        <Categorys category={category} setCategory={setCategory} />
-      </div>
-      <div className="mb-5">
-        <Searchbar inputSearch={inputSearch} setInputSearch={setInputSearch} />
-      </div>
-      <div
-        id="DailyCalmPlayerSub"
-        className="flex justify-between h-24 w-11/12 bg-gradient-to-br from-green to-circle rounded-2xl items-center pl-7 ml-4 mb-5"
-      >
-        <Link to={`/yoga/${randomYoga?._id}`}>
-          <div>
-            <h1 className="text-maintext leading-5 font-semibold mb-2">
-              {randomYoga?.title}
-            </h1>
-            <p className="text-circle leading-5 font-semibold">
-              {today} · {randomYoga?.category}
-            </p>
+    <div>
+      <main className="mb-24 flex flex-col items-center">
+        <Header />
+        <div className="flex flex-col justify-center items-center">
+          <h1 className="font-black text-maintext text-4xl leading-10 text-center mt-8 tracking-wide">
+            Yoga
+          </h1>
+          <p className="text-subtext leading-5 text-center mt-4 mb-8 font-semibold max-w-80 lg:max-w-96">
+            Find your inner zen from anywhere
+          </p>
+        </div>
+        <div className="mb-12">
+          <Categorys category={category} setCategory={setCategory} />
+        </div>
+        <div className="lg:w-3/4 ">
+          <div className="mb-5">
+            <Searchbar
+              inputSearch={inputSearch}
+              setInputSearch={setInputSearch}
+            />
           </div>
-        </Link>
-        <NavLink to={`${randomYoga?._id}`}>
-          <button className=" bg-maintext bg-opacity-80 w-10 h-10 rounded-full justify-center items-center flex mr-4 cursor-pointer">
-            <img src={"/image/PlayVector.png"} alt="" />
-          </button>
-        </NavLink>
-      </div>
-      <section className="columns-2 mx-2 ">
-        {yoga.length !== 0 ? (
-          yoga.slice(0, showMore).map((yogaItem) => (
-            <div key={yogaItem._id}>
-              <CatergoryTiles
-                id={yogaItem._id}
-                imgUrl={yogaItem.fileUrl}
-                title={yogaItem.title}
-              />
-            </div>
-          ))
-        ) : (
-          <p>{errorMessage}</p>
-        )}
-      </section>
-      <div className="flex flex-col items-center mt-2">
-        <button
-          onClick={() => setShowMore(showMore + 4)}
-          className=" px-5 h-6 bg-subtext/50 text-circle rounded-full flex items-center"
-        >
-          <GoDotFill size={15} fill="#8E9775" />
-          <GoDotFill size={15} fill="#8E9775" />
-          <GoDotFill size={15} fill="#8E9775" />
-        </button>
-      </div>
+          <div
+            id="DailyCalmPlayerSub"
+            className="flex justify-between h-24 bg-gradient-to-br from-green to-circle rounded-2xl items-center pl-7 mx-4 mb-5"
+          >
+            <Link to={`/yoga/${randomYoga?._id}`}>
+              <div>
+                <h1 className="text-maintext leading-5 font-semibold mb-2">
+                  {randomYoga?.title}
+                </h1>
+                <p className="text-circle leading-5 font-semibold">
+                  {today} · {randomYoga?.category}
+                </p>
+              </div>
+            </Link>
+            <NavLink to={`${randomYoga?._id}`}>
+              <button className=" bg-maintext bg-opacity-80 w-10 h-10 rounded-full justify-center items-center flex mr-4 cursor-pointer">
+                <img src={"/image/PlayVector.png"} alt="" />
+              </button>
+            </NavLink>
+          </div>
+          <section className="columns-2 mx-4 ">
+            {yoga.length !== 0 ? (
+              yoga.slice(0, showMore).map((yogaItem) => (
+                <div key={yogaItem._id}>
+                  <CatergoryTiles
+                    id={yogaItem._id}
+                    imgUrl={yogaItem.fileUrl}
+                    title={yogaItem.title}
+                  />
+                </div>
+              ))
+            ) : (
+              <p>{errorMessage}</p>
+            )}
+          </section>
+          <div className="flex flex-col items-center mt-2 lg:mt-8">
+            <button
+              onClick={() => setShowMore(showMore + 4)}
+              className=" px-5 h-6 bg-subtext/50 text-circle rounded-full flex items-center"
+            >
+              <GoDotFill size={15} fill="#8E9775" />
+              <GoDotFill size={15} fill="#8E9775" />
+              <GoDotFill size={15} fill="#8E9775" />
+            </button>
+          </div>
+        </div>
+      </main>
       <Navbar />
-    </main>
+    </div>
   );
 };
 
