@@ -20,6 +20,30 @@ const createMeditationCtrl = async (req, res) => {
   }
 };
 
+const editMeditationCtrl = async (req, res) => {
+  try {
+    const updateInfo = {
+      fileUrl: req.file ? req.file.path : "",
+      title: req.body.title,
+      description: req.body.description,
+      level: req.body.level,
+      duration: req.body.duration,
+      category: req.body.category,
+    };
+    const meditationId = req.params.meditationId;
+    const result = await MeditationService.editMeditation(
+      meditationId,
+      updateInfo,
+    );
+    res.status(201).json({ result });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ err, message: err.message || "Could not edit meditation" });
+  }
+};
+
 const getMeditationDetailCtrl = async (req, res) => {
   try {
     const meditationId = req.params.meditationId;
@@ -87,4 +111,5 @@ export const MeditationController = {
   getMeditationsByLevelCtrl,
   getMeditationsByCategoryCtrl,
   getRandomMeditationCtrl,
+  editMeditationCtrl,
 };

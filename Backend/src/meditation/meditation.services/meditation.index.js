@@ -1,4 +1,5 @@
 import { createMeditation } from "./meditation.createMeditation.js";
+import { editMeditation } from "./meditation.editMeditation.js";
 import { getMeditationDetail } from "./meditation.getMeditationDetail.js";
 import { getMeditationsByCategory } from "./meditation.getMeditationsByCategory.js";
 import { getMeditationsByLevel } from "./meditation.getMeditationsByLevel.js";
@@ -10,4 +11,5 @@ export const MeditationService = {
   getMeditationsByLevel,
   getMeditationsByCategory,
   getRandomMeditation,
+  editMeditation,
 };

@@ -23,4 +23,9 @@ export const meditationRoutes = express
     "/",
     upload.single("fileUrl"),
     MeditationController.createMeditationCtrl,
+  )
+  .patch(
+    "/:meditationId",
+    upload.single("fileUrl"),
+    MeditationController.editMeditationCtrl,
   );

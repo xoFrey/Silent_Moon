@@ -8,7 +8,7 @@ export const editYoga = async (yogaId, updateInfo) => {
     const uploadResult = await uploadImage(updateInfo.fileUrl.buffer, "files");
     updateInfo.fileUrl = uploadResult.secure_url;
   } else {
-    updateInfo.fileUrl = user.fileUrl;
+    console.log("no");
   }
 
   const updatedYoga = await Yoga.findByIdAndUpdate(
