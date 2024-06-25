@@ -6,7 +6,12 @@ const userSchema = new mongoose.Schema(
     firstname: { type: String, required: true, trim: true },
     lastname: { type: String, required: true, trim: true },
     email: { type: String, required: true, trim: true },
-    fileUrl: { type: String, required: false }, // ! Default Image
+    fileUrl: {
+      type: String,
+      required: false,
+      default:
+        "https://res.cloudinary.com/dieqrawak/image/upload/v1719309142/Silent_Moon/files/vqicm9bxfwpa2mndjshr.jpg",
+    },
     password: { type: String, required: true, trim: true },
     isVerified: { type: Boolean, default: false },
     isGuest: { type: Boolean, default: false },

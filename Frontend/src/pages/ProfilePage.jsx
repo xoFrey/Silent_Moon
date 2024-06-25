@@ -16,20 +16,20 @@ const ProfilePage = () => {
   const [showEditField, setShowEditField] = useState(false);
   const [inputSearch, setInputSearch] = useState("");
   const [filteredMeditation, setFilteredMeditation] = useState(
-    user.meditationFavorites
+    user?.meditationFavorites
   );
-  const [filteredYoga, setFilteredYoga] = useState(user.yogaFavorites);
+  const [filteredYoga, setFilteredYoga] = useState(user?.yogaFavorites);
 
   useEffect(() => {
     if (inputSearch.length === 0) {
-      setFilteredMeditation(user.meditationFavorites);
-      setFilteredYoga(user.yogaFavorites);
+      setFilteredMeditation(user?.meditationFavorites);
+      setFilteredYoga(user?.yogaFavorites);
     } else {
-      const filteredMeditation = user.meditationFavorites.filter((item) =>
+      const filteredMeditation = user?.meditationFavorites.filter((item) =>
         item.title.toLowerCase().includes(inputSearch.toLowerCase())
       );
       setFilteredMeditation(filteredMeditation);
-      const filteredYoga = user.yogaFavorites.filter((item) =>
+      const filteredYoga = user?.yogaFavorites.filter((item) =>
         item.title.toLowerCase().includes(inputSearch.toLowerCase())
       );
       setFilteredYoga(filteredYoga);
