@@ -8,9 +8,9 @@ const GoBackButton = () => {
     <>
       <button
         onClick={() => navigate(-1)}
-        className="flex w-14 h-14 rounded-full border border-solid border-circle justify-center items-center mt-7 ml-5"
+        className="fixed left-4 top-4"
       >
-        <GoArrowLeft size={28} />
+        <GoArrowLeft size={28} className="flex w-14 h-14 p-2 rounded-full border border-solid border-circle justify-center items-center " />
       </button>
     </>
   );

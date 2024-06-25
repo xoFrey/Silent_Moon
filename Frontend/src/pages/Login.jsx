@@ -37,7 +37,7 @@ const Login = () => {
   return (
     <main>
       <GoBackButton />
-      <div className="flex justify-center -mt-11">
+      <div className="flex justify-center ">
         <Header />
       </div>
       <h4 className="font-black text-maintext text-4xl leading-10 text-center mt-12 mb-20 tracking-wide">
