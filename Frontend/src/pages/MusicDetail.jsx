@@ -9,11 +9,9 @@ import {
   IoPlay,
 } from "react-icons/io5";
 import { PlaylistContext } from "../../context/Context";
-import HeaderDark from "../components/HeaderDark";
 
 const MusikDetail = () => {
   const [trackInfo, setTrackInfo] = useState(null);
-  const [thumbnail, setThumbnail] = useState(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const { playlist } = useContext(PlaylistContext);
   const [currentIndex, setCurrentIndex] = useState(0);
