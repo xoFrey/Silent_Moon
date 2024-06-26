@@ -46,7 +46,7 @@ const Notification = () => {
     const data = await res.json();
     setUser(data.result);
 
-    token ? navigate("/profile") : navigate("/login");
+   navigate("/login");
   };
 
   const weekdays = ["SU", "M", "T", "W", "TH", "F", "S"];
@@ -91,7 +91,7 @@ const Notification = () => {
       </section>
       <div className="mb-24">
         <PinkButton name={"SAVE"} funktion={updateUserInfo} />
-        <Link to="/profile" className="text-center">
+        <Link to="/login" className="text-center">
           <p className="mt-5 text-pink font-semibold">NO THANKS</p>
         </Link>
       </div>
