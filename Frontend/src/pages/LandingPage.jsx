@@ -53,7 +53,7 @@ const LandingPage = () => {
 
         <div>
           <div className=" mt-8 mb-5">
-            <PinkButton name="Sign Up" funktion={getRouted} />
+            <PinkButton name="Register" funktion={getRouted} />
           </div>
           <p className="uppercase text-subtext leading-5 text-center mb-3.5 mt-3.5 mx-3.5 font-semibold">
             already have an account?
