@@ -9,11 +9,9 @@ import {
   IoPlay,
 } from "react-icons/io5";
 import { PlaylistContext } from "../../context/Context";
-import HeaderDark from "../components/HeaderDark";
 
 const MusikDetail = () => {
   const [trackInfo, setTrackInfo] = useState(null);
-  const [thumbnail, setThumbnail] = useState(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const { playlist } = useContext(PlaylistContext);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -118,7 +116,7 @@ const MusikDetail = () => {
       <div className="h-screen flex flex-col items-center">
         <img
           src={playlist?.images[0].url}
-          className="w-52 h-52 rounded-full mb-52"
+          className="w-52 h-52 rounded-full mb-40"
         />
         <h1 className=" text-4xl text-maintext font-bold mb-2">
           {trackInfo?.name}

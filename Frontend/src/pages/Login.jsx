@@ -7,8 +7,8 @@ import Header from "../components/Header.jsx";
 import PinkButton from "../components/PinkButton.jsx";
 
 const Login = () => {
-  const [email, setEmail] = useState("izel.acxr@gmail.com");
-  const [password, setPassword] = useState("hallo");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const { user, setUser } = useContext(UserContext);
   const { token, setToken } = useContext(TokenContext);

@@ -14,7 +14,6 @@ export default {
     extend: {
       backgroundImage: {
         landingImg: "url('/image/FrameLanding.png')",
-        getStartedImg: "url('/image/getStartedImg.png')",
         SilentMoonLogo: "url('/image/SilentMoonLogo.png')",
         PlayerBackground: "url('/image/PlayerBackground.jpg')",
       },
@@ -24,7 +23,11 @@ export default {
       width: {
         410: "410px",
         357: "357px",
+        410: "410px",
         420: "420px",
+      },
+      height: {
+        700: "700px",
       },
     },
   },

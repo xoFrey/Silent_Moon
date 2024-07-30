@@ -40,7 +40,6 @@ const LandingPage = () => {
 
     <section className="h-screen w-screen ">
       <div className="bg-landingImg bg-top bg-contain bg-no-repeat sm:bg-cover sm:h-full h-3/4 lg:bg-contain  md:bg-contain  ">
-
         <HeaderDark />
       </div>
       <div className="flex flex-col pb-12 -mt-24 sm:-mt-10 lg:mt-24 ">
@@ -54,7 +53,7 @@ const LandingPage = () => {
 
         <div>
           <div className=" mt-8 mb-5">
-            <PinkButton name="Sign Up" funktion={getRouted} />
+            <PinkButton name="Register" funktion={getRouted} />
           </div>
           <p className="uppercase text-subtext leading-5 text-center mb-3.5 mt-3.5 mx-3.5 font-semibold">
             already have an account?
