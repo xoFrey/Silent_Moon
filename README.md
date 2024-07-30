@@ -1,8 +1,8 @@
 <h1 align="center"><samp>Silent Moon</samp> </h1>
 <p align="center"> 
-  <a href="https://github.com/xoFrey" target="_blank"> <img width="40" align="center" src="./src/assets/img/icons8-github-64.png"/></a>
-  <a href="https://silentmoon.superprojekte.de" target="_blank"> <img width="45" align="center" src="./src/assets/img/icons8-livepage-64.png"/></a>
-  <a href="https://www.linkedin.com/in/izel-acar-0572332ba/" target="_blank"> <img width="40" align="center" src="./src/assets/img/icons8-linkedin-64.png"/></a>
+  <a href="https://github.com/xoFrey" target="_blank"> <img width="40" align="center" src="./Frontend/src/assets/img/icons8-github-64.png"/></a>
+  <a href="https://silentmoon.superprojekte.de" target="_blank"> <img width="45" align="center" src="./Frontend/src/assets/img/icons8-livepage-64.png"/></a>
+  <a href="https://www.linkedin.com/in/izel-acar-0572332ba/" target="_blank"> <img width="40" align="center" src="./Frontend/src/assets/img/icons8-linkedin-64.png"/></a>
 </p>
 
 <h3><samp>Contributors:</samp></h3>
@@ -84,11 +84,23 @@
 <h2><samp>Screenshot</samp></h2>
 
 <p align="center">
-<img src="./src/assets/img/HomeLight.png"/> <img src="./src/assets/img/HomeDark.png"/> 
+<img src="./Frontend/src/assets/img/Landingpage.png"/> <img src="./Frontend/src/assets/img/Registration.png"/>
 </p>
 <p align="center">
-<img src="./src/assets/img/DetailLight.png"/> <img src="./src/assets/img/DetailDark.png"/> 
+<img src="./Frontend/src/assets/img/Verification.png"/> <img src="./Frontend/src/assets/img/Login.png"/>
 </p>
 <p align="center">
-<img src="./src/assets/img/TypesLight.png"/> <img src="./src/assets/img/TypesDark.png"/> 
+<img src="./Frontend/src/assets/img/Home.png"/> <img src="./Frontend/src/assets/img/Playlist.png"/>
+</p>
+<p align="center">
+<img src="./Frontend/src/assets/img/Yoga.png"/> <img src="./Frontend/src/assets/img/Meditation.png"/>
+</p>
+<p align="center">
+<img src="./Frontend/src/assets/img/DetailYoga.png"/> <img src="./Frontend/src/assets/img/DetailMeditation.png"/>
+</p>
+<p align="center">
+<img src="./Frontend/src/assets/img/Profile.png"/> <img src="./Frontend/src/assets/img/EditProfile.png"/>
+</p>
+<p align="center">
+<img src="./Frontend/src/assets/img/Notification.png"/> 
 </p>
