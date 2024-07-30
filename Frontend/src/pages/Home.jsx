@@ -101,98 +101,101 @@ const Home = () => {
   }, [dayTime]);
 
   return (
-    <main >
-      <Header />
-      <h2 className="text-2xl font-black w-4/5 mx-4 mb-2 mt-5 text-maintext  ">
-        Good {dayTime} {user.username}
-      </h2>
-      <p className=" text-subtext leading-5 pb-10 mx-4 font-semibold ">
-        We hope you have a good day.
-      </p>
-      <div className=" flex gap-4 justify-center mb-6 px-4">
-        <Link to={`/yoga/${randomYoga?._id}`}>
-          <div className=" relative z-0">
-            <img src="../../image/RecoveryBigMeditate.png" alt="yoga image" />
-            <p className=" absolute text-white left-3 bottom-5 font-light">
-              {randomYoga?.duration}
-            </p>
-            <ButtonStart fill={"#FAF2DA"} typeColor={"#4A503D"} />
-            <div className="flex flex-col absolute top-10 left-3">
-              <p className="  text-circle  text-xl">
-                {randomYoga?.title}
-              </p>
-              <p className=" uppercase  text-circle  text-xs">
-                {randomYoga?.level}
-              </p>
-            </div>
-          </div>
-        </Link>
-        <Link to={`/meditation/${randomMeditation?._id}`}>
-          <div className=" relative z-0 ">
-            <img src="../../image/RecoveryBigYoga.png" alt="meditation image" />
-            <p className=" absolute text-white left-3 bottom-5 font-light">
-              {randomMeditation?.duration}
-            </p>
-            <ButtonStart fill={"#4A503D"} typeColor={"#FAF2DA"} />
-            <div className="flex flex-col absolute top-10 left-3">
-              <p className="  text-circle text-xl">
-                {randomMeditation?.title}
-              </p>
-              <p className=" uppercase  text-circle  text-xs">
-                {randomMeditation?.level}
-              </p>
-            </div>
-          </div>
-        </Link>
-      </div>
-      <Searchbar inputSearch={inputSearch} setInputSearch={setInputSearch} />
-
-      <section className="mb-10 mt-8">
-        <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
-          Recommended Yoga for you
+    <>
+      <main className="px-60">
+        <Header />
+        <h2 className="text-2xl font-black w-4/5 mx-4 mb-2 mt-5 text-maintext  ">
+          Good {dayTime} {user.username}
         </h2>
-        <div className="flex items-baseline gap-5 overflow-x-scroll no-scrollbar px-4 pb-2">
-          {yogaByLevel ? (
-            yogaByLevel.map((item) => (
-              <Link key={item._id} to={`/yoga/${item._id}`}>
-                <TileCards
-                  name={item.title}
-                  level={item.level}
-                  duration={item.duration}
-                  imgURL={item.fileUrl}
-                />
-              </Link>
-            ))
-          ) : (
-            <p></p>
-          )}
+        <p className=" text-subtext leading-5 pb-10 mx-4 font-semibold ">
+          We hope you have a good day.
+        </p>
+        <div className=" flex gap-4 justify-center mb-6 px-4">
+          <Link to={`/yoga/${randomYoga?._id}`}>
+            <div className=" relative z-0">
+              <img src="../../image/RecoveryBigMeditate.png" alt="yoga image" />
+              <p className=" absolute text-white left-3 bottom-5 font-light">
+                {randomYoga?.duration}
+              </p>
+              <ButtonStart fill={"#FAF2DA"} typeColor={"#4A503D"} />
+              <div className="flex flex-col absolute top-10 left-3">
+                <p className="  text-circle  text-xl">
+                  {randomYoga?.title}
+                </p>
+                <p className=" uppercase  text-circle  text-xs">
+                  {randomYoga?.level}
+                </p>
+              </div>
+            </div>
+          </Link>
+          <Link to={`/meditation/${randomMeditation?._id}`}>
+            <div className=" relative z-0 ">
+              <img src="../../image/RecoveryBigYoga.png" alt="meditation image" />
+              <p className=" absolute text-white left-3 bottom-5 font-light">
+                {randomMeditation?.duration}
+              </p>
+              <ButtonStart fill={"#4A503D"} typeColor={"#FAF2DA"} />
+              <div className="flex flex-col absolute top-10 left-3">
+                <p className="  text-circle text-xl">
+                  {randomMeditation?.title}
+                </p>
+                <p className=" uppercase  text-circle  text-xs">
+                  {randomMeditation?.level}
+                </p>
+              </div>
+            </div>
+          </Link>
         </div>
-      </section>
+        <Searchbar inputSearch={inputSearch} setInputSearch={setInputSearch} />
 
-      <section className=" mb-32">
-        <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
-          Recommended Meditation for you
-        </h2>
+        <section className="mb-10 mt-8">
+          <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
+            Recommended Yoga for you
+          </h2>
+          <div className="flex items-baseline gap-5 overflow-x-scroll no-scrollbar px-4 pb-2">
+            {yogaByLevel ? (
+              yogaByLevel.map((item) => (
+                <Link key={item._id} to={`/yoga/${item._id}`}>
+                  <TileCards
+                    name={item.title}
+                    level={item.level}
+                    duration={item.duration}
+                    imgURL={item.fileUrl}
+                  />
+                </Link>
+              ))
+            ) : (
+              <p></p>
+            )}
+          </div>
+        </section>
 
-        <div className="flex items-baseline gap-5 overflow-x-scroll no-scrollbar px-4 pb-2">
-          {meditationByLevel ? (
-            meditationByLevel.map((item) => (
-              <Link key={item._id} to={`/meditation/${item._id}`}>
-                <TileCards
-                  name={item.title}
-                  level={item.level}
-                  duration={item.duration}
-                  imgURL={item.fileUrl}
-                />
-              </Link>
-            ))
-          ) : (
-            <p></p>
-          )}
-        </div>
-      </section>
+        <section className=" mb-32">
+          <h2 className=" text-2xl text-maintext font-bold tracking-wide pl-5 mb-6">
+            Recommended Meditation for you
+          </h2>
+
+          <div className="flex items-baseline gap-5 overflow-x-scroll no-scrollbar px-4 pb-2">
+            {meditationByLevel ? (
+              meditationByLevel.map((item) => (
+                <Link key={item._id} to={`/meditation/${item._id}`}>
+                  <TileCards
+                    name={item.title}
+                    level={item.level}
+                    duration={item.duration}
+                    imgURL={item.fileUrl}
+                  />
+                </Link>
+              ))
+            ) : (
+              <p></p>
+            )}
+          </div>
+        </section>
+
+      </main>
       <Navbar />
-    </main>
+    </>
   );
 };
 export default Home;
