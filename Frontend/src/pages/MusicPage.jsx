@@ -3,10 +3,8 @@ import Header from "../components/Header";
 import { FaHeart } from "react-icons/fa";
 import { IoHeadset } from "react-icons/io5";
 import { convertMStoMinSek } from "../../helperfunctions/helpers";
-import { IoPlayCircleOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { PlaylistContext, UserContext } from "../../context/Context";
-import PinkButton from "../components/PinkButton";
 import GuestMessage from "../components/GuestMessage";
 import Navbar from "../components/Navbar";
 import { FaPlay } from "react-icons/fa";
@@ -15,7 +13,7 @@ const MusicPage = () => {
   const { playlist, setPlaylist } = useContext(PlaylistContext);
   const { user } = useContext(UserContext);
 
-  const navigate = useNavigate();
+
 
   console.log(playlist);
 

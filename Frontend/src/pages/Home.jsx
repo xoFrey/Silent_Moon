@@ -101,7 +101,7 @@ const Home = () => {
   }, [dayTime]);
 
   return (
-    <main className="lg:px-60 ">
+    <main >
       <Header />
       <h2 className="text-2xl font-black w-4/5 mx-4 mb-2 mt-5 text-maintext  ">
         Good {dayTime} {user.username}
