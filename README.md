@@ -36,6 +36,7 @@
       <ul>
         <li>Create an account with personalized settings.</li>
         <li>Stay logged in or log in as a guest user.</li>
+        <li>Verify your registration via Email.</li>
       </ul>
     </li>
     <li>
