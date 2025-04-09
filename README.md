@@ -86,23 +86,20 @@
 <h2><samp>Screenshot</samp></h2>
 
 <p align="center">
-<img width=300 src="./Frontend/src/assets/img/Landingpage.png"/> <img width=300 src="./Frontend/src/assets/img/Registration.png"/>
+<img width=300 src="./Frontend/src/assets/img/Landingpage.png"/> <img width=300 src="./Frontend/src/assets/img/Register.png"/>
 </p>
 <p align="center">
 <img width=300 src="./Frontend/src/assets/img/Verification.png"/> <img width=300 src="./Frontend/src/assets/img/Login.png"/>
 </p>
 <p align="center">
-<img width=300 src="./Frontend/src/assets/img/Home.png"/> <img width=300 src="./Frontend/src/assets/img/Playlist.png"/>
+<img width=300 src="./Frontend/src/assets/img/Notification.png"/> <img width=300 src="./Frontend/src/assets/img/Home.png"/>
 </p>
 <p align="center">
-<img width=300 src="./Frontend/src/assets/img/Yoga.png"/> <img width=300 src="./Frontend/src/assets/img/Meditation.png"/>
-</p>
-<p align="center">
-<img width=300 src="./Frontend/src/assets/img/DetailYoga.png"/> <img width=300 src="./Frontend/src/assets/img/DetailMeditation.png"/>
+<img width=300 src="./Frontend/src/assets/img/Yoga.png"/> <img width=300 src="./Frontend/src/assets/img/Meditate.png"/>
 </p>
 <p align="center">
 <img width=300 src="./Frontend/src/assets/img/Profile.png"/> <img width=300 src="./Frontend/src/assets/img/EditProfile.png"/>
 </p>
 <p align="center">
-<img width=300 src="./Frontend/src/assets/img/Notification.png"/> 
+<img width=300 src="./Frontend/src/assets/img/Spotify.png"/>  <img width=300 src="./Frontend/src/assets/img/SpotifyPlayer.png"/> 
 </p>
