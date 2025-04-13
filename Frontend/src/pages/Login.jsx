@@ -35,7 +35,7 @@ const Login = () => {
     navigate("/home");
   };
   return (
-    <main >
+    <main>
       <GoBackButton />
       <div className='flex justify-center '>
         <Header />

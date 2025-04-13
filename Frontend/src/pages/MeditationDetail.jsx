@@ -26,7 +26,7 @@ const MeditationDetail = () => {
         `${backendUrl}/api/v1/meditation/detail/${meditationId}`,
         {
           headers: { authorization: `Bearer ${token}` },
-        }
+        },
       );
       const data = await res.json();
       if (!data.result) return "Failed to fetch one Meditation";
@@ -55,62 +55,65 @@ const MeditationDetail = () => {
     <main>
       <div>
         <img
-          className=" rounded-b-lg"
-
+          className=' rounded-b-lg'
           src={oneMeditation.fileUrl}
-          alt="meditationpicture"
+          alt='meditationpicture'
         />
       </div>
       <GoBackButtonDetails />
       {user.isGuest ? null : <ButtonLike id={meditationId} />}
-      {user.isGuest ? null : <ButtonDownload downloadLink={oneMeditation.fileUrl} />}
-      <div className=" ">
-        <h4 className="font-black text-maintext text-4xl mx-4 leading-10  tracking-wide">
+      {user.isGuest ? null : (
+        <ButtonDownload downloadLink={oneMeditation.fileUrl} />
+      )}
+      <div className=' '>
+        <h4 className='font-black text-maintext text-4xl mx-4 leading-10  tracking-wide'>
           {oneMeditation.title}
         </h4>
-        <p className="uppercase text-subtext leading-5 pb-6  mt-4 mx-4 font-semibold">
+        <p className='uppercase text-subtext leading-5 pb-6  mt-4 mx-4 font-semibold'>
           {oneMeditation.level}
         </p>
-        <p className=" text-subtext leading-5  mx-4  font-semibold">
+        <p className=' text-subtext leading-5  mx-4  font-semibold'>
           {oneMeditation.description}
         </p>
       </div>
 
-      <div>
-        <div className="flex gap-9 ml-5 mb-6 mt-6">
-          <div className="flex  gap-2">
-            <FaHeart fill="#E28F83" />
-            <p className="text-sm text-subtext">
+      {/* <div>
+        <div className='flex gap-9 ml-5 mb-6 mt-6'>
+          <div className='flex  gap-2'>
+            <FaHeart fill='#E28F83' />
+            <p className='text-sm text-subtext'>
               {playlistInfo?.followers.total} Favorites
             </p>
           </div>
-          <div className="flex items-center gap-2">
-            <IoHeadset fill="#3F414E" />
-            <p className="text-sm text-subtext">
+          <div className='flex items-center gap-2'>
+            <IoHeadset fill='#3F414E' />
+            <p className='text-sm text-subtext'>
               {playlistInfo?.followers.total + 304345} Listening
             </p>
           </div>
         </div>
-        <p className="text-2xl text-maintext font-bold tracking-wide pl-5 mb-6 ">
+        <p className='text-2xl text-maintext font-bold tracking-wide pl-5 mb-6 '>
           Playlist
         </p>
-        <section className="flex flex-col gap-5 px-5 mb-24">
+        <section className='flex flex-col gap-5 px-5 mb-24'>
           {playlistInfo?.tracks.items.slice(0, 4).map((item) => (
-            <Link to={`/musicdetails/${item.track.id}`} key={item.track.id}>
-              <div className="flex items-center gap-2 border-b border-subtext/20 pb-4 cursor-pointer">
-                <div className="w-10 h-10  border border-solid border-subtext rounded-full flex items-center justify-center">
+            <Link
+              to={`/musicdetails/${item.track.id}`}
+              key={item.track.id}>
+              <div className='flex items-center gap-2 border-b border-subtext/20 pb-4 cursor-pointer'>
+                <div className='w-10 h-10  border border-solid border-subtext rounded-full flex items-center justify-center'>
                   <FaPlay
                     size={"15px"}
-                    color="#A1A4B2"
-                    stroke="#A1A4B2"
-                    className=" ml-0.5"
+                    color='#A1A4B2'
+                    stroke='#A1A4B2'
+                    className=' ml-0.5'
                   />
                 </div>
                 <div>
-                  <p className=" text-base font-semibold text-maintext ">
+                  <p className=' text-base font-semibold text-maintext '>
                     {item.track.name}
                   </p>
-                  <p className=" text-xs text-subtext font-semibold">
+                  <p className=' text-xs text-subtext font-semibold'>
                     {convertMStoMinSek(item.track.duration_ms)}{" "}
                   </p>
                 </div>
@@ -118,7 +121,7 @@ const MeditationDetail = () => {
             </Link>
           ))}
         </section>
-      </div>
+      </div> */}
       <Navbar />
     </main>
   );

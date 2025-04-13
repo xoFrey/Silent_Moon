@@ -1,7 +1,5 @@
 const client_id = process.env.SPOTIFY_ID;
 const client_secret = process.env.SPOTIFY_SECRET;
-// const redirect_uri = "http://localhost:5173/music";
-// const code = "code";
 
 let authOptions = {
   url: "https://accounts.spotify.com/api/token",

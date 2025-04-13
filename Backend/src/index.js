@@ -1,6 +1,5 @@
 import express, { json, request } from "express";
 import cors from "cors";
-import multer from "multer";
 import mongoose from "mongoose";
 import morgan from "morgan";
 import cookieSession from "cookie-session";

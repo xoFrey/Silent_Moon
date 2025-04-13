@@ -39,11 +39,15 @@ const MusikDetail = () => {
     }
   }, [trackId]);
 
+  console.log(trackId);
+
   useEffect(() => {
-    if (trackInfo && audioRef.current) {
+    if (trackInfo && audioRef.current && trackInfo.preview_url !== null) {
       audioRef.current.src = trackInfo.preview_url;
       audioRef.current.play();
     }
+
+    console.log("trackinfo", trackInfo);
   }, [trackInfo]);
 
   useEffect(() => {
@@ -64,7 +68,7 @@ const MusikDetail = () => {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
       const data = await res.json();
       setTrackInfo(data);
@@ -84,7 +88,7 @@ const MusikDetail = () => {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
       const data = await res.json();
       setTrackInfo(data);
@@ -100,39 +104,36 @@ const MusikDetail = () => {
       setIsPlaying(false);
     }
   };
-  console.log(trackInfo);
 
   return (
-    <section className="bg-PlayerBackground bg-cover bg-no-repeat overflow-hidden h-screen">
+    <section className='bg-PlayerBackground bg-cover bg-no-repeat overflow-hidden h-screen'>
       <div>
         <button
           onClick={() => navigate(-1)}
-          className="my-8 mx-5 border rounded-full border-white bg-white p-2 "
-        >
+          className='my-8 mx-5 border rounded-full border-white bg-white p-2 '>
           <IoCloseOutline size={"30px"} />
         </button>
       </div>
 
-      <div className="h-screen flex flex-col items-center">
+      <div className='h-screen flex flex-col items-center'>
         <img
           src={playlist?.images[0].url}
-          className="w-52 h-52 rounded-full mb-40"
+          className='w-52 h-52 rounded-full mb-40'
         />
-        <h1 className=" text-4xl text-maintext font-bold mb-2">
+        <h1 className=' text-4xl text-maintext font-bold mb-2'>
           {trackInfo?.name}
         </h1>
-        <p className=" text-sm text-white font-semibold uppercase tracking-wider mb-16">
+        <p className=' text-sm text-white font-semibold uppercase tracking-wider mb-16'>
           {trackInfo?.album?.artists[0].name}
         </p>
-        <div className="flex items-center">
+        <div className='flex items-center'>
           <button
-            id="prevTrack"
+            id='prevTrack'
             onClick={() => {
               fetchPrevTrack();
               setIsPlaying(true);
             }}
-            disabled={isPrevDisabled}
-          >
+            disabled={isPrevDisabled}>
             <IoPlaySkipBackCircleOutline
               size={"50px"}
               className={`cursor-pointer ${
@@ -141,32 +142,31 @@ const MusikDetail = () => {
             />
           </button>
           {isPlaying ? (
-            <div className="border-8 border-subtext rounded-full bg-green cursor-pointer p-3">
+            <div className='border-8 border-subtext rounded-full bg-green cursor-pointer p-3'>
               <IoPause
                 size={"60px"}
-                fill="white"
+                fill='white'
                 onClick={togglePausePlay}
-                className="cursor-pointer"
+                className='cursor-pointer'
               />
             </div>
           ) : (
-            <div className="border-8 border-subtext rounded-full bg-green cursor-pointer p-3">
+            <div className='border-8 border-subtext rounded-full bg-green cursor-pointer p-3'>
               <IoPlay
                 size={"60px"}
-                fill="white"
+                fill='white'
                 onClick={togglePausePlay}
-                className="pl-2"
+                className='pl-2'
               />
             </div>
           )}
           <button
-            id="nextTrack"
+            id='nextTrack'
             onClick={() => {
               fetchNextTrack();
               setIsPlaying(true);
             }}
-            disabled={isNextDisabled}
-          >
+            disabled={isNextDisabled}>
             <IoPlaySkipForwardCircleOutline
               size={"50px"}
               className={`cursor-pointer ${
@@ -180,10 +180,10 @@ const MusikDetail = () => {
           <audio
             autoPlay
             ref={audioRef}
-            id="player"
-            volume="0.1"
+            id='player'
+            volume='0.1'
             controls
-            className="hidden"
+            className='hidden'
           />
         ) : (
           <p>Loading</p>
